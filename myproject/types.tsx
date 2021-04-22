@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  NewPost: undefined;
 };
 
 export type BottomTabParamList = {
@@ -30,6 +31,11 @@ export type UserType = {
   name: string,
   username: string,
   image?: string,
+  mainSport: string,
+  mainGym: string,
+  level: string,
+  following: number,
+  followers: number,
 
 }
 
@@ -41,4 +47,13 @@ export type PostType = {
   content: string,
   image?: string,
   numberOfLikes?: number,
+}
+
+export type ProfileType = {
+  id: string,
+  user: UserType,
+  mainSport: string,
+  mainGym: string,
+  level: string,
+  image?: string,
 }

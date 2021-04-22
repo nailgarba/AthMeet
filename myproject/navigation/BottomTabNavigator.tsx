@@ -5,8 +5,14 @@ import * as React from 'react';
 import ProfilePicture from '../components/ProfilePicture'
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import HomeScreen from '../screens/HomeSreen';
+import HomeScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
+import SearchScreen from '../screens/SearchScreen';
+import AthleteFinderScreen from '../screens/AthleteFinderScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+
+
+
 import { BottomTabParamList, HomeNavigatorParamList,SearchNavigatorParamList, AthleteFinderNavigatorParamList, ProfileNavigatorParamList, TabTwoNavigatorParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<HomeNavigatorParamList>();
@@ -17,7 +23,7 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint
+      tabBarOptions={{activeTintColor: 'tomato' //activeTintColor: Colors[colorScheme].tint
       //,showLabel:false
       }}>
       <BottomTab.Screen
@@ -30,21 +36,21 @@ export default function BottomTabNavigator() {
       
       <BottomTab.Screen
         name="Search"
-        component={TabTwoNavigator}
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ color }) => <Ionicons name="search" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="AthleteFinder"
-        component={TabTwoNavigator}
+        component={AthleteFinderNavigator}
         options={{
           tabBarIcon: ({ color }) => <FontAwesome5 name="people-arrows" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Profile"
-        component={TabTwoNavigator}
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="weight" color={color} />,
         }}
@@ -70,9 +76,11 @@ function HomeNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          headerRightContainerStyle: {marginRight: 10},
-          headerTitle:() => ( <FontAwesome5 name = {"dumbbell"} size ={25}></FontAwesome5>) ,
-          headerRight: () => ( <FontAwesome5 name = {"envelope"} size ={25}></FontAwesome5>),
+          headerRightContainerStyle: {marginRight: 15},
+          headerTitle:() => ( <FontAwesome5 name = {"dumbbell"} size ={40} color='tomato'></FontAwesome5>) ,
+          headerTitleContainerStyle: {alignItems:'center',
+          justifyContent: 'center',},
+          headerRight: () => ( <FontAwesome5 name = {"envelope"} size ={30} color='tomato'></FontAwesome5>),
           headerLeftContainerStyle: {marginLeft: 10},
           headerLeft:()=>(
             <ProfilePicture size={40} image={'https://i.pinimg.com/originals/44/ce/2c/44ce2cfa6267fde44790205135a78051.jpg'}/>
@@ -96,3 +104,47 @@ function TabTwoNavigator() {
     </TabTwoStack.Navigator>
   );
 }
+
+
+const SearchScreenStack = createStackNavigator<SearchNavigatorParamList>();
+
+function SearchNavigator() {
+  return (
+    <SearchScreenStack.Navigator>
+      <SearchScreenStack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{ headerTitle: 'SearchScreen' }}
+      />
+    </SearchScreenStack.Navigator>
+  );
+}
+
+const ProfileScreenStack = createStackNavigator<ProfileNavigatorParamList>();
+
+function ProfileNavigator() {
+  return (
+    <ProfileScreenStack.Navigator>
+      <ProfileScreenStack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerTitle: 'ProfileScreen' }}
+      />
+    </ProfileScreenStack.Navigator>
+  );
+}
+
+const AthleteFinderScreenStack = createStackNavigator<AthleteFinderNavigatorParamList>();
+
+function AthleteFinderNavigator() {
+  return (
+    <AthleteFinderScreenStack.Navigator>
+      <AthleteFinderScreenStack.Screen
+        name="AthleteFinderScreen"
+        component={AthleteFinderScreen}
+        options={{ headerTitle: 'AthleteFinderScreen' }}
+      />
+    </AthleteFinderScreenStack.Navigator>
+  );
+}
+
