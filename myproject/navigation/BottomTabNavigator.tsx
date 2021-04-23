@@ -1,4 +1,4 @@
-import { Ionicons,FontAwesome, FontAwesome5, MaterialCommunityIcons} from '@expo/vector-icons';
+import { Ionicons, FontAwesome5, MaterialCommunityIcons} from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -10,7 +10,7 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import SearchScreen from '../screens/SearchScreen';
 import AthleteFinderScreen from '../screens/AthleteFinderScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-
+import PrivateMessagesListButton from '../components/PrivateMessagesListButton'
 
 
 import { BottomTabParamList, HomeNavigatorParamList,SearchNavigatorParamList, AthleteFinderNavigatorParamList, ProfileNavigatorParamList, TabTwoNavigatorParamList } from '../types';
@@ -80,7 +80,7 @@ function HomeNavigator() {
           headerTitle:() => ( <FontAwesome5 name = {"dumbbell"} size ={40} color='tomato'></FontAwesome5>) ,
           headerTitleContainerStyle: {alignItems:'center',
           justifyContent: 'center',},
-          headerRight: () => ( <FontAwesome5 name = {"envelope"} size ={30} color='tomato'></FontAwesome5>),
+          headerRight: () => ( <PrivateMessagesListButton/>),
           headerLeftContainerStyle: {marginLeft: 10},
           headerLeft:()=>(
             <ProfilePicture size={40} image={'https://i.pinimg.com/originals/44/ce/2c/44ce2cfa6267fde44790205135a78051.jpg'}/>

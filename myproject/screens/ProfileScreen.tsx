@@ -3,12 +3,13 @@ import { StyleSheet } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import UserType from '../types';
+import {UserType} from '../types';
 import Feed from '../components/Feed';
 import ProfileScreenComponents from '../components/ProfileScreenComponents';
 import TopContainer from '../components/ProfileScreenComponents/TopContainer';
 
 import users from '../data/users';
+import EditProfileButton from '../components/EditProfileButton';
 
 
 export {UserType} from '../types';
@@ -20,7 +21,9 @@ export default function ProfileScreen() {
   
   return (
     <View style={styles.container}>
-        <ProfileScreenComponents user ={users[0].user} />
+      <EditProfileButton/>
+      <ProfileScreenComponents user ={users[0].user} />
+        
         
     </View>
     

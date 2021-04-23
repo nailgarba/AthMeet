@@ -3,7 +3,7 @@ import {View, Text, FlatList} from 'react-native';
 import  {StyleSheet} from 'react-native';
 import {UserType} from '../../types';
 import TopContainer from './TopContainer';
-import BottomContainer from './BottomContainer';
+//import BottomContainer from './BottomContainer';
 import MiddleContainer from './MiddleContainer';
 import users from '../../data/users';
 import Feed from '../Feed';
