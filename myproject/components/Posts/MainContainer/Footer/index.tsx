@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import { PostType } from '../../../types';
+import { PostType } from '../../../../types';
 import styles from './styles';
 import {MaterialCommunityIcons, Feather, Ionicons, AntDesign} from '@expo/vector-icons'
 
 export type FooterContainerProps = {
     post: PostType,
 }
-const Footer = ({post}: MainContainerProps) => (
+const Footer = ({post}: FooterContainerProps) => (
     <View style= {styles.container}>
         <View style={styles.iconContainer}>
             <MaterialCommunityIcons name ={"comment-outline"} size={20} color={'grey'}/>  

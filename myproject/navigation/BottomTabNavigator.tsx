@@ -81,10 +81,10 @@ function HomeNavigator() {
           headerTitleContainerStyle: {alignItems:'center',
           justifyContent: 'center',},
           headerRight: () => ( <PrivateMessagesListButton/>),
-          headerLeftContainerStyle: {marginLeft: 10},
+          /*headerLeftContainerStyle: {marginLeft: 10},
           headerLeft:()=>(
             <ProfilePicture size={40} image={'https://i.pinimg.com/originals/44/ce/2c/44ce2cfa6267fde44790205135a78051.jpg'}/>
-          )
+          )*/
       }}
       />
     </TabOneStack.Navigator>
