@@ -35,7 +35,16 @@ export default function AthleteFinderFilterScreen() {
                         <Text style={styles.buttonText}>FILTER</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.newPostContainer}>
+                
+
+            </View>
+        </SafeAreaView>
+
+
+    );
+}
+/*
+<View style={styles.newPostContainer}>
                     <View style={styles.inputContainer}>
                         <TextInput
                             value={post}
@@ -54,13 +63,7 @@ export default function AthleteFinderFilterScreen() {
 
                     </View>
                 </View>
-
-            </View>
-        </SafeAreaView>
-
-
-    );
-}
+*/
 
 const styles = StyleSheet.create({
     container: {

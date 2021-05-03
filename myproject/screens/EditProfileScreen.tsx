@@ -20,7 +20,7 @@ export default function AthleteFinderFilterScreen() {
         console.warn("OnPostPost");
         console.log(`posting post: ${post} Image: ${imageURL}`)
     }
-    
+
 
 
 
@@ -35,7 +35,16 @@ export default function AthleteFinderFilterScreen() {
                         <Text style={styles.buttonText}>SAVE CHANGES</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.newPostContainer}>
+                
+
+            </View>
+        </SafeAreaView>
+
+
+    );
+}
+/*
+<View style={styles.newPostContainer}>
                     <View style={styles.inputContainer}>
                         <TextInput
                             value={post}
@@ -54,13 +63,7 @@ export default function AthleteFinderFilterScreen() {
 
                     </View>
                 </View>
-
-            </View>
-        </SafeAreaView>
-
-
-    );
-}
+*/
 
 const styles = StyleSheet.create({
     container: {
@@ -90,13 +93,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
-    backButton:  { 
-      marginLeft: 15 ,  
+    backButton: {
+        marginLeft: 15,
     },
     inputContainer: {
         marginLeft: 10,
         width: '100%',
-        
+
     },
     newPostContainer: {
         flexDirection: 'row',
