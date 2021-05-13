@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
@@ -10,46 +10,19 @@ import TopContainer from '../components/ProfileScreenComponents/TopContainer';
 
 import users from '../data/users';
 import EditProfileButton from '../components/EditProfileButton';
-import Amplify, {Auth, API, graphqlOperation} from 'aws-amplify';
-import {getUser} from '../src/graphql/queries'; 
+
 
 export {UserType} from '../types';
 
 export type PostProps = {
 user: UserType,
 }
-
-/*
-useEffect( () => {
-  const [user, setUser] = React.useState(null);
-  const fetchUser = async () =>{
-    const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-    if(!userInfo){
-      return;
-    }
-    try{
-      const userData = await API.graphql(graphqlOperation(getUser, {id:userInfo.attributes.sub}));
-      if(userData){
-        setUser(userData.data.getUser);
-      }
-    }
-    catch(e){
-      console.log(e);
-    }
-    fetchUser();
-  }
-
-}, [])*/
-
-
-
 export default function ProfileScreen() {
   
   return (
     <View style={styles.container}>
       <EditProfileButton/>
       <ProfileScreenComponents user ={users[0].user} />
-      
         
         
     </View>

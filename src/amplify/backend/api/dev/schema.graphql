@@ -1,0 +1,36 @@
+type User @model {
+  id: ID!
+  username:String!
+  name: String!
+  email: String!
+  image: String
+  posts: [Post] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type Post @model @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  content: String!
+  userID: ID!
+  user: User @connection(fields: ["userID"])
+  image: String
+  likes: [Like] @connection(keyName: "byPost", fields: ["id"])
+  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+  id: ID!
+  postID: ID!
+  post: Post! @connection(fields: ["postID"])
+  content: String!
+}
+
+type Like
+  @model(queries:null)
+  @key(name: "byUser", fields: ["userID", "postID"])
+  @key(name: "byPost", fields: ["postID", "userID"]) {
+  id: ID!
+  userID: ID!
+  postID: ID!
+  user: User! @connection(fields: ["userID"])
+  post: Post! @connection(fields: ["postID"])
+}

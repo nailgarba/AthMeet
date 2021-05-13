@@ -10,30 +10,33 @@ import PrivateMessagesFeed from '../components/PrivateMessagesFeed';
 
 
 export default function PrivateMessagesListScreen() {
-    return (
-      <View style={styles.container}>
-          <PrivateMessagesFeed />
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <MaterialIcons name="arrow-back" size={40} color="tomato" />
+      </TouchableOpacity>
+      <PrivateMessagesFeed />
 
-      </View>
-      
-    );
-  }
-  
-  
-  /*    
-  
-  
-          <Post post ={posts[0]}/>
-          <Post post ={posts[1]}/>
-  
-        <Text style={styles.title}>Tab One</Text>
-        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        <EditScreenInfo path="/screens/HomeScreen.tsx" /> 
-  */
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+    </View>
+
+  );
+}
+
+
+/*    
+ 
+ 
+        <Post post ={posts[0]}/>
+        <Post post ={posts[1]}/>
+ 
+      <Text style={styles.title}>Tab One</Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <EditScreenInfo path="/screens/HomeScreen.tsx" /> 
+*/
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

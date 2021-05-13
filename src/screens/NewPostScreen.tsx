@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
@@ -11,14 +12,34 @@ import { MaterialIcons, } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
+import {API, Auth, graphqlOperation} from 'aws-amplify';
+import {createPost} from '../src/graphql/mutations';
+
+
+
 export default function NewPostScreen() {
     const [post, setPost] = React.useState("");
     const [imageURL, setImageURL] = React.useState("");
     const navigation = useNavigation();
 
-    const onPostPost = () => {
-        console.warn("OnPostPost");
-        console.log(`posting post: ${post} Image: ${imageURL}`)
+    const onPostPost = async () => {
+        try{
+            const currentUser= await Auth.currentAuthenticatedUser({bypassCache:true});
+            const newPost={
+                content:post,
+                image: imageURL,
+                userID: currentUser.attributes.sub,
+            }
+            console.log(`Created newPost object: ${newPost.content} ${newPost.image}${newPost.userID}`);
+
+            await API.graphql(graphqlOperation(createPost,{input: newPost}));
+            navigation.goBack();
+        }catch(e){
+            console.log(`caught an error in try catch L37 NewPostScreen`);
+            console.log(e);
+        }
+        console.warn(`OnPostPost`);
+        console.log(`posting post: ${post} Image: ${imageURL}`);
     }
     
 
