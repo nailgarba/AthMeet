@@ -10,11 +10,17 @@ import PrivateMessagesFeed from '../components/PrivateMessagesFeed';
 
 
 export default function PrivateMessagesListScreen() {
+
+  const navigation = useNavigation();
+
+
   return (
     <View style={styles.container}>
+      <View style={styles.headerContainer}>
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
         <MaterialIcons name="arrow-back" size={40} color="tomato" />
       </TouchableOpacity>
+      </View>
       <PrivateMessagesFeed />
 
     </View>
@@ -36,7 +42,18 @@ export default function PrivateMessagesListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: 'white',
+    width: '100%',
+    paddingRight: 15,
+    
   },
+  headerContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    //padding: 15,
+    marginTop: 25,
+    paddingBottom: 5
+},
 });

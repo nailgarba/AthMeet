@@ -13,42 +13,66 @@ import EditProfileButton from '../components/EditProfileButton';
 import Amplify, {Auth, API, graphqlOperation} from 'aws-amplify';
 import {getUser} from '../src/graphql/queries'; 
 
+import myUser from '../data/myUser';
+/*
 export {UserType} from '../types';
 
 export type PostProps = {
 user: UserType,
-}
-
-/*
-useEffect( () => {
-  const [user, setUser] = React.useState(null);
-  const fetchUser = async () =>{
-    const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-    if(!userInfo){
-      return;
-    }
-    try{
-      const userData = await API.graphql(graphqlOperation(getUser, {id:userInfo.attributes.sub}));
-      if(userData){
-        setUser(userData.data.getUser);
-      }
-    }
-    catch(e){
-      console.log(e);
-    }
-    fetchUser();
-  }
-
-}, [])*/
-
+}*/
 
 
 export default function ProfileScreen() {
   
+  
+  const [user,setUser]=React.useState([]);
+
+  React.useEffect(() => {
+    // get the current user
+    const fetchUser = async () => {
+      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      if (!userInfo) {
+        return;
+      }
+
+      try {
+        const userData = await API.graphql(graphqlOperation(getUser, { id:  userInfo.attributes.sub }))
+        if (userData) {
+          setUser(userData.data.getUser);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchUser();
+    console.log(user);
+  }, [])
+
+
+  /*
+  thisUser = {
+    
+      
+          id:'u1',
+          username: user.username,
+          name:'Nail Garba',
+          mainGym: 'NR1 Fitness',
+          mainSport:'Bodybuilding',
+          level: 'Advanced',
+          following: 391,
+          followers: 234,
+          image:'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png'
+      
+      
+  
+  }*/
+  
+
+
   return (
     <View style={styles.container}>
       <EditProfileButton/>
-      <ProfileScreenComponents user ={users[0].user} />
+      <ProfileScreenComponents user ={user} />
       
         
         

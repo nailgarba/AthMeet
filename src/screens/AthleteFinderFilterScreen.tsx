@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, SafeAreaView, TextInput, } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -10,17 +10,46 @@ import NewPostButton from "../components/NewPostButton";
 import { MaterialIcons, } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import RNPickerSelect from 'react-native-picker-select';
+
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+//import {createPost} from '../src/graphql/mutations';
+import { } from '../src/graphql/queries';
+
 
 export default function AthleteFinderFilterScreen() {
-    const [post, setPost] = React.useState("");
-    const [imageURL, setImageURL] = React.useState("");
     const navigation = useNavigation();
+    const placeholder = {
+        label: 'Select level of progression',
+        value: null,
+    };
+    // main gym (custom option?), main sport
+    const [mainGym, setMainGym] = React.useState("");
+    const [mainSport, setMainSport] = React.useState("");
+    const [level, setLevel] = React.useState("");
+    const [profiles, setProfiles] = React.useState([]);
 
-    const onPostPost = () => {
+    const onSave = async () => {
         console.warn("OnPostPost");
-        console.log(`posting post: ${post} Image: ${imageURL}`)
+        console.log(`posting post: ${post} Image: ${imageURL}`);
+
+        try {
+            const currentUser = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            const newPost = {
+                content: post,
+                image: imageURL,
+                userID: currentUser.attributes.sub,
+            }
+            console.log(`Changed filter settings: ${mainGym} ${mainSport}${level}`);
+
+            await API.graphql(graphqlOperation(createPost, { input: newPost }));
+            navigation.goBack();
+        } catch (e) {
+            console.log(`caught an error in try catch L37 NewPostScreen`);
+            console.log(e);
+        }
     }
-    
+
 
 
 
@@ -31,11 +60,40 @@ export default function AthleteFinderFilterScreen() {
                     <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                         <MaterialIcons name="arrow-back" size={30} color="tomato" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={onPostPost}>
-                        <Text style={styles.buttonText}>FILTER</Text>
+                    <TouchableOpacity style={styles.button} onPress={onSave}>
+                        <Text style={styles.buttonText}>SAVE</Text>
                     </TouchableOpacity>
                 </View>
-                
+                <View style={styles.mainContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput style={styles.inputs}
+                            value={mainGym}
+                            onChangeText={(value) => setMainGym(value)}
+                            multiline={true}
+                            numberOfLines={1}
+                            style={styles.postInput}
+                            placeholder={"Main Gym"}
+                        />
+                        <TextInput 
+                            value={mainSport}
+                            onChangeText={(value) => setMainSport(value)}
+                            multiline={true}
+                            numberOfLines={1}
+                            style={styles.postInput}
+                            placeholder={"Main Sport"}
+                        />
+                        <RNPickerSelect onValueChange={(value) => setLevel(value)}
+                            placeholder={placeholder}
+                            items={[
+                                { label: 'Beginner', value: 'Beginner' },
+                                { label: 'Intermediate', value: 'Intermediate' },
+                                { label: 'Advanced', value: 'Advanced' },
+                                { label: 'Expert', value: 'Expert' },
+                            ]}
+                        />
+                    </View>
+                </View>
+
 
             </View>
         </SafeAreaView>
@@ -43,27 +101,7 @@ export default function AthleteFinderFilterScreen() {
 
     );
 }
-/*
-<View style={styles.newPostContainer}>
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            value={post}
-                            onChangeText={(value) => setPost(value)}
-                            multiline={true}
-                            numberOfLines={3}
-                            style={styles.postInput}
-                            placeholder={"What's on your mind?"}
-                        />
-                        <TextInput
-                            value={imageURL}
-                            onChangeText={(value) => setImageURL(value)}
-                            style={styles.imageInput}
-                            placeholder={"Optional Image URL"}
-                        />
 
-                    </View>
-                </View>
-*/
 
 const styles = StyleSheet.create({
     container: {
@@ -93,23 +131,30 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
-    backButton:  { 
-      marginLeft: 15 ,  
+    backButton: {
+        marginLeft: 15,
     },
     inputContainer: {
         marginLeft: 10,
+        marginRight: 10,
+        marginBottom:100,
+        paddingBottom:10,
         width: '100%',
-        
+
     },
-    newPostContainer: {
+    mainContainer: {
         flexDirection: 'row',
-        //padding: 15,
-        //width: '100%',
+        alignContent: 'center' ,
+        padding: 15,
+        margin: 15,
+        marginBottom: 10,
+        width: '100%',
     },
     postInput: {
-        height: 100,
-        maxHeight: 400,
-        fontSize: 18
+        height: 30,
+        maxHeight: 50,
+        fontSize: 18,
+        marginBottom: 30,
     },
     imageInput: {
 

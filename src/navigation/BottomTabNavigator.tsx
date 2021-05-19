@@ -1,4 +1,4 @@
-import { Ionicons, FontAwesome5, MaterialCommunityIcons} from '@expo/vector-icons';
+import { Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -10,10 +10,12 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import SearchScreen from '../screens/SearchScreen';
 import AthleteFinderScreen from '../screens/AthleteFinderScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import PrivateMessagesListButton from '../components/PrivateMessagesListButton'
+import PrivateMessagesListButton from '../components/PrivateMessagesListButton';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { getUser } from '../src/graphql/queries';
 
 
-import { BottomTabParamList, HomeNavigatorParamList,SearchNavigatorParamList, AthleteFinderNavigatorParamList, ProfileNavigatorParamList, TabTwoNavigatorParamList } from '../types';
+import { BottomTabParamList, HomeNavigatorParamList, SearchNavigatorParamList, AthleteFinderNavigatorParamList, ProfileNavigatorParamList, TabTwoNavigatorParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<HomeNavigatorParamList>();
 
@@ -23,8 +25,9 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{activeTintColor: 'tomato' //activeTintColor: Colors[colorScheme].tint
-      //,showLabel:false
+      tabBarOptions={{
+        activeTintColor: 'tomato' //activeTintColor: Colors[colorScheme].tint
+        //,showLabel:false
       }}>
       <BottomTab.Screen
         name="Home"
@@ -33,7 +36,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <Ionicons name="home" color={color} />,
         }}
       />
-      
+
       <BottomTab.Screen
         name="Search"
         component={SearchNavigator}
@@ -70,22 +73,47 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 const TabOneStack = createStackNavigator<HomeNavigatorParamList>();
 
 function HomeNavigator() {
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    // get the current user
+    const fetchUser = async () => {
+      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      if (!userInfo) {
+        return;
+      }
+
+      try {
+        const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
+        if (userData) {
+          setUser(userData.data.getUser);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchUser();
+  }, [])
+
+
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          headerRightContainerStyle: {marginRight: 15},
-          headerTitle:() => ( <FontAwesome5 name = {"dumbbell"} size ={40} color='tomato'></FontAwesome5>) ,
-          headerTitleContainerStyle: {alignItems:'center',
-          justifyContent: 'center',},
-          headerRight: () => ( <PrivateMessagesListButton/>),
-          /*headerLeftContainerStyle: {marginLeft: 10},
-          headerLeft:()=>(
-            <ProfilePicture size={40} image={'https://i.pinimg.com/originals/44/ce/2c/44ce2cfa6267fde44790205135a78051.jpg'}/>
-          )*/
-      }}
+          headerRightContainerStyle: { marginRight: 15 },
+          headerTitle: () => (<FontAwesome5 name={"dumbbell"} size={40} color='tomato'></FontAwesome5>),
+          headerTitleContainerStyle: {
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          headerRight: () => (<PrivateMessagesListButton />),
+          headerLeftContainerStyle: { marginLeft: 10 },
+          headerLeft: () => (
+            <ProfilePicture size={40} image={user?.image} />
+          )/**/
+        }}
       />
     </TabOneStack.Navigator>
   );

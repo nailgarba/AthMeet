@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
@@ -12,8 +12,8 @@ import { MaterialIcons, } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-import {API, Auth, graphqlOperation} from 'aws-amplify';
-import {createPost} from '../src/graphql/mutations';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { createPost } from '../src/graphql/mutations';
 
 
 
@@ -23,25 +23,25 @@ export default function NewPostScreen() {
     const navigation = useNavigation();
 
     const onPostPost = async () => {
-        try{
-            const currentUser= await Auth.currentAuthenticatedUser({bypassCache:true});
-            const newPost={
-                content:post,
+        try {
+            const currentUser = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            const newPost = {
+                content: post,
                 image: imageURL,
                 userID: currentUser.attributes.sub,
             }
             console.log(`Created newPost object: ${newPost.content} ${newPost.image}${newPost.userID}`);
 
-            await API.graphql(graphqlOperation(createPost,{input: newPost}));
+            await API.graphql(graphqlOperation(createPost, { input: newPost }));
             navigation.goBack();
-        }catch(e){
+        } catch (e) {
             console.log(`caught an error in try catch L37 NewPostScreen`);
             console.log(e);
         }
         console.warn(`OnPostPost`);
         console.log(`posting post: ${post} Image: ${imageURL}`);
     }
-    
+
 
 
 
@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
-    backButton:  { 
-      marginLeft: 15 ,  
+    backButton: {
+        marginLeft: 15,
     },
     inputContainer: {
         marginLeft: 10,
         width: '100%',
-        
+
     },
     newPostContainer: {
         flexDirection: 'row',

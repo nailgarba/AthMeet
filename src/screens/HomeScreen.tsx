@@ -12,6 +12,7 @@ import NewPostButton from "../components/NewPostButton";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
+      
         <Feed />
         <NewPostButton/>
     </View>
@@ -31,9 +32,18 @@ export default function HomeScreen() {
       <EditScreenInfo path="/screens/HomeScreen.tsx" /> 
 */
 const styles = StyleSheet.create({
+  /*
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  },*/
+  container: {
+    flex: 1,
+    alignItems: 'flex-start',
+    backgroundColor: 'white',
+    width: '100%',
+    paddingRight: 15,
+
+},
 });
