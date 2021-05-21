@@ -23,47 +23,10 @@ function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-
-  const getRandomImage = ()=>{
-    return 'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png'
-  }
-
   const saveUserToDB = async (user:CreateUserInput) =>{
     console.log(user);
     await API.graphql(graphqlOperation(createUser, {input: user}))
   }
-
-
-/*
-  useEffect( () =>{
-    const updateUser = async () =>{
-      //get current user
-      const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true});
-      console.log(userInfo);
-
-      //check if user exists in database
-      if(userInfo){
-        const userData = await API.graphql(graphqlOperation(getUser, {id:userInfo.attributes.sub}));
-        console.log(userData)
-
-        //if not, create user
-        if(!userData.data.getUser){
-          const user = {
-            id: userInfo.attributes.sub,
-            username: userInfo.username,
-            name: userInfo.name,
-            email: userInfo.attributes.email,
-            image: getRandomImage(),
-          }
-          await saveUserToDB(user);
-        } else{
-          console.log('User exists already');
-        }
-      }
-    }
-    updateUser();
-  },  [])*/
-
 
   useEffect(() => {
     const updateUser = async () => {
@@ -80,7 +43,7 @@ function App() {
             username: userInfo.username,
             name: userInfo.username,
             email: userInfo.attributes.email,
-            image: getRandomImage(),
+            image: '',
           }
           await saveUserToDB(user);
         } else {
