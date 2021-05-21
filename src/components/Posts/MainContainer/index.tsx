@@ -4,7 +4,7 @@ import { PostType } from '../../../types';
 import styles from './styles';
 import {Ionicons} from '@expo/vector-icons';
 import Footer from './Footer';
-
+import moment from 'moment';
 
 
 export type MainContainerProps = {
@@ -15,7 +15,7 @@ const MainContainer = ({post}: MainContainerProps) => (
         <View style= {styles.postHeaderContainer}>
             <Text style={styles.name}>{post.user.name}</Text>
             <Text style= {styles.username}>@{post.user.username}</Text>
-            <Text style= {styles.postedAt}>{post.postedAt}</Text>
+            <Text style= {styles.createdAt}>{moment(post.createdAt).fromNow()}</Text>
         </View>
 
         <View >

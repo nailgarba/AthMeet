@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         marginRight:5,
         color: 'grey',
     },
-    postedAt: {
+    createdAt: {
         marginRight:5,
         color: 'grey',
     },

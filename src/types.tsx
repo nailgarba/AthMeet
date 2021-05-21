@@ -1,8 +1,18 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  PrivateMessages: undefined;
+  PrivateMessagesList: undefined;
+  EditProfile: undefined;
+  AthleteFinderFilter: undefined;
+  OtherProfile: undefined;
+  Profile: undefined;
+  ChatRoom: undefined;
   NewPost: undefined;
+  Home: undefined;
+  
 };
+
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -43,7 +53,7 @@ export type UserType = {
 export type PostType = {
   id: string,
   user: UserType,
-  postedAt: string,
+  createdAt: string,
   content: string,
   image?: string,
   numberOfLikes?: number,
@@ -56,4 +66,16 @@ export type ProfileType = {
   mainGym: string,
   level: string,
   image?: string,
+}
+export type ChatRoom = {
+  id: string;
+  users: UserType[];
+  lastMessage: Message;
+}
+export type Message = {
+  id: string;
+  content: string;
+  createdAt: string;
+  user: UserType;
+  post?: PostType;
 }

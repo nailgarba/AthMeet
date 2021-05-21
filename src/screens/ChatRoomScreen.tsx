@@ -10,7 +10,8 @@ import {Auth, API, graphqlOperation} from 'aws-amplify';
 
 import { messagesByChatRoom } from '../src/graphql/queries';
 import { onCreateMessage } from '../src/graphql/subscriptions';
-import InputBox from "../components/InputBox";
+import InputBox from '../components/InputBox';
+import ChatMessage from '../components/ChatMessage';
 
 export default function AthleteFinderFilterScreen() {
     const [messages, setMessages] = React.useState([]);
