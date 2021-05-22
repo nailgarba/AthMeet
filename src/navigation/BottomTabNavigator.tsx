@@ -16,6 +16,7 @@ import { getUser } from '../src/graphql/queries';
 
 
 import { BottomTabParamList, HomeNavigatorParamList, SearchNavigatorParamList, AthleteFinderNavigatorParamList, ProfileNavigatorParamList, TabTwoNavigatorParamList } from '../types';
+import SignOutButton from '../components/SignOutButton';
 
 const BottomTab = createBottomTabNavigator<HomeNavigatorParamList>();
 
@@ -103,15 +104,15 @@ function HomeNavigator() {
         component={HomeScreen}
         options={{
           headerRightContainerStyle: { marginRight: 15 },
+          headerRight: () => (<PrivateMessagesListButton />),
           headerTitle: () => (<FontAwesome5 name={"dumbbell"} size={40} color='tomato'></FontAwesome5>),
           headerTitleContainerStyle: {
             alignItems: 'center',
             justifyContent: 'center',
           },
-          headerRight: () => (<PrivateMessagesListButton />),
           headerLeftContainerStyle: { marginLeft: 10 },
           headerLeft: () => (
-            <ProfilePicture size={40} image={user?.image} />
+            <ProfilePicture size={40} user = {user? user:""}/>
           )/**/
         }}
       />
@@ -156,7 +157,11 @@ function ProfileNavigator() {
       <ProfileScreenStack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{ headerTitle: 'ProfileScreen' }}
+        options={{
+          headerTitle: 'ProfileScreen',
+          headerRightContainerStyle: { marginRight: 25 },
+          headerRight: () => (<SignOutButton />),
+        }}
       />
     </ProfileScreenStack.Navigator>
   );

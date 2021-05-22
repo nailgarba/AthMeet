@@ -11,14 +11,14 @@ export type TopContainerProps = {
 const TopContainer = ({ user }: TopContainerProps) => (
     <View style={styles.container}>
         <View style={styles.profilePictureContainer}>
-            <ProfilePicture image={user.image} size={200} />
+            <ProfilePicture user={user} size={200} />
         </View>
         <View style={{ margin:'auto' }}>
             <Text style={styles.nameContainer} >{user.name}</Text>
             <Text style={styles.usernameContainer}>@{user.username}</Text>
             <View style={styles.followsContainer}>
-                <Text>Followers {user.followers}</Text>
-                <Text>Following {user.following}</Text>
+                <Text>Followers </Text>
+                <Text>Following </Text>
                 <Text style={styles.content}>Main Gym: {user.mainGym}</Text>
                 <Text style={styles.content}>Main Sport: {user.mainSport}</Text>
                 <Text style={styles.content}>Level: {user.level}</Text>
@@ -29,6 +29,8 @@ const TopContainer = ({ user }: TopContainerProps) => (
 
     </View>
 )
+//<Text>Followers {user.followers}</Text>
+//<Text>Following {user.following}</Text>
 
 export default TopContainer;
 

@@ -1,12 +1,12 @@
-type User @model {
+type User @model  @key(name: "byUsername", fields: ["id", "username"]){
   id: ID!
   username:String!
   name: String!
   email: String!
   image: String
   posts: [Post] @connection(keyName: "byUser", fields: ["id"])
-  following:[User]
-  followers:[User]
+  following:[User] @connection(keyName: "byUsername", fields:  ["id", "username"])
+  followers:[User] @connection(keyName: "byUsername", fields:  ["id", "username"])
   mainGym: String
   mainSport: String
   level: String

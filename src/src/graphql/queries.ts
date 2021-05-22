@@ -22,15 +22,7 @@ export const getUser = /* GraphQL */ `
         nextToken
       }
       following {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-        }
-        following {
+        items {
           id
           username
           name
@@ -42,37 +34,10 @@ export const getUser = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        followers {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        mainGym
-        mainSport
-        level
-        chatRoomUser {
-          nextToken
-        }
-        createdAt
-        updatedAt
+        nextToken
       }
       followers {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-        }
-        following {
+        items {
           id
           username
           name
@@ -84,26 +49,7 @@ export const getUser = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        followers {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        mainGym
-        mainSport
-        level
-        chatRoomUser {
-          nextToken
-        }
-        createdAt
-        updatedAt
+        nextToken
       }
       mainGym
       mainSport
@@ -140,28 +86,10 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         following {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         followers {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         mainGym
         mainSport
@@ -192,28 +120,10 @@ export const getPost = /* GraphQL */ `
           nextToken
         }
         following {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         followers {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         mainGym
         mainSport
@@ -366,28 +276,10 @@ export const getChatRoomUser = /* GraphQL */ `
           nextToken
         }
         following {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         followers {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         mainGym
         mainSport
@@ -413,6 +305,7 @@ export const getChatRoomUser = /* GraphQL */ `
           content
           userID
           chatRoomID
+          postID
           updatedAt
         }
         createdAt
@@ -480,6 +373,7 @@ export const getChatRoom = /* GraphQL */ `
           content
           userID
           chatRoomID
+          postID
           updatedAt
         }
         nextToken
@@ -509,6 +403,7 @@ export const getChatRoom = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        postID
         post {
           id
           content
@@ -546,6 +441,7 @@ export const listChatRooms = /* GraphQL */ `
           content
           userID
           chatRoomID
+          postID
           updatedAt
         }
         createdAt
@@ -573,28 +469,10 @@ export const getMessage = /* GraphQL */ `
           nextToken
         }
         following {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         followers {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
+          nextToken
         }
         mainGym
         mainSport
@@ -620,11 +498,13 @@ export const getMessage = /* GraphQL */ `
           content
           userID
           chatRoomID
+          postID
           updatedAt
         }
         createdAt
         updatedAt
       }
+      postID
       post {
         id
         content
@@ -686,6 +566,7 @@ export const listMessages = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        postID
         post {
           id
           content
@@ -741,6 +622,7 @@ export const messagesByChatRoom = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        postID
         post {
           id
           content

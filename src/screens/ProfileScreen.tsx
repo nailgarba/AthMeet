@@ -73,9 +73,6 @@ export default function ProfileScreen() {
     <View style={styles.container}>
       <EditProfileButton/>
       <ProfileScreenComponents user ={user} />
-      
-        
-        
     </View>
     
   );

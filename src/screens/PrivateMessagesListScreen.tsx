@@ -1,19 +1,42 @@
 import * as React from 'react';
-import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, SafeAreaView, TextInput,FlatList } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { Text, View, } from '../components/Themed';
 import { MaterialIcons, } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import PrivateMessagesFeed from '../components/PrivateMessagesFeed';
-
+import ChatListItem from '../components/ChatListItem';
+import {API, graphqlOperation,Auth,} from 'aws-amplify';
+import { getUser } from '../src/graphql/queries';
 
 export default function PrivateMessagesListScreen() {
 
   const navigation = useNavigation();
 
+  const [chatRooms, setChatRooms] = React.useState([]);
 
+  React.useEffect(() => {
+    const fetchChatRooms = async () => {
+      try {
+        const userInfo = await Auth.currentAuthenticatedUser();
+
+        const userData = await API.graphql(
+          graphqlOperation(
+            getUser, {
+              id: userInfo.attributes.sub,
+            }
+          )
+        )
+
+        setChatRooms(userData.data.getUser.chatRoomUser.items)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchChatRooms();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -21,8 +44,14 @@ export default function PrivateMessagesListScreen() {
         <MaterialIcons name="arrow-back" size={40} color="tomato" />
       </TouchableOpacity>
       </View>
-      <PrivateMessagesFeed />
-
+      <View style={styles.container}>
+      <FlatList
+        style={{width: '100%'}}
+        data={chatRooms}
+        renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
     </View>
 
   );
@@ -30,6 +59,7 @@ export default function PrivateMessagesListScreen() {
 
 
 /*    
+<PrivateMessagesFeed />
  
  
         <Post post ={posts[0]}/>

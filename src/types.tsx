@@ -71,6 +71,17 @@ export type ChatRoom = {
   id: string;
   users: UserType[];
   lastMessage: Message;
+  chatRoomUsers: chatRoomUsers[];
+  messages: Message[];
+  lastMessageID: string;
+
+} 
+
+export type chatRoomUsers = {
+  id: string;
+  users: UserType[];
+  lastMessage: Message;
+  
 }
 export type Message = {
   id: string;
