@@ -7,7 +7,7 @@ import { UserType } from '../types';
 import Feed from '../components/Feed';
 import ProfileScreenComponents from '../components/ProfileScreenComponents';
 import TopContainer from '../components/ProfileScreenComponents/TopContainer';
-
+import { useRoute } from '@react-navigation/native';
 import { MaterialIcons, } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import users from '../data/users';
@@ -26,11 +26,13 @@ export type OtherProfileProps = {
 }
 
 
-const OtherProfileScreen = (userID: OtherProfileProps) => {
+const OtherProfileScreen = () => {
   const [suser, setUser] = React.useState([]);
+  const [tuser, setTUser] = React.useState([]);
+  const route = useRoute();
 
   React.useEffect(() => {
-    // get the current user
+     //get the current user
     const fetchUser = async () => {
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
       if (!userInfo) {
@@ -38,7 +40,7 @@ const OtherProfileScreen = (userID: OtherProfileProps) => {
       }
 
       try {
-        const userData = await API.graphql(graphqlOperation(getUser, { id:  userID}))
+        const userData = await API.graphql(graphqlOperation(getUser, { id:  route.params.userID.id}))
         if (userData) {
           setUser(userData.data.getUser);
         }
@@ -48,7 +50,7 @@ const OtherProfileScreen = (userID: OtherProfileProps) => {
     }
     fetchUser();
     console.log(suser);
-  }, [])
+  }, [])/**/
 
   const navigation = useNavigation();
  
@@ -56,10 +58,18 @@ const OtherProfileScreen = (userID: OtherProfileProps) => {
   
   const checkDMS = () => {
     console.log(suser);
-    console.log(userID);
-    console.warn("users:");
-    console.log(`suser: ${suser.username} user: ${userID}`);
-    //check if chatroom exists if not create one
+    console.warn(" route:");
+    console.log(route);
+    console.log(`route params: `);
+    console.log(route.params);
+    console.log(`route id: `);
+    console.log(route.params.id);
+    console.log(`route params userID: `);
+    console.log(route.params.userID);
+    console.log(`route params userID id: `);
+    console.log(route.params.userID.id);    
+    console.log(`suser: ${suser}  tuser: ${tuser}`);
+    //check if chatroom exists if not create one user: ${userID}
   }
 
 

@@ -48,7 +48,7 @@ function RootNavigator() {
       <Stack.Screen name ="PrivateMessagesList" component={PrivateMessagesListScreen} />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       <Stack.Screen name ="AthleteFinderFilter" component={AthleteFinderFilterScreen} />   
-      <Stack.Screen name="OtherProfile" component={OtherProfileScreen} />
+      <Stack.Screen name="OtherProfile" component={OtherProfileScreen}/>
       <Stack.Screen name="Profile" component={ProfileScreen} />   
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name ="ChatRoom" component={ChatRoomScreen} 
