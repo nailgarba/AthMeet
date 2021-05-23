@@ -17,6 +17,7 @@ import OtherProfileScreen from '../screens/OtherProfileScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
 import {MaterialCommunityIcons,} from '@expo/vector-icons';
+import NewChatContactsScreen from '../screens/NewChatContactsScreen';
 
 
 // If you are not familiar with React Navigation, we recommend going through the
@@ -50,6 +51,7 @@ function RootNavigator() {
       <Stack.Screen name ="AthleteFinderFilter" component={AthleteFinderFilterScreen} />   
       <Stack.Screen name="OtherProfile" component={OtherProfileScreen}/>
       <Stack.Screen name="Profile" component={ProfileScreen} />   
+      <Stack.Screen name="NewChatContacts" component={NewChatContactsScreen} />   
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name ="ChatRoom" component={ChatRoomScreen} 
       options={({ route })  => ({

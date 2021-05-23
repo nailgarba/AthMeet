@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, SafeAreaView, TextInput,FlatList } from 'react-native';
+import { StyleSheet, SafeAreaView, TextInput, FlatList } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View, } from '../components/Themed';
@@ -8,8 +8,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import PrivateMessagesFeed from '../components/PrivateMessagesFeed';
 import ChatListItem from '../components/ChatListItem';
-import {API, graphqlOperation,Auth,} from 'aws-amplify';
+import { API, graphqlOperation, Auth, } from 'aws-amplify';
 import { getUser } from '../src/graphql/queries';
+import NewChatButton from '../components/NewChatButton';
 
 export default function PrivateMessagesListScreen() {
 
@@ -25,8 +26,8 @@ export default function PrivateMessagesListScreen() {
         const userData = await API.graphql(
           graphqlOperation(
             getUser, {
-              id: userInfo.attributes.sub,
-            }
+            id: userInfo.attributes.sub,
+          }
           )
         )
 
@@ -40,18 +41,21 @@ export default function PrivateMessagesListScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <MaterialIcons name="arrow-back" size={40} color="tomato" />
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={40} color="tomato" />
+        </TouchableOpacity>
+        <View>
+          <NewChatButton ></NewChatButton>
+        </View>
       </View>
       <View style={styles.container}>
-      <FlatList
-        style={{width: '100%'}}
-        data={chatRooms}
-        renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
+        <FlatList
+          style={{ width: '100%' }}
+          data={chatRooms}
+          renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
     </View>
 
   );
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '100%',
     paddingRight: 15,
-    
+
   },
   headerContainer: {
     width: '100%',
@@ -85,5 +89,8 @@ const styles = StyleSheet.create({
     //padding: 15,
     marginTop: 25,
     paddingBottom: 5
-},
+  },
+  backButton:{
+    
+  }
 });

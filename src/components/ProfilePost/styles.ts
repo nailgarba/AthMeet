@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
         //padding: '15',
         borderBottomWidth: 1,
         borderColor: 'tomato',
+    },
+    goToChatButton:{
+        paddingTop:15 ,
     }
 });
 

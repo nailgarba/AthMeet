@@ -4,7 +4,7 @@ import Colors from "../../constants/Colors";
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, } from "react-native";
 import { API, Auth, graphqlOperation, } from 'aws-amplify';
 import { createMessage, updateChatRoom, } from '../../src/graphql/mutations';
-import { MaterialIcons, FontAwesome5, Entypo, Fontisto, } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, Entypo, Fontisto, } from '@expo/vector-icons';
 
 const InputBox = (props) => {
 
@@ -70,11 +70,10 @@ const InputBox = (props) => {
                         onChangeText={setMessage}
                     />
                     <Entypo name="attachment" size={24} color="grey" style={styles.icon} />
-                    {!message && <Fontisto name="camera" size={24} color="grey" style={styles.icon} />}
                 </View>
                 <TouchableOpacity onPress={onSendPress}>
                     <View style={styles.buttonContainer}>
-                        <MaterialIcons name="send" size={28} color="white" />
+                        <Ionicons name="md-send" size={28} color="white" />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -84,6 +83,7 @@ const InputBox = (props) => {
 
 export default InputBox;
 
+//{!message && <Fontisto name="camera" size={24} color="grey" style={styles.icon} />}
 
 
 const styles = StyleSheet.create({
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         width: 50,
         height: 50,
-        backgroundColor: Colors.light.tint,
+        backgroundColor: 'tomato',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 25,

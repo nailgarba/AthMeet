@@ -10,6 +10,7 @@ export type RootStackParamList = {
   ChatRoom: undefined;
   NewPost: undefined;
   Home: undefined;
+  NewChatContacts: undefined;
   
 };
 

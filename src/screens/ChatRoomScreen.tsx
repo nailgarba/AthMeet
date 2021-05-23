@@ -13,7 +13,7 @@ import { onCreateMessage } from '../src/graphql/subscriptions';
 import InputBox from '../components/InputBox';
 import ChatMessage from '../components/ChatMessage';
 
-export default function AthleteFinderFilterScreen() {
+export default function ChatRoomScreen() {
     const [messages, setMessages] = React.useState([]);
     const [myId, setMyId] = React.useState(null);
     const route = useRoute();

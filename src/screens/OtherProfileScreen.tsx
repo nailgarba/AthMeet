@@ -17,6 +17,7 @@ import { getUser } from '../src/graphql/queries';
 
 import myUser from '../data/myUser';
 import { useNavigation } from '@react-navigation/native';
+import GoToChatButton from '../components/GoToChatButton';
 export {UserType} from '../types';
 
 
@@ -27,14 +28,18 @@ export type OtherProfileProps = {
 
 
 const OtherProfileScreen = () => {
-  const [suser, setUser] = React.useState([]);
+  const [user, setUser] = React.useState([]);
   const [tuser, setTUser] = React.useState([]);
+  const [isSelf, setisSelf] = React.useState(true);
+  var testfalse = false;
+  var testtrue = true;
   const route = useRoute();
+ // var isSelf = false;
 
   React.useEffect(() => {
      //get the current user
     const fetchUser = async () => {
-      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      const userInfo =await Auth.currentAuthenticatedUser({ bypassCache: true });
       if (!userInfo) {
         return;
       }
@@ -46,10 +51,45 @@ const OtherProfileScreen = () => {
         }
       } catch (e) {
         console.log(e);
-      }
+
+      }/*
+      testtrue = ( user.id == userInfo.attributes.sub);
+      setisSelf( user.id == userInfo.attributes.sub);
+      console.log(`--------------------------------------------------`);
+      console.log(`------------------------testtrue-------------------`);
+      console.log(testtrue);
+      console.log(`--------------------------------------------------`);
+      console.log(`--------------------------------------------------`);
+      console.log(`-----------------------testfalse---------------------------`);
+      console.log(testfalse);
+      console.log(`--------------------------------------------------`);
+      console.log(`------------------------isself--------------------------`);
+            console.log(isSelf);
+
+      console.log(`--------------------------------------------------`);
+      console.log(`-------------------bool test---------------------`);
+      console.log(user.id == userInfo.attributes.sub);
+      
+      console.log(`--------------------------------------------------`);
+      console.log(`----------------------user id----------------------------`);
+      console.log(user );
+      console.log(`--------------------------------------------------`);
+      
+      console.log(`-----------------sub---------------------------------`);
+      console.log( userInfo.attributes.sub );
+
+      setisSelf( !user.id == userInfo.attributes.sub);*/
+      
+      
     }
     fetchUser();
-    console.log(suser);
+    console.log(user);
+    /*
+    console.log(`-----------------end if---------------------`);
+    console.log(`-------------------bool test---------------------`);
+    console.log(user.id == userInfo.attributes.sub);/*/
+  
+
   }, [])/**/
 
   const navigation = useNavigation();
@@ -57,7 +97,7 @@ const OtherProfileScreen = () => {
 
   
   const checkDMS = () => {
-    console.log(suser);
+    console.log(user);
     console.warn(" route:");
     console.log(route);
     console.log(`route params: `);
@@ -68,9 +108,11 @@ const OtherProfileScreen = () => {
     console.log(route.params.userID);
     console.log(`route params userID id: `);
     console.log(route.params.userID.id);    
-    console.log(`suser: ${suser}  tuser: ${tuser}`);
+    console.log(`user: ${user}  tuser: ${tuser}`);
     //check if chatroom exists if not create one user: ${userID}
   }
+  
+  
 
 
 
@@ -80,11 +122,11 @@ const OtherProfileScreen = () => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={40} color="tomato" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={checkDMS}>
-          <Text style={styles.buttonText}>DM</Text>
-        </TouchableOpacity>
+        {!testfalse
+                ? <GoToChatButton user = {user}/>
+                : <View/>}
       </View>
-      <ProfileScreenComponents user={suser} />
+      <ProfileScreenComponents user={user} />
     </View>
   )
 }

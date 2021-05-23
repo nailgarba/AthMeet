@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import { UserType } from '../../types';
+import GoToChatButton from '../GoToChatButton';
 import LeftContainer from './LeftContainer';
 import MainContainer from './MainContainer';
 
@@ -8,17 +9,20 @@ import styles from './styles';
 
 export {ProfileType} from '../../types';
 
-export type PostProps = {
-post: ProfileType,
+export type ProfilePostProps = {
+
 user: UserType,
 }
 
 
 
-const ProfilePost = ({post}: PostProps) => (
+const ProfilePost = ({user}: ProfilePostProps) => (
     <View style= {styles.container}>
-       <LeftContainer user={post.user}/>
-       <MainContainer post={post}/> 
+       <LeftContainer user={user}/>
+       <MainContainer user={user}/> 
+       <View style= {styles.goToChatButton}>
+       <GoToChatButton user={user}/>
+       </View>
     </View>
 )
 
