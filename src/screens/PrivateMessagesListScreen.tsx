@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import PrivateMessagesFeed from '../components/PrivateMessagesFeed';
 import ChatListItem from '../components/ChatListItem';
 import { API, graphqlOperation, Auth, } from 'aws-amplify';
-import { getUser } from '../src/graphql/queries';
+import { getUser, listChatRooms } from '../customgraphql/queries';
 import NewChatButton from '../components/NewChatButton';
 
 export default function PrivateMessagesListScreen() {
@@ -17,6 +17,8 @@ export default function PrivateMessagesListScreen() {
   const navigation = useNavigation();
 
   const [chatRooms, setChatRooms] = React.useState([]);
+  
+  const [testchatRooms, settesChatRooms] = React.useState([]);
 
   React.useEffect(() => {
     const fetchChatRooms = async () => {
@@ -37,6 +39,26 @@ export default function PrivateMessagesListScreen() {
       }
     }
     fetchChatRooms();
+
+    const fetchtestChatRooms = async () => {
+      try {
+        const userInfo = await Auth.currentAuthenticatedUser();
+
+        const userData = await API.graphql(
+          graphqlOperation(
+            listChatRooms, {
+            id: userInfo.attributes.sub,
+          }
+          )
+        )
+
+        settesChatRooms(userData.data.getUser.chatRoomUser.items)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchtestChatRooms();
+
   }, []);
   return (
     <View style={styles.container}>
@@ -51,7 +73,7 @@ export default function PrivateMessagesListScreen() {
       <View style={styles.container}>
         <FlatList
           style={{ width: '100%' }}
-          data={chatRooms}
+          data={testchatRooms}
           renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
           keyExtractor={(item) => item.id}
         />
@@ -91,6 +113,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5
   },
   backButton:{
-    
+
   }
 });

@@ -19,9 +19,9 @@ const ChatListItem = (props: ChatListItemProps) => {
     const getOtherUser = async () => {
       const userInfo = await Auth.currentAuthenticatedUser();
       if (chatRoom.chatRoomUsers.items[0].user.id === userInfo.attributes.sub) {
-        setOtherUser(chatRoom.chatRoomUsers.items[1].user);
-      } else {
         setOtherUser(chatRoom.chatRoomUsers.items[0].user);
+      } else {
+        setOtherUser(chatRoom.chatRoomUsers.items[1].user);
       }
     }
     getOtherUser();
@@ -51,7 +51,7 @@ const ChatListItem = (props: ChatListItemProps) => {
               style={styles.lastMessage}>
               {chatRoom.lastMessage
                 ? `${chatRoom.lastMessage.user.name}: ${chatRoom.lastMessage.content}`
-                : ""}
+                : <View/>}
             </Text>
           </View>
 
@@ -76,6 +76,9 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: 'space-between',
     padding: 10,
+    borderBottomWidth: 1,
+    borderTopWidth:1,
+    borderColor: 'tomato',
   },
   lefContainer: {
     flexDirection: 'row',

@@ -25,6 +25,7 @@ export type NewChatProps = {
 
 const GoToChatButton = ( props:NewChatProps) => {
     const { user } = props;
+    const userID = user.id;
     const navigation = useNavigation();
   
     const onClick = async () => {
@@ -53,15 +54,21 @@ const GoToChatButton = ( props:NewChatProps) => {
           graphqlOperation(
             createChatRoomUser, {
               input: {
-                userID: user.id,
+                userID: userID,
                 chatRoomID: newChatRoom.id,
-              }
             }
-          )
+        }
         )
+        )
+        console.log(`-------------------------------------------`);
+        console.log(`----------------user id--------------------`);
+        console.log(userID);
   
         //  3. Add authenticated user to the Chat Room
         const userInfo = await Auth.currentAuthenticatedUser();
+        console.log(`-------------------------------------------`);
+        console.log(`----------------sub--------------------`);
+        console.log(userInfo.attributes.sub);
         await API.graphql(
           graphqlOperation(
             createChatRoomUser, {
