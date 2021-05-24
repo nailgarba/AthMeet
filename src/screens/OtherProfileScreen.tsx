@@ -83,7 +83,7 @@ const OtherProfileScreen = () => {
       
     }
     fetchUser();
-    console.log(user);
+    //console.log(user);
     /*
     console.log(`-----------------end if---------------------`);
     console.log(`-------------------bool test---------------------`);

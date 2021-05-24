@@ -82,7 +82,7 @@ const GoToChatButton = ( props:NewChatProps) => {
   
         navigation.navigate('ChatRoom', {
           id: newChatRoom.id,
-          name: "Hardcoded name",
+          name: user.name,
         })
   
       } catch (e) {

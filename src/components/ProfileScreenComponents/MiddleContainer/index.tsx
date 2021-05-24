@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { UserType } from '../../../types';
 import ProfilePicture from '../../ProfilePicture';
 import { StyleSheet } from 'react-native';
-import Feed from '../../Feed';
+import PrivateFeed from '../../PrivateFeed';
 
 
 export type MiddleContainerProps = {
@@ -11,7 +11,7 @@ export type MiddleContainerProps = {
 }
 const MiddleContainer = ({ user }: MiddleContainerProps) => (
     <View style={styles.container}>
-        <Feed/>
+        <PrivateFeed user={user}/>
     </View>
     
 )

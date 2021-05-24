@@ -24,7 +24,7 @@ function App() {
   const colorScheme = useColorScheme();
 
   const saveUserToDB = async (user:CreateUserInput) =>{
-    console.log(user);
+   // console.log(user);
     await API.graphql(graphqlOperation(createUser, {input: user}))
   }
 
@@ -36,7 +36,7 @@ function App() {
       if(userInfo) {
         // Check if user already exists in database
         const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }));
-        console.log(userData)
+        //console.log(userData)
         if(!userData.getUser) {
           const user = {
             id: userInfo.attributes.sub,

@@ -45,8 +45,8 @@ export const getUser = /* GraphQL */ `
 
 
 export const listChatRooms = /* GraphQL */ `
-query MyQuery {
-    getUser(id: "22842985-8fa6-4f80-b113-98674b1b3f52") {
+query MyQuery($id: ID!) {
+    getUser(id: $id) {
         chatRoomUser {
           items {
             chatRoomID
@@ -75,3 +75,77 @@ query MyQuery {
     }
     
   `;
+
+
+  export const listPrivatePosts = /* GraphQL */ `
+  query MyQuery($id: ID!) {
+    listPosts(filter: {userID: {beginsWith: "22842985-8fa6-4f80-b113-98674b1b3f52"}}) {
+      nextToken
+       items {
+         id
+         content
+         userID
+         user {
+           id
+           username
+           name
+           email
+           image
+           mainGym
+           mainSport
+           level
+           createdAt
+           updatedAt
+         }
+         image
+         likes {
+           nextToken
+         }
+         comments {
+           nextToken
+         }
+         createdAt
+         updatedAt
+       }
+     }
+   }
+  `;
+
+  export const listPosts = /* GraphQL */ `
+  query ListPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        content
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        image
+        likes {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+  

@@ -15,9 +15,16 @@ export type UserProps = {
     user: UserType,
 }
 
-
-const ProfileScreenComponents = ({user}: UserProps) => (
+const ProfileScreenComponents = ({user}: UserProps) => {
+    console.log(`----------------------------------------------------`);
+            console.log(`------------------ProfileScreenComponents----------------------`);
+            console.log(`-------------------user id-------------------`);
+            console.log(`----------------------------------------------------`);
+            console.log(user.id);
+            console.log(`----------------------------------------------------`);
     
+
+    return (
     <View style ={styles.container}>
         <View style={styles.topContainer}>
         <TopContainer user={user}/>        
@@ -28,7 +35,7 @@ const ProfileScreenComponents = ({user}: UserProps) => (
         
     </View>
 
-)
+)}
 //<Feed/>
 export default ProfileScreenComponents;
 

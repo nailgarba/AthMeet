@@ -105,6 +105,39 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         flex: 1,
     },
+    buttonContainer: {
+        width: 50,
+        height: 50,
+        backgroundColor: 'tomato',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 25,
+    }
+})
+
+
+
+
+/*
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        margin: 10,
+    },
+    mainContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        backgroundColor: 'white',
+        marginRight: 10,
+        padding: 10,
+        borderRadius: 25,
+    },
+    textInput: {
+        marginHorizontal: 10,
+        flex: 1,
+    },
     icon: {
         marginHorizontal: 5,
     },
@@ -117,7 +150,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
     }
 })
-/*
+
 const styles = StyleSheet.create({
   container: {
     flex: 1

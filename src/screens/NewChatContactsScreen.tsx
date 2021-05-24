@@ -4,7 +4,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { View } from '../components/Themed';
 import { MaterialIcons, } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
-import ContactListItem from '../components/ProfilePost';
+import ProfilePost from '../components/ProfilePost';
 //import users from '../../data/users';
 import { listUsers }  from '../src/graphql/queries';
 import {useEffect, useState} from "react";
@@ -39,7 +39,7 @@ export default function NewChatContactsScreen() {
       <FlatList
         style={{width: '100%'}}
         data={users}
-        renderItem={({ item }) => <ContactListItem user={item} />}
+        renderItem={({ item }) => <ProfilePost user={item} />}
         keyExtractor={(item) => item.id}
       />
     </View>

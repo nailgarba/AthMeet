@@ -45,7 +45,7 @@ export default function ProfileScreen() {
       }
     }
     fetchUser();
-    console.log(user);
+    //console.log(user);
   }, [])
 
 
