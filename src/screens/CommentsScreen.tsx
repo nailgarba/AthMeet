@@ -15,11 +15,14 @@ import PostInComments from '../components/PostInCommentScreen'
 
 import { PostType } from '../types';
 import CommentInputBox from '../components/CommentInputBox';
+import CommentPost from '../components/CommentPost';
+import CommentsinComments from '../components/CommentsinComments';
 
 
 export default function CommentsScreen() {
     const route = useRoute();
     const navigation = useNavigation();
+    const [comments, setComments] = React.useState([]);
     const [user, setUser] = React.useState(null);
     const [post, setPost] = React.useState(null);
     const postID = route.params.postID;
@@ -32,7 +35,6 @@ export default function CommentsScreen() {
     console.log(`------------------------------------------`);
     console.log(`------------------------------------------`);*/
     
-    const [comments, setComments] = React.useState([]);
     
     React.useEffect(() => {
         const fetchPost= async () => {
@@ -60,10 +62,17 @@ export default function CommentsScreen() {
         }
         fetchUser();
         const fetchComments = async () => {
-            const commentData = await API.graphql(graphqlOperation(commentsByPost, { postID: route.params.postID}));
+            const commentData = await API.graphql(graphqlOperation(commentsByPost, { postID: postID}));
             setComments(commentData.data.commentsByPost.items);
         }
         fetchComments();
+        console.log(`------------------------------------------`);
+    console.log(`------------------------------------------`);
+    console.log(`---------------comments in comments screen   fetchComments ---------------`);
+    console.log(comments);
+    console.log(`------------------------------------------`);
+    console.log(`------------------------------------------`);
+    console.log(`------------------------------------------`);
     }, [])
 
    /** 
@@ -75,7 +84,13 @@ export default function CommentsScreen() {
     console.log(`------------------------------------------`);
     console.log(`------------------------------------------`);
 */
-
+console.log(`------------------------------------------`);
+    console.log(`------------------2222------------------------`);
+    console.log(`---------------comments in comments screen   fetchComments ---------------`);
+    console.log(comments);
+    console.log(`------------------------------------------`);
+    console.log(`------------------------------------------`);
+    console.log(`------------------------------------------`);
 
 
     return (
@@ -90,8 +105,9 @@ export default function CommentsScreen() {
                 
             </View>
             <View style={styles.commentsContainer}>
+                {comments && <CommentsinComments comments ={comments}/>}
             </View>
-            <CommentInputBox/>
+            {post && <CommentInputBox props ={post}/>}
 
                 
         </View>

@@ -13,9 +13,6 @@ export type FooterContainerProps = {
 const Footer = ({post}: FooterContainerProps) => (
     <View style= {styles.container}>
         <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name ={"comment-outline"} size={20} color={'grey'}/>  
-        </View> 
-        <View style={styles.iconContainer}>
             <MaterialCommunityIcons name ={"share"} size={20} color={'grey'}/>  
         </View> 
     </View>

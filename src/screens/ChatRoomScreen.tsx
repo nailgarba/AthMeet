@@ -79,9 +79,8 @@ export default function ChatRoomScreen() {
           inverted
         />
       </View>
-      <View style={styles.inputContainer}>
         <InputBox chatRoomID={route.params.id} />
-      </View>
+      
     </View>
 
   );

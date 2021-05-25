@@ -11,17 +11,30 @@ import { MaterialIcons, Ionicons, Entypo, Fontisto, } from '@expo/vector-icons';
 
 const CommentInputBox = (props) => {
 
-    const { post } = props;
+    const post  = props;
+    /*
+    console.log(`------------------------------`);
+    console.log(`------------------------------`);
+    console.log(`------------------------------`);
+    console.log(`----------Post in CommentInputBox-------------`);
+    console.log(post);
+    console.log(`------------------------------`);
+    console.log(`------------------------------`);
+    console.log(`----------props in CommentInputBox-------------`);
+    console.log(props);
+    console.log(`------------------------------`);
+    console.log(`------------------------------`);*/
     const [message, setMessage] = useState('');
     const [myUserId, setMyUserId] = useState(null);
     
-    useEffect(() => {
+    React.useEffect(() => {
         const fetchUser = async () => {
             const userInfo = await Auth.currentAuthenticatedUser();
             setMyUserId(userInfo.attributes.sub);
         }
         fetchUser();
     }, [])
+
     const onSendPress = async () => {
         try {
             const newMessageData = await API.graphql(
@@ -30,13 +43,31 @@ const CommentInputBox = (props) => {
                     input: {
                         content: message,
                         userID: myUserId,
-                        postID: post.id,
+                        postID: props.props.id,
                     }
                 })
             )
         } catch (e) {
             console.log(e);
-        }
+        }/*
+        console.log(`-------OnSendPress---------`);
+        console.log(`------------------------------`);
+        console.log(`----------message in CommentInputBox-------------`);
+        console.log(message);
+        console.log(`------------------------------`);
+        console.log(`------------------------------`);
+        console.log(`------------------------------`);
+        console.log(`----------myUserId in CommentInputBox-------------`);
+        console.log(myUserId);
+        console.log(`------------------------------`);
+        console.log(`------------------------------`);
+        console.log(`------------------------------`);
+        console.log(`----------post.post.id in CommentInputBox-------------`);
+        console.log(post.post.id);
+        console.log(`------------------------------`);
+        console.log(`------------------------------`);*/
+
+        
         setMessage('');
     }
     

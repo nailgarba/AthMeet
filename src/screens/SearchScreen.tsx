@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { FlatList,StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import { TouchableOpacity, FlatList, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 
 import ProfilePost from '../components/ProfilePost';
 
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import Post from '../components/Posts';
 import posts from '../data/posts';
 import Feed from '../components/Feed';
-import { listUsers }  from '../src/graphql/queries';
+import { listUsers } from '../src/graphql/queries';
 
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 
@@ -22,11 +23,17 @@ export default function SearchScreen() {
     const [users, setUsers] = React.useState([]);
 
     React.useEffect(() => {
+    }, [])
         const fetchUsers = async () => {
             try {
                 const followingData = await API.graphql(
                     graphqlOperation(
-                        listUsers
+                        listUsers, {
+                        filter: {
+                            name: { contains: searchValue }, 
+                            }
+                        }
+                    
                     )
                 )
                 setUsers(followingData.data.listUsers.items);
@@ -35,16 +42,20 @@ export default function SearchScreen() {
             }
         }
         fetchUsers();
-    }, [])
 
+
+    const onSendPress = () => {
+        console.log(`-----------------------------`);
+        fetchUsers();
+
+    }
 
 
     return (
 
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView >
             <View style={styles.container}>
                 <View style={styles.searchContainer}>
-                    <View style={styles.inputContainer}>
                         <TextInput
                             value={searchValue}
                             onChangeText={(value) => setSearchValue(value)}
@@ -53,7 +64,9 @@ export default function SearchScreen() {
                             style={styles.searchInput}
                             placeholder={"Enter a username"}
                         />
-                    </View>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={onSendPress}>
+                            <Ionicons name="search" size={28} color="white" />
+                        </TouchableOpacity>
                 </View>
                 <View style={styles.resultsContainer}>
                     <FlatList
@@ -67,9 +80,44 @@ export default function SearchScreen() {
             </View>
         </SafeAreaView >
 
-                );
+    );
 }
 
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    searchContainer: {
+        flexDirection: 'row',
+        padding: 5,
+        paddingLeft:10,
+        width: '100%',
+    },
+    searchInput: {
+        height: 35,
+        maxHeight: 400,
+        fontSize: 18,
+        width: '90 %',
+    },
+    resultsContainer: {
+        flex: 1,
+
+    },
+    buttonContainer: {
+        width: '10%',
+        height: 35,
+        backgroundColor: 'tomato',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+    }
+});
+
+/*
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -98,3 +146,37 @@ const styles = StyleSheet.create({
 
     }
 });
+*/
+
+
+/* return (
+
+        <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
+                <View style={styles.searchContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            value={searchValue}
+                            onChangeText={(value) => setSearchValue(value)}
+                            multiline={false}
+                            numberOfLines={1}
+                            style={styles.searchInput}
+                            placeholder={"Enter a username"}
+                        />
+                    </View>
+                </View>
+                <View style={styles.resultsContainer}>
+                    <FlatList
+                        style={{ width: '100%' }}
+                        data={users}
+                        renderItem={({ item }) => <ProfilePost user={item} />}
+                        keyExtractor={(item) => item.id}
+                    />
+                </View>
+
+            </View>
+        </SafeAreaView >
+
+                );
+
+                */
