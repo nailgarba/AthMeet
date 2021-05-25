@@ -1,4 +1,6 @@
-type User @model  @key(name: "byUsername", fields: ["id", "username"]){
+type User 
+@model  
+@key(name: "byUsername", fields: ["id", "username"]){
   id: ID!
   username:String!
   name: String!
@@ -13,7 +15,9 @@ type User @model  @key(name: "byUsername", fields: ["id", "username"]){
   chatRoomUser: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type Post @model @key(name: "byUser", fields: ["userID"]) {
+type Post 
+  @model 
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   content: String!
   userID: ID!
@@ -23,8 +27,13 @@ type Post @model @key(name: "byUser", fields: ["userID"]) {
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+type Comment 
+  @model 
+  @key(name: "byPost", fields: ["postID", "content"],queryField: "commentsByPost")
+  @key(name: "byUser", fields: ["userID", "postID"]) {
   id: ID!
+  userID: ID!
+  user: User @connection(fields: ["userID"])
   postID: ID!
   post: Post! @connection(fields: ["postID"])
   content: String!
@@ -42,9 +51,9 @@ type Like
 }
 
 type ChatRoomUser
-@model
-@key(name: "byUser", fields: ["userID", "chatRoomID"])
-@key(name: "byChatRoom", fields: ["chatRoomID", "userID"]) {
+  @model
+  @key(name: "byUser", fields: ["userID", "chatRoomID"])
+  @key(name: "byChatRoom", fields: ["chatRoomID", "userID"]) {
   id: ID!
   userID: ID!
   chatRoomID: ID!
@@ -52,7 +61,8 @@ type ChatRoomUser
   chatRoom: ChatRoom @connection(fields: ["chatRoomID"])
 }
 
-type ChatRoom @model {
+type ChatRoom 
+  @model {
   id: ID!
   chatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
   messages: [Message]  @connection(keyName: "byChatRoom", fields: ["id"])

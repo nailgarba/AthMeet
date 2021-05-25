@@ -58,6 +58,14 @@ export type PostType = {
   content: string,
   image?: string,
   numberOfLikes?: number,
+  comment?: CommentType[], 
+}
+export type CommentType = {
+  id: string,
+  user: UserType,
+  createdAt: string,
+  content: string,
+  post:PostType,
 }
 
 export type ProfileType = {

@@ -129,6 +129,8 @@ export type ModelCommentConnection = {
 export type Comment = {
   __typename: "Comment",
   id?: string,
+  userID?: string,
+  user?: User,
   postID?: string,
   post?: Post,
   content?: string,
@@ -250,11 +252,13 @@ export type DeletePostInput = {
 
 export type CreateCommentInput = {
   id?: string | null,
+  userID: string,
   postID: string,
   content: string,
 };
 
 export type ModelCommentConditionInput = {
+  userID?: ModelIDInput | null,
   postID?: ModelIDInput | null,
   content?: ModelStringInput | null,
   and?: Array< ModelCommentConditionInput | null > | null,
@@ -264,6 +268,7 @@ export type ModelCommentConditionInput = {
 
 export type UpdateCommentInput = {
   id: string,
+  userID?: string | null,
   postID?: string | null,
   content?: string | null,
 };
@@ -400,6 +405,7 @@ export type ModelPostFilterInput = {
 
 export type ModelCommentFilterInput = {
   id?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
   postID?: ModelIDInput | null,
   content?: ModelStringInput | null,
   and?: Array< ModelCommentFilterInput | null > | null,
@@ -756,6 +762,7 @@ export type CreatePostMutation = {
       items?:  Array< {
         __typename: "Comment",
         id: string,
+        userID: string,
         postID: string,
         content: string,
         createdAt: string,
@@ -826,6 +833,7 @@ export type UpdatePostMutation = {
       items?:  Array< {
         __typename: "Comment",
         id: string,
+        userID: string,
         postID: string,
         content: string,
         createdAt: string,
@@ -896,6 +904,7 @@ export type DeletePostMutation = {
       items?:  Array< {
         __typename: "Comment",
         id: string,
+        userID: string,
         postID: string,
         content: string,
         createdAt: string,
@@ -917,6 +926,36 @@ export type CreateCommentMutation = {
   createComment?:  {
     __typename: "Comment",
     id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      following?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      followers?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      mainGym?: string | null,
+      mainSport?: string | null,
+      level?: string | null,
+      chatRoomUser?:  {
+        __typename: "ModelChatRoomUserConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     postID: string,
     post:  {
       __typename: "Post",
@@ -963,6 +1002,36 @@ export type UpdateCommentMutation = {
   updateComment?:  {
     __typename: "Comment",
     id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      following?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      followers?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      mainGym?: string | null,
+      mainSport?: string | null,
+      level?: string | null,
+      chatRoomUser?:  {
+        __typename: "ModelChatRoomUserConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     postID: string,
     post:  {
       __typename: "Post",
@@ -1009,6 +1078,36 @@ export type DeleteCommentMutation = {
   deleteComment?:  {
     __typename: "Comment",
     id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      following?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      followers?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      mainGym?: string | null,
+      mainSport?: string | null,
+      level?: string | null,
+      chatRoomUser?:  {
+        __typename: "ModelChatRoomUserConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     postID: string,
     post:  {
       __typename: "Post",
@@ -2205,6 +2304,7 @@ export type GetPostQuery = {
       items?:  Array< {
         __typename: "Comment",
         id: string,
+        userID: string,
         postID: string,
         content: string,
         createdAt: string,
@@ -2268,6 +2368,36 @@ export type GetCommentQuery = {
   getComment?:  {
     __typename: "Comment",
     id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      following?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      followers?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      mainGym?: string | null,
+      mainSport?: string | null,
+      level?: string | null,
+      chatRoomUser?:  {
+        __typename: "ModelChatRoomUserConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     postID: string,
     post:  {
       __typename: "Post",
@@ -2317,6 +2447,20 @@ export type ListCommentsQuery = {
     items?:  Array< {
       __typename: "Comment",
       id: string,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        username: string,
+        name: string,
+        email: string,
+        image?: string | null,
+        mainGym?: string | null,
+        mainSport?: string | null,
+        level?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       postID: string,
       post:  {
         __typename: "Post",
@@ -2715,6 +2859,53 @@ export type ListMessagesQuery = {
   } | null,
 };
 
+export type CommentsByPostQueryVariables = {
+  postID?: string | null,
+  content?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type CommentsByPostQuery = {
+  commentsByPost?:  {
+    __typename: "ModelCommentConnection",
+    items?:  Array< {
+      __typename: "Comment",
+      id: string,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        username: string,
+        name: string,
+        email: string,
+        image?: string | null,
+        mainGym?: string | null,
+        mainSport?: string | null,
+        level?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      postID: string,
+      post:  {
+        __typename: "Post",
+        id: string,
+        content: string,
+        userID: string,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      content: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type MessagesByChatRoomQueryVariables = {
   chatRoomID?: string | null,
   createdAt?: ModelStringKeyConditionInput | null,
@@ -3048,6 +3239,7 @@ export type OnCreatePostSubscription = {
       items?:  Array< {
         __typename: "Comment",
         id: string,
+        userID: string,
         postID: string,
         content: string,
         createdAt: string,
@@ -3113,6 +3305,7 @@ export type OnUpdatePostSubscription = {
       items?:  Array< {
         __typename: "Comment",
         id: string,
+        userID: string,
         postID: string,
         content: string,
         createdAt: string,
@@ -3178,6 +3371,7 @@ export type OnDeletePostSubscription = {
       items?:  Array< {
         __typename: "Comment",
         id: string,
+        userID: string,
         postID: string,
         content: string,
         createdAt: string,
@@ -3194,6 +3388,36 @@ export type OnCreateCommentSubscription = {
   onCreateComment?:  {
     __typename: "Comment",
     id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      following?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      followers?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      mainGym?: string | null,
+      mainSport?: string | null,
+      level?: string | null,
+      chatRoomUser?:  {
+        __typename: "ModelChatRoomUserConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     postID: string,
     post:  {
       __typename: "Post",
@@ -3235,6 +3459,36 @@ export type OnUpdateCommentSubscription = {
   onUpdateComment?:  {
     __typename: "Comment",
     id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      following?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      followers?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      mainGym?: string | null,
+      mainSport?: string | null,
+      level?: string | null,
+      chatRoomUser?:  {
+        __typename: "ModelChatRoomUserConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     postID: string,
     post:  {
       __typename: "Post",
@@ -3276,6 +3530,36 @@ export type OnDeleteCommentSubscription = {
   onDeleteComment?:  {
     __typename: "Comment",
     id: string,
+    userID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      following?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      followers?:  {
+        __typename: "ModelUserConnection",
+        nextToken?: string | null,
+      } | null,
+      mainGym?: string | null,
+      mainSport?: string | null,
+      level?: string | null,
+      chatRoomUser?:  {
+        __typename: "ModelChatRoomUserConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     postID: string,
     post:  {
       __typename: "Post",

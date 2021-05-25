@@ -148,6 +148,7 @@ export const getPost = /* GraphQL */ `
       comments {
         items {
           id
+          userID
           postID
           content
           createdAt
@@ -201,6 +202,31 @@ export const getComment = /* GraphQL */ `
   query GetComment($id: ID!) {
     getComment(id: $id) {
       id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       postID
       post {
         id
@@ -243,6 +269,19 @@ export const listComments = /* GraphQL */ `
     listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
         postID
         post {
           id
@@ -575,6 +614,55 @@ export const listMessages = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const commentsByPost = /* GraphQL */ `
+  query CommentsByPost(
+    $postID: ID
+    $content: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentsByPost(
+      postID: $postID
+      content: $content
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        postID
+        post {
+          id
+          content
+          userID
+          image
+          createdAt
+          updatedAt
+        }
+        content
+        createdAt
         updatedAt
       }
       nextToken

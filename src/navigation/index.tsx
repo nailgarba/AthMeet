@@ -18,7 +18,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
 import {MaterialCommunityIcons,} from '@expo/vector-icons';
 import NewChatContactsScreen from '../screens/NewChatContactsScreen';
-
+import CommentsScreen from '../screens/CommentsScreen';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -53,6 +53,8 @@ function RootNavigator() {
       <Stack.Screen name="Profile" component={ProfileScreen} />   
       <Stack.Screen name="NewChatContacts" component={NewChatContactsScreen} />   
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="Comments" component={CommentsScreen} 
+      options={({ route })  => ({})}/>  
       <Stack.Screen name ="ChatRoom" component={ChatRoomScreen} 
       options={({ route })  => ({
           title: route.params.name,

@@ -69,29 +69,29 @@ export default function ChatRoomScreen() {
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={40} color="tomato" />
-          <Text>{route.params.name}</Text>
         </TouchableOpacity>
-        </View>
-          <View style={styles.mainContainer}>
-            <FlatList
-              data={messages}
-              renderItem={({ item }) => <ChatMessage myId={myId} message={item} />}
-              inverted
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <InputBox chatRoomID={route.params.id} />
-          </View>
-        </View>
+        <Text>{route.params.name}</Text>
+      </View>
+      <View style={styles.mainContainer}>
+        <FlatList
+          data={messages}
+          renderItem={({ item }) => <ChatMessage myId={myId} message={item} />}
+          inverted
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <InputBox chatRoomID={route.params.id} />
+      </View>
+    </View>
 
   );
 }
 
 const styles = StyleSheet.create({
-          container: {
-        },
+  container: {
+  },
   headerContainer: {
-          width: '100%',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     //padding: 15,
@@ -100,13 +100,13 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
 
-        },
+  },
   inputContainer: {
 
-        },
-        backButton:{
+  },
+  backButton: {
 
-        }
+  }
 
 })
 

@@ -247,6 +247,7 @@ export const onCreatePost = /* GraphQL */ `
       comments {
         items {
           id
+          userID
           postID
           content
           createdAt
@@ -303,6 +304,7 @@ export const onUpdatePost = /* GraphQL */ `
       comments {
         items {
           id
+          userID
           postID
           content
           createdAt
@@ -359,6 +361,7 @@ export const onDeletePost = /* GraphQL */ `
       comments {
         items {
           id
+          userID
           postID
           content
           createdAt
@@ -375,6 +378,31 @@ export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment {
     onCreateComment {
       id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       postID
       post {
         id
@@ -412,6 +440,31 @@ export const onUpdateComment = /* GraphQL */ `
   subscription OnUpdateComment {
     onUpdateComment {
       id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       postID
       post {
         id
@@ -449,6 +502,31 @@ export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment {
     onDeleteComment {
       id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       postID
       post {
         id
