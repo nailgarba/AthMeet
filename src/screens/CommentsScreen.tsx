@@ -125,20 +125,22 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     headerContainer: {
-        width: '100%',
+        //width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        //padding: 15,
+        alignContent: 'center',
+        padding: 15,
         marginTop: 25,
         paddingBottom: 5,
         backgroundColor: '#e3e3e3',
     },
     postContainer: {
-        height:'auto',
+        justifyContent:'space-between',
+        marginBottom:5,
+        
     },
     commentsContainer: {
         marginBottom: 'auto',
-
     },
     inputContainer: {
     },

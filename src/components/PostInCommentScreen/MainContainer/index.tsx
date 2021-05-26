@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image,StyleSheet} from 'react-native';
 import { PostType } from '../../../types';
-import styles from './styles';
 import {Ionicons} from '@expo/vector-icons';
 import Footer from './Footer';
 import moment from 'moment';
+
 
 
 export type MainContainerProps = {
@@ -28,17 +28,56 @@ const MainContainer = (post) => {
             <Text style= {styles.createdAt}>{moment(post.post.createdAt).fromNow()}</Text>
         </View>
 
-        <View >
-            <Text style= {styles.content}>{post.post.content}</Text>
+        <View style= {styles.content}>
+            <Text >{post.post.content}</Text>
             {!!post.post.image && <Image style={styles.image} source={{uri:post.post.image}}/>}
         </View>
-        <Footer post={post.post}/>
+        <View style= {styles.footer}>
 
-        
-        {/*username */}
-        {/*content */}
-        {/*footer */}
+        <Footer post={post.post}/>
+        </View>
     </View>
 )}
 
 export default MainContainer;
+
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        marginHorizontal: 10,
+        justifyContent:'space-between',
+    },
+    postHeaderContainer: {
+        flexDirection: 'row',
+    },
+    name:{
+        marginRight:5,
+        fontWeight:'bold',
+    },
+    username: {
+        marginRight:5,
+        color: 'grey',
+    },
+    createdAt: {
+        marginRight:5,
+        color: 'grey',
+    },
+    content:{
+        //minHeight:30,
+        marginVertical: 4,
+        fontSize: 15,
+        lineHeight: 18,
+
+    },
+    image: {
+        marginVertical: 5,
+        width: "100%",
+        height: 230,
+        resizeMode: 'cover',
+        borderRadius: 15,
+       // overflow: 'hidden',
+    },
+    footer:{
+        minHeight:10
+    }
+});

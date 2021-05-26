@@ -18,6 +18,7 @@ import { getUser } from '../src/graphql/queries';
 import myUser from '../data/myUser';
 import { useNavigation } from '@react-navigation/native';
 import GoToChatButton from '../components/GoToChatButton';
+import SecondFeed from '../components/SecondFeed';
 export {UserType} from '../types';
 
 
@@ -126,7 +127,13 @@ const OtherProfileScreen = () => {
                 ? <GoToChatButton user = {user}/>
                 : <View/>}
       </View>
+      <View>
+
       <ProfileScreenComponents user={user} />
+      </View>
+      <View>
+        {user.id && <SecondFeed id={user.id}/>}
+      </View>
     </View>
   )
 }

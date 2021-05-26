@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: 'tomato',
     },
-    goToChatButton:{
-        paddingTop:15 ,
+    GoToChatButton:{
+        alignSelf:'center'
     }
 });
 

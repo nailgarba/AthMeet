@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import { PostType } from '../../../../types';
-import styles from './styles';
 import CommentButton from '../../../CommentButton';
 
 import LikeButton from '../../../LikeButton';
@@ -20,4 +19,23 @@ const Footer = ({post}: FooterContainerProps) => (
 
 //<LikeButton post= {post}></LikeButton>
 export default Footer;
+
+
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        justifyContent: "space-between",
+        flexDirection:"row",
+       // marginTop: 4,
+    },
+    number:{
+        marginLeft: 5,
+        color: 'grey',
+    },
+    iconContainer:{
+        flexDirection: "row",
+    }
+});
+
+
 
