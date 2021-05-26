@@ -20,7 +20,7 @@ const ProfilePost = ({user}: ProfilePostProps) => (
     <View style= {styles.container}>
        <LeftContainer user={user}/>
        <MainContainer user={user}/> 
-       <View style= {styles.goToChatButton}>
+       <View style= {styles.GoToChatButton}>
        <GoToChatButton user={user}/>
        </View>
     </View>

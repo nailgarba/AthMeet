@@ -24,24 +24,24 @@ export default function SearchScreen() {
 
     React.useEffect(() => {
     }, [])
-        const fetchUsers = async () => {
-            try {
-                const followingData = await API.graphql(
-                    graphqlOperation(
-                        listUsers, {
-                        filter: {
-                            name: { contains: searchValue }, 
-                            }
-                        }
-                    
-                    )
+    const fetchUsers = async () => {
+        try {
+            const followingData = await API.graphql(
+                graphqlOperation(
+                    listUsers, {
+                    filter: {
+                        name: { contains: searchValue },
+                    }
+                }
+
                 )
-                setUsers(followingData.data.listUsers.items);
-            } catch (e) {
-                console.log(e);
-            }
+            )
+            setUsers(followingData.data.listUsers.items);
+        } catch (e) {
+            console.log(e);
         }
-        fetchUsers();
+    }
+    fetchUsers();
 
 
     const onSendPress = () => {
@@ -53,20 +53,20 @@ export default function SearchScreen() {
 
     return (
 
-        <SafeAreaView >
-            <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            
                 <View style={styles.searchContainer}>
-                        <TextInput
-                            value={searchValue}
-                            onChangeText={(value) => setSearchValue(value)}
-                            multiline={false}
-                            numberOfLines={1}
-                            style={styles.searchInput}
-                            placeholder={"Enter a username"}
-                        />
-                        <TouchableOpacity style={styles.buttonContainer} onPress={onSendPress}>
-                            <Ionicons name="search" size={28} color="white" />
-                        </TouchableOpacity>
+                    <TextInput
+                        value={searchValue}
+                        onChangeText={(value) => setSearchValue(value)}
+                        multiline={false}
+                        numberOfLines={1}
+                        style={styles.searchInput}
+                        placeholder={"Enter a username"}
+                    />
+                    <TouchableOpacity style={styles.buttonContainer} onPress={onSendPress}>
+                        <Ionicons name="search" size={28} color="black" />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.resultsContainer}>
                     <FlatList
@@ -77,7 +77,6 @@ export default function SearchScreen() {
                     />
                 </View>
 
-            </View>
         </SafeAreaView >
 
     );
@@ -85,31 +84,33 @@ export default function SearchScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        //width: '100%',
+        //height: '100%',
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+        flex: 1,
 
     },
     searchContainer: {
         flexDirection: 'row',
         padding: 5,
-        paddingLeft:10,
-        width: '100%',
+        paddingLeft: 10,
+        //width: '100%',
+        height:'10%',
     },
     searchInput: {
-        height: 35,
-        maxHeight: 400,
+        
         fontSize: 18,
-        width: '90 %',
+        width: '85%',
     },
     resultsContainer: {
         flex: 1,
 
     },
     buttonContainer: {
-        width: '10%',
-        height: 35,
+        width: '15%',
+        //height: 35,
         backgroundColor: 'tomato',
         justifyContent: 'center',
         alignItems: 'center',

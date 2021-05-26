@@ -84,6 +84,8 @@ export default function AthleteFinderFilterScreen() {
                         />
                         <RNPickerSelect onValueChange={(value) => setLevel(value)}
                             placeholder={placeholder}
+                            style={{ inputAndroid: { color: 'black' } }} 
+                            useNativeAndroidPickerStyle={false}
                             items={[
                                 { label: 'Beginner', value: 'Beginner' },
                                 { label: 'Intermediate', value: 'Intermediate' },

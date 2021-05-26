@@ -60,31 +60,52 @@ export default function PrivateMessagesListScreen() {
     fetchtestChatRooms();
 
   }, []);
+  console.log(`-------------------------------------------`);
+console.log(`-------------------------------------------`);
+console.log(`-------------------------------------------`);
+console.log(`---------------before return testchatrooms in privmsgscrn------------------`);
+console.log(testchatRooms);
+console.log(`-------------------------------------------`);
+console.log(`-------------------------------------------`);
+console.log(`-------------------------------------------`);
+console.log(`-------------------------------------------`);
+console.log(`-------------------------------------------`);
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={40} color="tomato" />
         </TouchableOpacity>
-        <View>
-          <NewChatButton ></NewChatButton>
-        </View>
+        <NewChatButton ></NewChatButton>
       </View>
-      <View style={styles.container}>
-        <FlatList
-          style={{ width: '100%' }}
-          data={testchatRooms}
-          renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
-          keyExtractor={(item) => item.id}
-        />
+      <View style={styles.chatsContainer}>
+        {testchatRooms && <PrivateMessagesFeed chatRooms = {testchatRooms}/>}
+        {testchatRooms.items? <Text> Start a chat</Text> : <View/>}
       </View>
     </View>
 
-  );
+);
 }
 
 
+
+
+
 /*    
+{testchatRooms &&
+<FlatList
+  style={{ width: '100%' }}
+  data={testchatRooms}
+  renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
+  keyExtractor={(item) => item.id}
+/>}
+
+
+
+
 <PrivateMessagesFeed />
  
  
@@ -100,19 +121,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: '100%',
-    paddingRight: 15,
-
   },
   headerContainer: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //padding: 15,
+    padding: 15,
     marginTop: 25,
-    paddingBottom: 5
+    paddingBottom: 5,
+    backgroundColor: '#e3e3e3',
   },
   backButton:{
 
+  },
+  chatsContainer:{
+     width: '100%', 
   }
 });

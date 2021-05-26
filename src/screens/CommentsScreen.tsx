@@ -107,7 +107,10 @@ console.log(`------------------------------------------`);
             <View style={styles.commentsContainer}>
                 {comments && <CommentsinComments comments ={comments}/>}
             </View>
+            <View  style={styles.inputContainer}>
+
             {post && <CommentInputBox props ={post}/>}
+            </View>
 
                 
         </View>
@@ -117,6 +120,9 @@ console.log(`------------------------------------------`);
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
     },
     headerContainer: {
         width: '100%',
@@ -124,16 +130,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         //padding: 15,
         marginTop: 25,
-        paddingBottom: 5
+        paddingBottom: 5,
+        backgroundColor: '#e3e3e3',
     },
     postContainer: {
-
+        height:'auto',
     },
     commentsContainer: {
+        marginBottom: 'auto',
 
     },
     inputContainer: {
-
     },
     backButton: {
 

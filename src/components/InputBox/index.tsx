@@ -55,11 +55,7 @@ const InputBox = (props) => {
     }
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={100}
-            style={{ width: '100%' }}
-        >
+        
             <View style={styles.container}>
                 <View style={styles.mainContainer}>
                     <TextInput
@@ -77,28 +73,37 @@ const InputBox = (props) => {
                     </View>
                 </TouchableOpacity>
             </View>
-        </KeyboardAvoidingView>
     )
 }
 
 export default InputBox;
 
-//{!message && <Fontisto name="camera" size={24} color="grey" style={styles.icon} />}
 
+/*
+<KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={100}
+            style={{ width: '100%' }}
+        >
+{!message && <Fontisto name="camera" size={24} color="grey" style={styles.icon} />}
+*/
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'gray',
         flexDirection: 'row',
-        alignItems: 'flex-end',
-        margin: 10,
+        alignItems: 'center',
+        margin: 0,
+        padding:3,
     },
     mainContainer: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'flex-end',
         backgroundColor: 'white',
-        marginRight: 10,
+        marginRight: 5,
         padding: 10,
+        paddingRight:15,
         borderRadius: 25,
     },
     textInput: {
@@ -106,12 +111,13 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     buttonContainer: {
-        width: 50,
-        height: 50,
+        width: 45,
+        height: 45,
         backgroundColor: 'tomato',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 25,
+        margin:2,
     }
 })
 

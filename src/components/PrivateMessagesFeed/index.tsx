@@ -8,10 +8,10 @@ import ChatListItem from '../ChatListItem';
 
 
 
-const PrivateMessagesFeed = () => (
+const PrivateMessagesFeed = (props) => (
     <View style ={{width: '100%'}}>
         <FlatList
-            data = {users}
+            data = {props.chatRooms}
             renderItem={({item}) => <ChatListItem chatRoom = {item.chatRoom} />}
             keyExtractor={(item) => item.id}
         />
@@ -20,8 +20,14 @@ const PrivateMessagesFeed = () => (
 )
 
 export default PrivateMessagesFeed;
-
-
+/*
+{
+    <FlatList
+      style={{ width: '100%' }}
+      data={testchatRooms}
+      renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
+      keyExtractor={(item) => item.id}
+    />}
 /*
 const PrivateMessagesFeed = () => (
     <View style ={{width: '100%'}}>

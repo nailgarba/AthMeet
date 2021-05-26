@@ -37,7 +37,7 @@ export default function NewChatContactsScreen() {
         </TouchableOpacity>
         </View>
       <FlatList
-        style={{width: '100%'}}
+        style={styles.flatList}
         data={users}
         renderItem={({ item }) => <ProfilePost user={item} />}
         keyExtractor={(item) => item.id}
@@ -48,18 +48,28 @@ export default function NewChatContactsScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },headerContainer: {
+    justifyContent: 'flex-start',
+        flexDirection: 'column',
+        flex: 1,
+  },
+  headerContainer: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //padding: 15,
+    padding: 15,
     marginTop: 25,
-    paddingBottom: 5
+    marginBottom:0,
+    paddingBottom: 5,
+    backgroundColor: '#e3e3e3',
   },
   backButton:{
     
+    
+  },
+  flatList:  {
+    width: '100%',
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    borderColor: 'tomato',
   }
 });

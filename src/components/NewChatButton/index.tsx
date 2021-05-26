@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity ,View} from 'react-native';
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet } from "react-native";
@@ -17,13 +17,16 @@ const NewChatButton = () => {
   }
 
   return (
+    <View style={styles.button}>
+
     <TouchableOpacity
       activeOpacity={0.7}
       style={styles.button}
       onPress={onClick}
-    >
+      >
       <FontAwesome5 name={"envelope"} size={30} color='tomato'></FontAwesome5>
     </TouchableOpacity>
+      </View>
   )
 }
 
@@ -31,7 +34,9 @@ export default NewChatButton;
 
 const styles = StyleSheet.create({
   button: {
-    marginRight:15,
+    //marginRight:15,
+
+    backgroundColor: '#e3e3e3',
   }
 });
 

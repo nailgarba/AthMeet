@@ -81,8 +81,9 @@ export default function AthleteFinderScreen() {
         graphqlOperation(
           listUsers, {
             filter: {
-                mainGym: { contains: user.mainGym },
-                mainSport: {contains: user.mainSport },
+                mainGym: { contains: mainGym },
+                mainSport: {contains: mainSport },
+                level: {contains: level }
                 }
           }
           
@@ -140,8 +141,10 @@ export default function AthleteFinderScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop:5,
+    alignItems: 'stretch',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+        flex: 1,
   },
 });

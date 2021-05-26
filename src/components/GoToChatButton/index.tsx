@@ -28,6 +28,25 @@ const GoToChatButton = ( props:NewChatProps) => {
     const userID = user.id;
     const navigation = useNavigation();
   
+    const checkForExistingChat = async (id) =>{
+      try {
+        
+        const userInfo = await Auth.currentAuthenticatedUser();
+        const newChatRoomData = await API.graphql(
+          graphqlOperation(
+            createChatRoom, {
+              input: {
+                lastMessageID: "zz753fca-e8c3-473b-8e85-b14196e84e16"
+              }
+            }
+          )
+        )
+          }catch (e) {
+            console.log(e);
+          }
+    } 
+
+
     const onClick = async () => {
       try {
   
@@ -89,6 +108,8 @@ const GoToChatButton = ( props:NewChatProps) => {
         console.log(e);
       }
     }
+
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}

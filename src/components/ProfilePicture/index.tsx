@@ -6,6 +6,7 @@ import { UserType } from '../ProfileScreenComponents';
 export type ProfilePictureProps = {
     size?: number,
     user: UserType;
+    image?: string,
 }
 
 const ProfilePicture = ({ user, size = 50 }: ProfilePictureProps) => {
@@ -25,6 +26,7 @@ const ProfilePicture = ({ user, size = 50 }: ProfilePictureProps) => {
                     width: size,
                     height: size,
                     borderRadius: size,
+                    margin:3,
                 }}
             />
         </TouchableWithoutFeedback>

@@ -34,6 +34,19 @@ export default function ChatRoomScreen() {
   }
 
   React.useEffect(() => {
+    const fetchMessages = async () => {
+      const messagesData = await API.graphql(
+        graphqlOperation(
+          messagesByChatRoom, {
+          chatRoomID: route.params.id,
+          sortDirection: "DESC",
+        }
+        )
+      )
+  
+      console.log("FETCH MESSAGES")
+      setMessages(messagesData.data.messagesByChatRoom.items);
+    }
     fetchMessages();
   }, [])
 
@@ -65,12 +78,12 @@ export default function ChatRoomScreen() {
   }, [])
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={40} color="tomato" />
         </TouchableOpacity>
-        <Text>{route.params.name}</Text>
+        <Text style={styles.nameContainer}>{route.params.name}</Text>
       </View>
       <View style={styles.mainContainer}>
         <FlatList
@@ -78,29 +91,45 @@ export default function ChatRoomScreen() {
           renderItem={({ item }) => <ChatMessage myId={myId} message={item} />}
           inverted
         />
-      </View>
+      </View >
+      <View style={styles.inputContainer}>
+
         <InputBox chatRoomID={route.params.id} />
+      </View>
       
-    </View>
+    </SafeAreaView>
 
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+        //alignItems: 'stretch',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+        flex: 1,
   },
   headerContainer: {
-    width: '100%',
+    //width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //padding: 15,
+    alignContent: 'center',
+    padding: 15,
     marginTop: 25,
-    paddingBottom: 5
+    paddingBottom: 5,
+    backgroundColor: '#e3e3e3',
+  },
+  nameContainer:{
+    fontSize: 24,
+    alignSelf: 'center'
+
   },
   mainContainer: {
+    flex:1,
 
   },
   inputContainer: {
+    //alignSelf: 'flex-end',
 
   },
   backButton: {

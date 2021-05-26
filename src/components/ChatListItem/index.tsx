@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import { ChatRoom } from "../../types";
 import moment from "moment";
 import { useNavigation } from '@react-navigation/native';
-import {Auth,} from 'aws-amplify';
+import { Auth, } from 'aws-amplify';
 
 export type ChatListItemProps = {
   chatRoom: ChatRoom;
@@ -11,20 +11,38 @@ export type ChatListItemProps = {
 
 const ChatListItem = (props: ChatListItemProps) => {
   const { chatRoom } = props;
-  const [ otherUser, setOtherUser] = useState(null);
+  const [otherUser, setOtherUser] = useState(null);
 
   const navigation = useNavigation();
 
-  useEffect(() => {
+  React.useEffect(() => {
+    console.log(`-------------------------------------------`);
+    console.log(`-------------------------------------------`);
+    console.log(`-------------------------------------------`);
+    console.log(`---------------chatroom in ChatListItem------------------`);
+    console.log(chatRoom);
+    console.log(`-------------------------------------------`);
+    console.log(`-------------------------------------------`);
+    console.log(`---------------props in ChatListItem------------------`);
+    console.log(props);
+    console.log(`-------------------------------------------`);
+    console.log(`-------------------------------------------`);
+    console.log(`-------------------------------------------`);
+
+
     const getOtherUser = async () => {
-      const userInfo = await Auth.currentAuthenticatedUser();
-      if (chatRoom.chatRoomUsers.items[0].user.id === userInfo.attributes.sub) {
-        setOtherUser(chatRoom.chatRoomUsers.items[1].user);
-      } else {
-        setOtherUser(chatRoom.chatRoomUsers.items[0].user);
-      }
+        const userInfo = await Auth.currentAuthenticatedUser();
+        if (chatRoom.chatRoomUsers.items[0].user.id === userInfo.attributes.sub) {
+          setOtherUser(chatRoom.chatRoomUsers.items[1].user);
+        } else {
+          setOtherUser(chatRoom.chatRoomUsers.items[0].user);
+        }
+      
     }
-    getOtherUser();
+
+ //   if (chatRoom && chatRoom.items) {
+      getOtherUser();
+   // }
   }, [])
 
   const onClick = () => {
@@ -42,7 +60,7 @@ const ChatListItem = (props: ChatListItemProps) => {
     <TouchableWithoutFeedback onPress={onClick}>
       <View style={styles.container}>
         <View style={styles.lefContainer}>
-          <Image source={{ uri: otherUser.image }} style={styles.profilePicture}/>
+          <Image source={{ uri: otherUser.image }} style={styles.profilePicture} />
 
           <View style={styles.midContainer}>
             <Text style={styles.username}>{otherUser.name}</Text>
@@ -51,14 +69,14 @@ const ChatListItem = (props: ChatListItemProps) => {
               style={styles.lastMessage}>
               {chatRoom.lastMessage
                 ? `${chatRoom.lastMessage.user.name}: ${chatRoom.lastMessage.content}`
-                : <View/>}
+                : <View />}
             </Text>
           </View>
 
         </View>
 
         <Text style={styles.time}>
-        {chatRoom.lastMessage && moment(chatRoom.lastMessage.createdAt).format("DD/MM/YYYY")}
+          {chatRoom.lastMessage && moment(chatRoom.lastMessage.createdAt).format("DD/MM/YYYY")}
         </Text>
       </View>
     </TouchableWithoutFeedback>
@@ -77,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
     borderBottomWidth: 1,
-    borderTopWidth:1,
+    borderTopWidth: 1,
     borderColor: 'tomato',
   },
   lefContainer: {

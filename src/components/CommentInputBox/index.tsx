@@ -101,9 +101,14 @@ export default CommentInputBox;
 
 const styles = StyleSheet.create({
     container: {
+       // flexDirection: 'row',
+       // alignItems: 'flex-end',
+       // margin: 10,
+        backgroundColor: 'gray',
         flexDirection: 'row',
-        alignItems: 'flex-end',
-        margin: 10,
+        alignItems: 'center',
+        margin: 0,
+        padding:3,
     },
     mainContainer: {
         flex: 1,
@@ -112,6 +117,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginRight: 10,
         padding: 10,
+        paddingRight:15,
         borderRadius: 25,
     },
     textInput: {
@@ -125,5 +131,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
+        margin:2,
     }
 })
