@@ -3,6 +3,8 @@ import { View, Text } from 'react-native';
 import { UserType } from '../../../types';
 import ProfilePicture from '../../ProfilePicture';
 import { StyleSheet } from 'react-native';
+import FollowingButton from '../../FollowingButton';
+import FollowersButton from '../../FollowersButton';
 
 
 export type TopContainerProps = {
@@ -20,11 +22,10 @@ const TopContainer = ({ user }: TopContainerProps) => (
         <View style={styles.followsContainer}>
             <View>
 
-            <Text style={styles.followsTexts}>Followers </Text>
+            <FollowersButton id={user.id}></FollowersButton>
             </View>
             <View>
-
-            <Text style={styles.followsTexts}>Following </Text>
+                <FollowingButton id={user.id}></FollowingButton>
             </View>
         </View>
         <View style={styles.content}>

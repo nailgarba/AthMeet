@@ -15,16 +15,24 @@ const LikeButton = ({ post }: LikeProps) => {
 
     const [user, setUser] = React.useState(null);
     const [myLike, setMyLike] = React.useState(null);
-    const [likesCount, setLikesCount] = React.useState(post.likes.items.length);
+    const [likesCount, setLikesCount] = React.useState(0);
+
+    if(post.likes && post.likes.items){
+
+        setLikesCount(post.likes.items.length);
+    }
+
     React.useEffect(() => {
         const fetchUser = async () => {
-            const currentUser = await Auth.currentAuthenticatedUser();
-            setUser(currentUser);
+            const userInfo = await Auth.currentAuthenticatedUser();
+            setUser(userInfo);
+            if(post.likes && post.likes.items){
 
-            const searchedLike = post.likes.items.find(
-                (like) => like.userID === currentUser.attributes.sub
-            );
-            setMyLike(searchedLike);
+                const searchedLike = post.likes.items.find(
+                    (like) => like.userID === userInfo.attributes.sub
+                );
+                setMyLike(searchedLike);
+            }
         }
         fetchUser();
     }, [])
@@ -32,7 +40,7 @@ const LikeButton = ({ post }: LikeProps) => {
     const submitLike = async () => {
         const like = {
             userID: user.attributes.sub,
-            tweetID: post.id,
+            postID: post.id,
         }
 
         try {
@@ -71,10 +79,10 @@ const LikeButton = ({ post }: LikeProps) => {
 
         <View style={styles.likeContainer}>
             <TouchableOpacity onPress={onLike}>
-                <AntDesign name={!myLike ? "hearto" : "heart"} size={20} color={!myLike ? 'grey' : 'red'} />
                 <AntDesign name ={!myLike ? "like2": "like1"} size={20} color={!myLike ? 'grey' : 'tomato'}/>
             </TouchableOpacity>
-            <Text style={styles.number}>{post.numberOfLikes}</Text>
+            {(likesCount>0)? <Text style={styles.number}>{post.numberOfLikes}</Text> : null }
+            
         </View>
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -8,12 +8,14 @@ import Feed from '../components/Feed';
 import ProfileScreenComponents from '../components/ProfileScreenComponents';
 import TopContainer from '../components/ProfileScreenComponents/TopContainer';
 
+import { useRoute } from '@react-navigation/native';
 import users from '../data/users';
 import EditProfileButton from '../components/EditProfileButton';
 import Amplify, {Auth, API, graphqlOperation} from 'aws-amplify';
 import {getUser} from '../src/graphql/queries'; 
 
 import myUser from '../data/myUser';
+import SecondFeed from '../components/SecondFeed';
 /*
 export {UserType} from '../types';
 
@@ -25,6 +27,7 @@ user: UserType,
 export default function ProfileScreen() {
   
   
+  const route = useRoute();
   const [user,setUser]=React.useState([]);
 
   React.useEffect(() => {
@@ -71,8 +74,21 @@ export default function ProfileScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.mainContainer}>
+        <ScrollView>
+
+
+          <View style={styles.profileInfo}>
+
+            <ProfileScreenComponents user={user} />
+          </View>
+          <View style={styles.profileFeed}>
+            {user.id && <SecondFeed id={user.id} />}
+          </View>
+        </ScrollView>
+      </View>
       <EditProfileButton/>
-      <ProfileScreenComponents user ={user} />
+
     </View>
     
   );
@@ -83,7 +99,42 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+    },
+    headerContainer: {
+      //width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       alignItems: 'center',
-      justifyContent: 'center',
+      padding: 15,
+      marginTop: 25,
+      paddingBottom: 5,
+      backgroundColor: '#e3e3e3',
+    },
+    mainContainer: {
+      flex: 1,
+      alignItems: 'stretch',
+      justifyContent: 'flex-start',
+  
+    },
+    profileInfo: {
+      alignItems:'center',
+      borderTopWidth:1,
+      borderBottomWidth:0,
+      borderColor:'tomato'
+      //  margin:'auto',
+  
+    },
+    profileFeed: {
+      borderTopWidth:2,
+      borderBottomWidth:1,
+      paddingTop:10,
+      borderColor:'tomato'
+      // margin:'auto',
+  
+    },
+    backButton: {
+      marginLeft: 15,
     },
   });

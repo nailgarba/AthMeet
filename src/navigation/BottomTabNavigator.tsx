@@ -112,7 +112,7 @@ function HomeNavigator() {
           },
           headerLeftContainerStyle: { marginLeft: 10 },
           headerLeft: () => (
-            <ProfilePicture size={40} user = {user? user:""}/>
+            <ProfilePicture size={40} user={user ? user : ""} />
           )/**/
         }}
       />
@@ -143,7 +143,13 @@ function SearchNavigator() {
       <SearchScreenStack.Screen
         name="SearchScreen"
         component={SearchScreen}
-        options={{ headerTitle: 'SearchScreen' }}
+        options={{
+          headerTitle: () => (<FontAwesome5 name={"dumbbell"} size={40} color='tomato'></FontAwesome5>),
+          headerTitleContainerStyle: {
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        }}
       />
     </SearchScreenStack.Navigator>
   );
@@ -158,7 +164,11 @@ function ProfileNavigator() {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          headerTitle: 'ProfileScreen',
+          headerTitle: () => (<FontAwesome5 name={"dumbbell"} size={40} color='tomato'></FontAwesome5>),
+          headerTitleContainerStyle: {
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
           headerRightContainerStyle: { marginRight: 25 },
           headerRight: () => (<SignOutButton />),
         }}
@@ -175,7 +185,13 @@ function AthleteFinderNavigator() {
       <AthleteFinderScreenStack.Screen
         name="AthleteFinderScreen"
         component={AthleteFinderScreen}
-        options={{ headerTitle: 'AthleteFinderScreen' }}
+        options={{
+          headerTitle: () => (<FontAwesome5 name={"dumbbell"} size={40} color='tomato'></FontAwesome5>),
+          headerTitleContainerStyle: {
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        }}
       />
     </AthleteFinderScreenStack.Navigator>
   );

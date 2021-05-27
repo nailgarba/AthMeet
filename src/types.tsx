@@ -11,7 +11,9 @@ export type RootStackParamList = {
   NewPost: undefined;
   Home: undefined;
   NewChatContacts: undefined;
-  
+  Following:undefined;
+  Followers:undefined;
+  Comments:undefined;
 };
 
 

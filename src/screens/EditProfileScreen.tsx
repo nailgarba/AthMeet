@@ -16,9 +16,9 @@ export default function AthleteFinderFilterScreen() {
     const [imageURL, setImageURL] = React.useState("");
     const navigation = useNavigation();
 
-    const onPostPost = () => {
+    const onSave = () => {
         console.warn("OnPostPost");
-        console.log(`posting post: ${post} Image: ${imageURL}`)
+        console.log(`----------------Saving Changes to profile-------------`)
     }
 
 
@@ -31,7 +31,7 @@ export default function AthleteFinderFilterScreen() {
                     <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                         <MaterialIcons name="arrow-back" size={30} color="tomato" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={onPostPost}>
+                    <TouchableOpacity style={styles.button} onPress={onSave}>
                         <Text style={styles.buttonText}>SAVE CHANGES</Text>
                     </TouchableOpacity>
                 </View>
@@ -68,22 +68,23 @@ export default function AthleteFinderFilterScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'flex-start',
-        backgroundColor: 'white',
-        width: '100%',
-        paddingRight: 15,
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
 
     },
     headerContainer: {
-        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        //padding: 15,
+        alignContent: 'center',
+        padding: 15,
         marginTop: 25,
+        paddingBottom: 5,
+        backgroundColor: '#e3e3e3',
     },
     button: {
         backgroundColor: 'tomato',
         borderRadius: 30,
+        alignSelf:'center',
 
     },
     buttonText: {
@@ -98,6 +99,9 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 100,
+        paddingBottom: 10,
         width: '100%',
 
     },
@@ -107,9 +111,10 @@ const styles = StyleSheet.create({
         //width: '100%',
     },
     postInput: {
-        height: 100,
-        maxHeight: 400,
-        fontSize: 18
+        height: 30,
+        maxHeight: 50,
+        fontSize: 18,
+        marginBottom: 30,
     },
     imageInput: {
 
