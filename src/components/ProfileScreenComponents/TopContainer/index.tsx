@@ -11,23 +11,31 @@ export type TopContainerProps = {
 const TopContainer = ({ user }: TopContainerProps) => (
     <View style={styles.container}>
         <View style={styles.profilePictureContainer}>
-            <ProfilePicture user={user} size={200} />
+            <ProfilePicture user={user} size={170} />
         </View>
-        <View style={{ margin:'auto' }}>
+        <View style={styles.namesContainer}>
             <Text style={styles.nameContainer} >{user.name}</Text>
             <Text style={styles.usernameContainer}>@{user.username}</Text>
-            <View style={styles.followsContainer}>
-                <Text>Followers </Text>
-                <Text>Following </Text>
-                <Text style={styles.content}>Main Gym: {user.mainGym}</Text>
-                <Text style={styles.content}>Main Sport: {user.mainSport}</Text>
-                <Text style={styles.content}>Level: {user.level}</Text>
+        </View>
+        <View style={styles.followsContainer}>
+            <View>
+
+            <Text style={styles.followsTexts}>Followers </Text>
+            </View>
+            <View>
+
+            <Text style={styles.followsTexts}>Following </Text>
             </View>
         </View>
+        <View style={styles.content}>
 
-
-
+            <Text style={styles.infoTexts}>Main Gym: {user.mainGym}</Text>
+            <Text style={styles.infoTexts}>Main Sport: {user.mainSport}</Text>
+            <Text style={styles.infoTexts}>Level: {user.level}</Text>
+        </View>
     </View>
+
+
 )
 //<Text>Followers {user.followers}</Text>
 //<Text>Following {user.following}</Text>
@@ -36,32 +44,61 @@ export default TopContainer;
 
 const styles = StyleSheet.create({
     container: {
+        alignItems: 'center',
         margin: 'auto',
         flex: 1,
-        marginTop: 15,
+        marginTop: 5,
     },
     profilePictureContainer: {
         marginTop: 15,
+
+        alignItems: 'center',
     },
-    followsContainer: {
-        marginTop: 10,
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'blue',
+    namesContainer: {
+        alignItems: 'center',
     },
     nameContainer: {
         fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
+        alignItems: 'center',
     },
     usernameContainer: {
         fontSize: 16,
         color: 'gray',
+        //alignItems: 'center',
+    },
+    followsContainer: {
+        flexDirection:'row',
+        justifyContent:'space-around',
+        marginTop: 6,
+        marginBottom:6,
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    followsTexts: {
+        marginVertical: 4,
+        marginLeft:10,
+        marginRight:10,
+        fontSize: 20,
+       //lineHeight: 18,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     content: {
         marginVertical: 4,
-        fontSize: 15,
+        fontSize: 20,
         lineHeight: 18,
+        alignItems: 'center',
+        //justifyContent:'center'
+
+    },
+    infoTexts: {
+        //marginVertical: 4,
+        fontSize: 20,
+       // lineHeight: 18,
+        alignItems: 'center',
+        justifyContent: 'center'
 
     },
 });

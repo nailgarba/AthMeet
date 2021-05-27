@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -19,7 +19,7 @@ import myUser from '../data/myUser';
 import { useNavigation } from '@react-navigation/native';
 import GoToChatButton from '../components/GoToChatButton';
 import SecondFeed from '../components/SecondFeed';
-export {UserType} from '../types';
+export { UserType } from '../types';
 
 
 
@@ -35,18 +35,18 @@ const OtherProfileScreen = () => {
   var testfalse = false;
   var testtrue = true;
   const route = useRoute();
- // var isSelf = false;
+  // var isSelf = false;
 
   React.useEffect(() => {
-     //get the current user
+    //get the current user
     const fetchUser = async () => {
-      const userInfo =await Auth.currentAuthenticatedUser({ bypassCache: true });
+      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
       if (!userInfo) {
         return;
       }
 
       try {
-        const userData = await API.graphql(graphqlOperation(getUser, { id:  route.params.userID.id}))
+        const userData = await API.graphql(graphqlOperation(getUser, { id: route.params.userID.id }))
         if (userData) {
           setUser(userData.data.getUser);
         }
@@ -80,8 +80,8 @@ const OtherProfileScreen = () => {
       console.log( userInfo.attributes.sub );
 
       setisSelf( !user.id == userInfo.attributes.sub);*/
-      
-      
+
+
     }
     fetchUser();
     //console.log(user);
@@ -89,14 +89,14 @@ const OtherProfileScreen = () => {
     console.log(`-----------------end if---------------------`);
     console.log(`-------------------bool test---------------------`);
     console.log(user.id == userInfo.attributes.sub);/*/
-  
+
 
   }, [])/**/
 
   const navigation = useNavigation();
- 
 
-  
+
+
   const checkDMS = () => {
     console.log(user);
     console.warn(" route:");
@@ -108,12 +108,12 @@ const OtherProfileScreen = () => {
     console.log(`route params userID: `);
     console.log(route.params.userID);
     console.log(`route params userID id: `);
-    console.log(route.params.userID.id);    
+    console.log(route.params.userID.id);
     console.log(`user: ${user}  tuser: ${tuser}`);
     //check if chatroom exists if not create one user: ${userID}
   }
-  
-  
+
+
 
 
 
@@ -124,16 +124,23 @@ const OtherProfileScreen = () => {
           <MaterialIcons name="arrow-back" size={40} color="tomato" />
         </TouchableOpacity>
         {!testfalse
-                ? <GoToChatButton user = {user}/>
-                : <View/>}
+          ? <GoToChatButton user={user} />
+          : <View />}
       </View>
-      <View>
+      <View style={styles.mainContainer}>
+        <ScrollView>
 
-      <ProfileScreenComponents user={user} />
+
+          <View style={styles.profileInfo}>
+
+            <ProfileScreenComponents user={user} />
+          </View>
+          <View style={styles.profileFeed}>
+            {user.id && <SecondFeed id={user.id} />}
+          </View>
+        </ScrollView>
       </View>
-      <View>
-        {user.id && <SecondFeed id={user.id}/>}
-      </View>
+
     </View>
   )
 }
@@ -141,27 +148,40 @@ const OtherProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
   },
   headerContainer: {
-    width: '100%',
+    //width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //padding: 15,
+    alignItems: 'center',
+    padding: 15,
     marginTop: 25,
+    paddingBottom: 5,
+    backgroundColor: '#e3e3e3',
   },
-  button: {
-    backgroundColor: 'tomato',
-    borderRadius: 30,
+  mainContainer: {
+    flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
 
   },
-  buttonText: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 15,
+  profileInfo: {
+    alignItems:'center',
+    borderTopWidth:1,
+    borderBottomWidth:0,
+    borderColor:'tomato'
+    //  margin:'auto',
+
+  },
+  profileFeed: {
+    borderTopWidth:2,
+    borderBottomWidth:1,
+    paddingTop:10,
+    borderColor:'tomato'
+    // margin:'auto',
+
   },
   backButton: {
     marginLeft: 15,

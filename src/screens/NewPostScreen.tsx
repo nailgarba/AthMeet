@@ -47,36 +47,38 @@ export default function NewPostScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                        <MaterialIcons name="arrow-back" size={40} color="tomato" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={onPostPost}>
-                        <Text style={styles.buttonText}>POST</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.newPostContainer}>
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            value={post}
-                            onChangeText={(value) => setPost(value)}
-                            multiline={true}
-                            numberOfLines={3}
-                            style={styles.postInput}
-                            placeholder={"What's on your mind?"}
-                        />
-                        <TextInput
-                            value={imageURL}
-                            onChangeText={(value) => setImageURL(value)}
-                            style={styles.imageInput}
-                            placeholder={"Optional Image URL"}
-                        />
+            <View style={styles.headerContainer}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                    <MaterialIcons name="arrow-back" size={40} color="tomato" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={onPostPost}>
+                    <Text style={styles.buttonText}>POST</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.newPostContainer}>
+                <View style={styles.postInputContainer}>
 
-                    </View>
+                <TextInput
+                    value={post}
+                    onChangeText={(value) => setPost(value)}
+                    multiline={true}
+                    numberOfLines={3}
+                    style={styles.postInput}
+                    placeholder={"What's on your mind?"}
+                    />
+                </View>
+                <View style={styles.imageInputContainer}>
+
+                <TextInput
+                    value={imageURL}
+                    onChangeText={(value) => setImageURL(value)}
+                    style={styles.imageInput}
+                    placeholder={"Optional Image URL"}
+                    />
                 </View>
 
             </View>
+
         </SafeAreaView>
 
 
@@ -86,18 +88,36 @@ export default function NewPostScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'flex-start',
-        backgroundColor: 'white',
-        width: '100%',
-        paddingRight: 15,
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
 
     },
     headerContainer: {
-        width: '100%',
+        //width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        //padding: 15,
+        alignContent: 'center',
+        padding: 15,
         marginTop: 25,
+        paddingBottom: 5,
+        backgroundColor: '#e3e3e3',
+    },
+    newPostContainer: {
+        flexDirection: 'column',
+        //padding: 15,
+        //width: '100%',
+        minHeight: '40%',
+        padding: 'auto',
+        justifyContent:"space-between",
+
+    },
+    postInputContainer: {
+        marginLeft: 10,
+        width: '100%',
+
+    },
+    imageInputContainer: {
+        marginLeft: 10,
     },
     button: {
         backgroundColor: 'tomato',
@@ -114,22 +134,14 @@ const styles = StyleSheet.create({
     backButton: {
         marginLeft: 15,
     },
-    inputContainer: {
-        marginLeft: 10,
-        width: '100%',
-
-    },
-    newPostContainer: {
-        flexDirection: 'row',
-        //padding: 15,
-        //width: '100%',
-    },
     postInput: {
         height: 100,
         maxHeight: 400,
         fontSize: 18
     },
     imageInput: {
-
+        height: 100,
+        maxHeight: 400,
+        fontSize: 18
     },
 });
