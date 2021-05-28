@@ -16,14 +16,14 @@ export type ProfilePostProps = {
 
 const PrivateFeed = ({user}: ProfilePostProps) => {
     const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);/*
     console.log(`----------------------------------------------------`);
     console.log(`----------------------------------------------------`);
     console.log(`-------------------user id----first---------------`);
     console.log(`----------------------------------------------------`);
     console.log(user.id);
     console.log(`----------------------------------------------------`);
-    
+    */
     const fetchPosts = async () => {
         setLoading(true);
         //get posts from DB
@@ -37,7 +37,7 @@ const PrivateFeed = ({user}: ProfilePostProps) => {
 
             }
                 ));
-            setPosts(postsData.data.listPosts.items);
+            setPosts(postsData.data.listPosts.items);/*
             console.log(`----------------------------------------------------`);
             console.log(`----------------------------------------------------`);
             console.log(`----------------------------------------------------`);
@@ -51,7 +51,7 @@ const PrivateFeed = ({user}: ProfilePostProps) => {
             console.log(`-------------------posts--------------------`);
             console.log(`----------------------------------------------------`);
             console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);
+            console.log(`----------------------------------------------------`);*/
         }
         catch (e) {
             console.log(e);

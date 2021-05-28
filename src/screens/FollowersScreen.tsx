@@ -9,6 +9,7 @@ import ProfilePost from '../components/ProfilePost';
 import { listUsers } from '../src/graphql/queries';
 import { useEffect, useState } from "react";
 import { useRoute } from '@react-navigation/native';
+import {getFollowers} from '../customgraphql/queries';
 
 export default function FollowersScreen() {
 
@@ -21,12 +22,12 @@ export default function FollowersScreen() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const followingData = await API.graphql(
+                const followersData = await API.graphql(
                     graphqlOperation(
-                        listUsers
+                        getFollowers,  {id: "4c1fbfb4-f87e-4384-bda3-0c3be1272868"}
                     )
                 )
-                setUsers(followingData.data.listUsers.items);
+                setUsers(followersData.getUser.data.followers.items);
             } catch (e) {
                 console.log(e);
             }

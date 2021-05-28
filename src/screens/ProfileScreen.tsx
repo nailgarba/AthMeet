@@ -80,7 +80,7 @@ export default function ProfileScreen() {
 
           <View style={styles.profileInfo}>
 
-            <ProfileScreenComponents user={user} />
+            {user.id && <ProfileScreenComponents user={user} />}
           </View>
           <View style={styles.profileFeed}>
             {user.id && <SecondFeed id={user.id} />}

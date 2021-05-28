@@ -148,4 +148,31 @@ query MyQuery($id: ID!) {
     }
   }
 `;
+
+
+export const getFollowers = /* GraphQL */ `
+query getFollowers ($id: ID!){
+  getUser(id: $id) {
+    followers {
+      items {
+        id
+        name
+        username
+        image
+        level
+        mainGym
+        mainSport
+        updatedAt
+      }
+    }
+    id
+    name
+    username
+    image
+    level
+    mainGym
+    mainSport
+  }
+}`
+;
   

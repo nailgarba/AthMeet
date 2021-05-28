@@ -17,7 +17,7 @@ const Footer = ({ post }: FooterContainerProps) => {
     const [myLike, setMyLike] = React.useState(null);
     const [likesCount, setLikesCount] = React.useState(0);
     const [user, setUser] = React.useState(null);
-    const [postt, setPost] = React.useState(null);
+    const [postt, setPost] = React.useState(null);/*
     console.log(`-----------------///////////////------------------`);
     console.log(`-----------------------------------`);
     console.log(`-----------------------------------`);
@@ -27,19 +27,19 @@ const Footer = ({ post }: FooterContainerProps) => {
     console.log(`-----------------------------------`);
     console.log(`-------------/////////----------------------`);
     console.log(`-----------------------------------`);
-    console.log(`-----------------------------------`);
+    console.log(`-----------------------------------`);*/
    
     React.useEffect(() => {
         const fetchPost= async () => {
             const postData = await API.graphql(graphqlOperation(getPost, { id: post.id}));
-            setPost(postData.data.getPost);//** 
+            setPost(postData.data.getPost);/**
             console.log(`------------------------------------------`);
             console.log(`------------------------------------------`);
             console.log(`---------------post in fetchpost in footer ---------------`);
             console.log(postt);
             console.log(`------------------------------------------`);
             console.log(`------------------------------------------`);
-            console.log(`------------------------------------------`);//*/
+            console.log(`------------------------------------------`);*/
         }
         fetchPost();
 

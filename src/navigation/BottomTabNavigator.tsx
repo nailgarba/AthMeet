@@ -13,6 +13,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import PrivateMessagesListButton from '../components/PrivateMessagesListButton';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 import { getUser } from '../src/graphql/queries';
+import { View } from '../components/Themed';
 
 
 import { BottomTabParamList, HomeNavigatorParamList, SearchNavigatorParamList, AthleteFinderNavigatorParamList, ProfileNavigatorParamList, TabTwoNavigatorParamList } from '../types';
@@ -171,6 +172,8 @@ function ProfileNavigator() {
           },
           headerRightContainerStyle: { marginRight: 25 },
           headerRight: () => (<SignOutButton />),
+          headerLeftContainerStyle: { marginLeft: 10 },
+          headerLeft: () => (<View/>)
         }}
       />
     </ProfileScreenStack.Navigator>

@@ -21,7 +21,6 @@ const TopContainer = ({ user }: TopContainerProps) => (
         </View>
         <View style={styles.followsContainer}>
             <View>
-
             <FollowersButton id={user.id}></FollowersButton>
             </View>
             <View>
@@ -29,7 +28,6 @@ const TopContainer = ({ user }: TopContainerProps) => (
             </View>
         </View>
         <View style={styles.content}>
-
             <Text style={styles.infoTexts}>Main Gym: {user.mainGym}</Text>
             <Text style={styles.infoTexts}>Main Sport: {user.mainSport}</Text>
             <Text style={styles.infoTexts}>Level: {user.level}</Text>

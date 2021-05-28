@@ -129,11 +129,8 @@ const OtherProfileScreen = () => {
       </View>
       <View style={styles.mainContainer}>
         <ScrollView>
-
-
           <View style={styles.profileInfo}>
-
-            <ProfileScreenComponents user={user} />
+            {user.id && <ProfileScreenComponents user={user} />}
           </View>
           <View style={styles.profileFeed}>
             {user.id && <SecondFeed id={user.id} />}
@@ -168,18 +165,18 @@ const styles = StyleSheet.create({
 
   },
   profileInfo: {
-    alignItems:'center',
-    borderTopWidth:1,
-    borderBottomWidth:0,
-    borderColor:'tomato'
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderBottomWidth: 0,
+    borderColor: 'tomato'
     //  margin:'auto',
 
   },
   profileFeed: {
-    borderTopWidth:2,
-    borderBottomWidth:1,
-    paddingTop:10,
-    borderColor:'tomato'
+    borderTopWidth: 2,
+    borderBottomWidth: 1,
+    paddingTop: 10,
+    borderColor: 'tomato'
     // margin:'auto',
 
   },
