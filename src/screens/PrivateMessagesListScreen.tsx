@@ -39,7 +39,6 @@ export default class PrivateMessagesListScreen extends Component {
             chatRooms: userData.data.getUser.chatRoomUser.items
           });
         }
-        //setChatRooms(userData.data.getUser.chatRoomUser.items)
       } catch (e) {
         console.log(e);
       }
@@ -62,71 +61,35 @@ export default class PrivateMessagesListScreen extends Component {
             testchatRooms: userData.data.getUser.chatRoomUser.items
           });
         }
-        //settesChatRooms(userData.data.getUser.chatRoomUser.items)
       } catch (e) {
         console.log(e);
       }
     }
     fetchtestChatRooms();
   }
+  fetchtestChatRooms = async () => {
+    try {
+      const userInfo = await Auth.currentAuthenticatedUser();
 
-/*
-  const [chatRooms, setChatRooms] = React.useState([]);
-  
-  const [testchatRooms, settesChatRooms] = React.useState([]);
-
-  React.useEffect(() => {
-    const fetchChatRooms = async () => {
-      try {
-        const userInfo = await Auth.currentAuthenticatedUser();
-
-        const userData = await API.graphql(
-          graphqlOperation(
-            getUser, {
-            id: userInfo.attributes.sub,
-          }
-          )
+      const userData = await API.graphql(
+        graphqlOperation(
+          listChatRooms, {
+          id: userInfo.attributes.sub,
+        }
         )
-
-        setChatRooms(userData.data.getUser.chatRoomUser.items)
-      } catch (e) {
-        console.log(e);
+      )
+      if (userData) {
+        this.setState({
+          testchatRooms: userData.data.getUser.chatRoomUser.items
+        });
       }
+    } catch (e) {
+      console.log(e);
     }
-    fetchChatRooms();
-
-    const fetchtestChatRooms = async () => {
-      try {
-        const userInfo = await Auth.currentAuthenticatedUser();
-
-        const userData = await API.graphql(
-          graphqlOperation(
-            listChatRooms, {
-            id: userInfo.attributes.sub,
-          }
-          )
-        )
-
-        settesChatRooms(userData.data.getUser.chatRoomUser.items)
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    fetchtestChatRooms();
-
-  }, []);*/
-  /*
-  console.log(`-------------------------------------------`);
-console.log(`-------------------------------------------`);
-console.log(`-------------------------------------------`);
-console.log(`---------------before return testchatrooms in privmsgscrn------------------`);
-console.log(testchatRooms);
-console.log(`-------------------------------------------`);
-console.log(`-------------------------------------------`);
-console.log(`-------------------------------------------`);
-console.log(`-------------------------------------------`);
-console.log(`-------------------------------------------`);
-*/
+  }
+  reloadPrivateMessagesList(){
+    this.fetchtestChatRooms();
+  }
 
   render(){
 
@@ -137,7 +100,7 @@ console.log(`-------------------------------------------`);
         <NewChatButton ></NewChatButton>
       </View>
       <View style={styles.chatsContainer}>
-        {this.state.testchatRooms && <PrivateMessagesFeed chatRooms={this.state.testchatRooms} />}
+        {this.state.testchatRooms && <PrivateMessagesFeed chatRooms={this.state.testchatRooms} reloadPrivateMessagesList={this.fetchtestChatRooms.bind(this)} />}
         {this.state.testchatRooms.items ?  <Text> Start a chat</Text> :<View /> }
       </View>
     </View>
@@ -146,32 +109,6 @@ console.log(`-------------------------------------------`);
 }
 }
 
-
-
-
-
-/*    
-{testchatRooms &&
-<FlatList
-  style={{ width: '100%' }}
-  data={testchatRooms}
-  renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
-  keyExtractor={(item) => item.id}
-/>}
-
-
-
-
-<PrivateMessagesFeed />
- 
- 
-        <Post post ={posts[0]}/>
-        <Post post ={posts[1]}/>
- 
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/HomeScreen.tsx" /> 
-*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,

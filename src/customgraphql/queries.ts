@@ -54,6 +54,7 @@ query MyQuery($id: ID!) {
             chatRoom {
               chatRoomUsers {
                 items {
+                  chatRoomID
                   user {
                     id
                     name
