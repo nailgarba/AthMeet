@@ -19,6 +19,7 @@ import myUser from '../data/myUser';
 import { useNavigation } from '@react-navigation/native';
 import GoToChatButton from '../components/GoToChatButton';
 import SecondFeed from '../components/SecondFeed';
+import BackButton from '../components/BackButton';
 export { UserType } from '../types';
 
 
@@ -120,9 +121,7 @@ const OtherProfileScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back" size={40} color="tomato" />
-        </TouchableOpacity>
+        <BackButton/>
         {!testfalse
           ? <GoToChatButton user={user} />
           : <View />}
