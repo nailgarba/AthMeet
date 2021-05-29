@@ -11,6 +11,7 @@ import { messagesByChatRoom } from '../src/graphql/queries';
 import { onCreateMessage } from '../src/graphql/subscriptions';
 import InputBox from '../components/InputBox';
 import ChatMessage from '../components/ChatMessage';
+import BackButton from '../components/BackButton';
 
 export default function ChatRoomScreen() {
   const [messages, setMessages] = React.useState([]);
@@ -80,9 +81,7 @@ export default function ChatRoomScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back" size={40} color="tomato" />
-        </TouchableOpacity>
+        <BackButton/>
         <Text style={styles.nameContainer}>{route.params.name}</Text>
       </View>
       <View style={styles.mainContainer}>

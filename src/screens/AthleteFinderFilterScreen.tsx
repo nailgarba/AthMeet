@@ -15,6 +15,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 //import {createPost} from '../src/graphql/mutations';
 import { } from '../src/graphql/queries';
+import BackButton from '../components/BackButton';
 
 
 export default function AthleteFinderFilterScreen() {
@@ -56,9 +57,7 @@ export default function AthleteFinderFilterScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                    <MaterialIcons name="arrow-back" size={30} color="tomato" />
-                </TouchableOpacity>
+                <BackButton/>
                 <TouchableOpacity style={styles.button} onPress={onSave}>
                     <Text style={styles.buttonText}>SAVE</Text>
                 </TouchableOpacity>

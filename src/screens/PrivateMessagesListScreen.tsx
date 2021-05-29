@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, TextInput, FlatList } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
@@ -11,11 +11,66 @@ import ChatListItem from '../components/ChatListItem';
 import { API, graphqlOperation, Auth, } from 'aws-amplify';
 import { getUser, listChatRooms } from '../customgraphql/queries';
 import NewChatButton from '../components/NewChatButton';
+import BackButton from '../components/BackButton';
 
-export default function PrivateMessagesListScreen() {
+export default class PrivateMessagesListScreen extends Component {
+  constructor(props) {
+    super(props);
 
-  const navigation = useNavigation();
+    this.state = {
+      chatRooms: [],
+      testchatRooms:[],
 
+
+    }
+    const fetchChatRooms = async () => {
+      try {
+        const userInfo = await Auth.currentAuthenticatedUser();
+
+        const userData = await API.graphql(
+          graphqlOperation(
+            getUser, {
+            id: userInfo.attributes.sub,
+          }
+          )
+        )
+        if (userData) {
+          this.setState({
+            chatRooms: userData.data.getUser.chatRoomUser.items
+          });
+        }
+        //setChatRooms(userData.data.getUser.chatRoomUser.items)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchChatRooms();
+
+    const fetchtestChatRooms = async () => {
+      try {
+        const userInfo = await Auth.currentAuthenticatedUser();
+
+        const userData = await API.graphql(
+          graphqlOperation(
+            listChatRooms, {
+            id: userInfo.attributes.sub,
+          }
+          )
+        )
+        if (userData) {
+          this.setState({
+            testchatRooms: userData.data.getUser.chatRoomUser.items
+          });
+        }
+        //settesChatRooms(userData.data.getUser.chatRoomUser.items)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchtestChatRooms();
+  }
+
+/*
   const [chatRooms, setChatRooms] = React.useState([]);
   
   const [testchatRooms, settesChatRooms] = React.useState([]);
@@ -59,7 +114,8 @@ export default function PrivateMessagesListScreen() {
     }
     fetchtestChatRooms();
 
-  }, []);
+  }, []);*/
+  /*
   console.log(`-------------------------------------------`);
 console.log(`-------------------------------------------`);
 console.log(`-------------------------------------------`);
@@ -70,24 +126,24 @@ console.log(`-------------------------------------------`);
 console.log(`-------------------------------------------`);
 console.log(`-------------------------------------------`);
 console.log(`-------------------------------------------`);
+*/
 
-
+  render(){
 
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back" size={40} color="tomato" />
-        </TouchableOpacity>
+        <BackButton />
         <NewChatButton ></NewChatButton>
       </View>
       <View style={styles.chatsContainer}>
-        {testchatRooms && <PrivateMessagesFeed chatRooms = {testchatRooms}/>}
-        {testchatRooms.items? <Text> Start a chat</Text> : <View/>}
+        {this.state.testchatRooms && <PrivateMessagesFeed chatRooms={this.state.testchatRooms} />}
+        {this.state.testchatRooms.items ?  <Text> Start a chat</Text> :<View /> }
       </View>
     </View>
 
-);
+  );
+}
 }
 
 
@@ -131,10 +187,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     backgroundColor: '#e3e3e3',
   },
-  backButton:{
+  backButton: {
 
   },
-  chatsContainer:{
-     width: '100%', 
+  chatsContainer: {
+    width: '100%',
   }
 });

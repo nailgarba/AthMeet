@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { createPost } from '../src/graphql/mutations';
+import BackButton from '../components/BackButton';
 
 
 
@@ -48,9 +49,7 @@ export default function NewPostScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                    <MaterialIcons name="arrow-back" size={40} color="tomato" />
-                </TouchableOpacity>
+                <BackButton/>
                 <TouchableOpacity style={styles.button} onPress={onPostPost}>
                     <Text style={styles.buttonText}>POST</Text>
                 </TouchableOpacity>

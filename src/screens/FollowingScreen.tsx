@@ -9,6 +9,7 @@ import ProfilePost from '../components/ProfilePost';
 import { listUsers } from '../src/graphql/queries';
 import { useEffect, useState } from "react";
 import { useRoute } from '@react-navigation/native';
+import BackButton from '../components/BackButton';
 
 export default function FollowingScreen() {
 
@@ -37,9 +38,7 @@ export default function FollowingScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                    <MaterialIcons name="arrow-back" size={40} color="tomato" />
-                </TouchableOpacity>
+                <BackButton/>
             </View>
             <FlatList
                 style={styles.flatList}

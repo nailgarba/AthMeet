@@ -17,6 +17,7 @@ import { PostType } from '../types';
 import CommentInputBox from '../components/CommentInputBox';
 import CommentPost from '../components/CommentPost';
 import CommentsinComments from '../components/CommentsinComments';
+import BackButton from '../components/BackButton';
 
 
 export default function CommentsScreen() {
@@ -96,9 +97,7 @@ console.log(`------------------------------------------`);
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                    <MaterialIcons name="arrow-back" size={40} color="tomato" />
-                </TouchableOpacity>
+                <BackButton/>
             </View>
             <View style={styles.postContainer}>
             {post && <PostInComments post= {post}></PostInComments>}
