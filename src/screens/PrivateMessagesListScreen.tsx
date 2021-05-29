@@ -90,6 +90,11 @@ export default class PrivateMessagesListScreen extends Component {
   reloadPrivateMessagesList(){
     this.fetchtestChatRooms();
   }
+  componentDidMount(){
+    this.focusListener = this.props.navigation.addListener('focus', () => {
+      this.fetchtestChatRooms();
+    });
+  }
 
   render(){
 

@@ -5,6 +5,7 @@ import ProfilePicture from '../../ProfilePicture';
 import { StyleSheet } from 'react-native';
 import FollowingButton from '../../FollowingButton';
 import FollowersButton from '../../FollowersButton';
+import FollowButton from '../../FollowButton';
 
 
 export type TopContainerProps = {
@@ -18,6 +19,9 @@ const TopContainer = ({ user }: TopContainerProps) => (
         <View style={styles.namesContainer}>
             <Text style={styles.nameContainer} >{user.name}</Text>
             <Text style={styles.usernameContainer}>@{user.username}</Text>
+        </View>
+        <View style={styles.followButton}>
+            <FollowButton id={user.id}/>
         </View>
         <View style={styles.followsContainer}>
             <View>
@@ -66,6 +70,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'gray',
         //alignItems: 'center',
+    },
+    followButton:{
+
     },
     followsContainer: {
         flexDirection:'row',

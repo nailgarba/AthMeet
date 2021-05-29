@@ -21,36 +21,6 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
-      following {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      followers {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       mainGym
       mainSport
       level
@@ -63,6 +33,30 @@ export const onCreateUser = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      followInfo {
+        id
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        followed {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -88,36 +82,6 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
-      following {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      followers {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       mainGym
       mainSport
       level
@@ -130,6 +94,30 @@ export const onUpdateUser = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      followInfo {
+        id
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        followed {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -155,36 +143,6 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      following {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      followers {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       mainGym
       mainSport
       level
@@ -197,6 +155,30 @@ export const onDeleteUser = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      followInfo {
+        id
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        followed {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -218,17 +200,17 @@ export const onCreatePost = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -275,17 +257,17 @@ export const onUpdatePost = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -332,17 +314,17 @@ export const onDeletePost = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -388,17 +370,17 @@ export const onCreateComment = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -450,17 +432,17 @@ export const onUpdateComment = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -512,17 +494,17 @@ export const onDeleteComment = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -575,17 +557,17 @@ export const onCreateLike = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -636,17 +618,17 @@ export const onUpdateLike = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -697,17 +679,17 @@ export const onDeleteLike = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -758,17 +740,17 @@ export const onCreateChatRoomUser = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -814,17 +796,17 @@ export const onUpdateChatRoomUser = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -870,17 +852,17 @@ export const onDeleteChatRoomUser = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1129,17 +1111,17 @@ export const onCreateMessage = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1213,17 +1195,17 @@ export const onUpdateMessage = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1297,17 +1279,17 @@ export const onDeleteMessage = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1360,6 +1342,198 @@ export const onDeleteMessage = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      updatedAt
+    }
+  }
+`;
+export const onCreateFollow = /* GraphQL */ `
+  subscription OnCreateFollow {
+    onCreateFollow {
+      id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      followed {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFollow = /* GraphQL */ `
+  subscription OnUpdateFollow {
+    onUpdateFollow {
+      id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      followed {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFollow = /* GraphQL */ `
+  subscription OnDeleteFollow {
+    onDeleteFollow {
+      id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      followed {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
       updatedAt
     }
   }

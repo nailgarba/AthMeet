@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import Colors from "../../constants/Colors";
 import { Message } from "../../types";
-//import moment from "moment"
+import moment from "moment"
 
 export type ChatMessageProps = {
   message: Message;
@@ -20,14 +20,14 @@ const ChatMessage = (props: ChatMessageProps) => {
     <View style={styles.container}>
       <View style={[
         styles.messageBox, {
-          backgroundColor: isMyMessage() ? '#ffa494' : 'gray',
+          backgroundColor: isMyMessage() ? '#ffa494' : '#d1d1d1',
           marginLeft: isMyMessage() ? 50 : 0,
           marginRight: isMyMessage() ? 0 : 50,
         }
       ]}>
         {!isMyMessage() && <Text style={styles.name}>{message.user.name}</Text>}
         <Text style={styles.message}>{message.content}</Text>
-        <Text style={styles.time}>{message.createdAt}</Text>
+        <Text style={styles.time}>{moment(message.createdAt).calendar()}</Text>
       </View>
     </View>
   )
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     time: {
       alignSelf: "flex-end",
-      color: 'grey'
+      color: 'black'
     },
     messageBox: {
       borderRadius: 5,

@@ -8,7 +8,7 @@ import { MaterialIcons, Ionicons, Entypo, Fontisto, } from '@expo/vector-icons';
 
 const InputBox = (props) => {
 
-    const { chatRoomID } = props;
+    const chatRoomID  = props.chatRoomID;
     const [message, setMessage] = useState('');
     const [myUserId, setMyUserId] = useState(null);
 

@@ -21,36 +21,6 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      following {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      followers {
-        items {
-          id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       mainGym
       mainSport
       level
@@ -63,6 +33,30 @@ export const getUser = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      followInfo {
+        id
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        followed {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -85,17 +79,17 @@ export const listUsers = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -119,17 +113,17 @@ export const getPost = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -212,17 +206,17 @@ export const getComment = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -314,17 +308,17 @@ export const getChatRoomUser = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -507,17 +501,17 @@ export const getMessage = /* GraphQL */ `
         posts {
           nextToken
         }
-        following {
-          nextToken
-        }
-        followers {
-          nextToken
-        }
         mainGym
         mainSport
         level
         chatRoomUser {
           nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -614,6 +608,105 @@ export const listMessages = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getFollow = /* GraphQL */ `
+  query GetFollow($id: ID!) {
+    getFollow(id: $id) {
+      id
+      userID
+      user {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
+          id
+          userID
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      followed {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFollows = /* GraphQL */ `
+  query ListFollows(
+    $filter: ModelFollowFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFollows(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        user {
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
+        }
+        followed {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        createdAt
         updatedAt
       }
       nextToken

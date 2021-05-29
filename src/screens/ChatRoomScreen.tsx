@@ -39,7 +39,7 @@ export default class ChatRoomScreen extends Component {
           graphqlOperation(
             messagesByChatRoom, {
             chatRoomID: this.state.routeid,
-           //chatRoomID: "0dd96cbb-f831-4503-90e1-d24f05885195",
+            //chatRoomID: "0dd96cbb-f831-4503-90e1-d24f05885195",
             sortDirection: "DESC",
           })
         )
@@ -66,27 +66,49 @@ export default class ChatRoomScreen extends Component {
       }
     }
     getMyId();
-}
+  }
 
-    componentDidMount=() => {
-      const subscription = API.graphql(
-        graphqlOperation(onCreateMessage)
-      ).subscribe({
-        next: (data) => {
-          const newMessage = data.value.data.onCreateMessage;
+  fetchMessages = async () => {
+    try {
+      const messagesData = await API.graphql(
+        graphqlOperation(
+          messagesByChatRoom, {
+          chatRoomID: this.state.routeid,
+          //chatRoomID: "0dd96cbb-f831-4503-90e1-d24f05885195",
+          sortDirection: "DESC",
+        })
+      )
 
-          if (newMessage.chatRoomID !== this.state.routeid) {
-            console.log("Message is in another room!")
-            return;
-          }
-
-          fetchMessages();
-          // setMessages([newMessage, ...messages]);
-        }
-      });
-      return () => subscription.unsubscribe();
+      if (messagesData) {
+        this.setState({
+          messages: messagesData.data.messagesByChatRoom.items
+        });
+      }
+      console.log("FETCH MESSAGES");
+    } catch (e) {
+      console.log(e);
     }
-  
+  }
+
+  componentDidMount = () => {
+    const subscription = API.graphql(
+      graphqlOperation(onCreateMessage)
+    ).subscribe({
+      next: (data) => {
+        const newMessage = data.value.data.onCreateMessage;
+
+        if (newMessage.chatRoomID !== this.state.routeid) {
+          console.log("Message is in another room!")
+          return;
+        }
+
+        this.fetchMessages();
+        // setMessages([newMessage, ...messages]);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }
+
 
 
   render() {

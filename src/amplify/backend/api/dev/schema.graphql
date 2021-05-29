@@ -1,18 +1,17 @@
 type User 
 @model  
-@key(name: "byUsername", fields: ["id", "username"]){
+@key(name: "byUser", fields: ["id"]) {
   id: ID!
   username:String!
   name: String!
   email: String!
   image: String
   posts: [Post] @connection(keyName: "byUser", fields: ["id"])
-  following:[User] @connection(keyName: "byUsername", fields:  ["id", "username"])
-  followers:[User] @connection(keyName: "byUsername", fields:  ["id", "username"])
   mainGym: String
   mainSport: String
   level: String
   chatRoomUser: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
+  followInfo: Follow @connection(fields: ["id"])
 }
 
 type Post 
@@ -85,4 +84,15 @@ type Message
   chatRoom: ChatRoom @connection(fields: ["chatRoomID"])
   postID: ID
   post: Post @connection(fields: ["postID"])
+}
+
+type Follow
+  @model 
+  @key(name: "byUser", fields: ["userID"]){
+  id: ID!
+  userID: ID!
+  user: User @connection(fields: ["userID"])
+  followed:[User] @connection(keyName: "byUser", fields: ["id"])
+  followers:[User] @connection(keyName: "byUser", fields: ["id"])
+
 }
