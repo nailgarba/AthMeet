@@ -8,6 +8,7 @@ import LikeButton from '../../../LikeButton';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 
 import {getPost} from '../../../../src/graphql/queries';
+import ShareButton from '../../../ShareButton';
 
 export type FooterContainerProps = {
     post: PostType,
@@ -72,12 +73,13 @@ const Footer = ({ post }: FooterContainerProps) => {
                 {myLike? <LikeButton post={post} like={myLike}/> : <LikeButton post={post} />}
             </View>
             <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name={"share"} size={20} color={'grey'} />
+                {post && <ShareButton post={post}></ShareButton>}
             </View>
         </View>
     )
 }
 
+//<MaterialCommunityIcons name={"share"} size={20} color={'grey'} />
 export default Footer;
 
 //<AntDesign name ={"like2"} size={20} color={'grey'}/>

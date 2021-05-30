@@ -47,13 +47,13 @@ export default class FollowButton extends Component {
                             otherUser: userInfo.data.getUser
                         });
                     }
-
                 }
             } catch (e) {
                 console.log(e);
             }
 
         }
+        getOtherUserInfo();
 
 
 
@@ -95,13 +95,13 @@ export default class FollowButton extends Component {
         try {
             const myUser = await API.graphql(graphqlOperation(getUser, { id: this.state.myID }));
             const followed = await API.graphql(graphqlOperation(getUser, { id: this.state.userID }));
-            await API.graphql(graphqlOperation(createFollow, { id: userInfo.data }
+            await API.graphql(graphqlOperation(createFollow, { id: userInfo.data }));
         } catch (e) {
             console.log(e);
         }
         this.setState({
             isFollowed: true
-        })
+        });
     }
 
 

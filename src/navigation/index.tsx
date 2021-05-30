@@ -21,6 +21,7 @@ import NewChatContactsScreen from '../screens/NewChatContactsScreen';
 import CommentsScreen from '../screens/CommentsScreen';
 import FollowingScreen from '../screens/FollowingScreen';
 import FollowersScreen from '../screens/FollowersScreen';
+import PostSendScreen from '../screens/PostSendScreen';
 
 
 // If you are not familiar with React Navigation, we recommend going through the
@@ -57,6 +58,7 @@ function RootNavigator() {
       <Stack.Screen name="Following" component={FollowingScreen} />   
       <Stack.Screen name="Followers" component={FollowersScreen} />   
       <Stack.Screen name="NewChatContacts" component={NewChatContactsScreen} />   
+      <Stack.Screen name="PostSend" component={PostSendScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="Comments" component={CommentsScreen} 
       options={({ route })  => ({})}/>  
