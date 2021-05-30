@@ -29,7 +29,7 @@ export default class FollowButton extends Component {
                     const myUser = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }));
                     if (myUser) {
                         this.setState({
-                            otherUser: userInfo.data.getUser
+                            myUser: userInfo.data.getUser
                         });
                     }
                 }
@@ -54,19 +54,6 @@ export default class FollowButton extends Component {
 
         }
         getOtherUserInfo();
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         const checkIfFollowed = async () => {
@@ -95,7 +82,7 @@ export default class FollowButton extends Component {
         try {
             const myUser = await API.graphql(graphqlOperation(getUser, { id: this.state.myID }));
             const followed = await API.graphql(graphqlOperation(getUser, { id: this.state.userID }));
-            await API.graphql(graphqlOperation(createFollow, { id: userInfo.data }));
+           // await API.graphql(graphqlOperation(createFollow, { id: myID, followed}));
         } catch (e) {
             console.log(e);
         }
@@ -106,6 +93,9 @@ export default class FollowButton extends Component {
 
 
     unfollowUser = async () => {
+        this.setState({
+            isFollowed: false
+        });
     }
 
 
@@ -123,23 +113,26 @@ export default class FollowButton extends Component {
 
     render() {
 
-        if (!this.state.isMe) {
             return (
 
-                (<View style={styles.container}>
-                    <TouchableOpacity onPress={this.onClick}>
-                        <SimpleLineIcons name={this.state.isFollowed ? "user-following" : "user-follow"} size={20} color={!this.state.isFollowed ? 'grey' : 'tomato'} />
+                (<View >
+                    <TouchableOpacity style={styles.container} onPress={this.onClick}>
+                        <SimpleLineIcons name={this.state.isFollowed ? "user-following" : "user-follow"} size={30} color={!this.state.isFollowed ? 'white' : 'white'} />
                     </TouchableOpacity>
                 </View>)
             )
-        }
-        else return (<View />)
+        
+
     }
 
 }
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor:"tomato",
+        borderRadius:9,
+        paddingVertical:5,
+        paddingHorizontal:15,
         alignItems: 'center',
         margin: 'auto',
         flex: 1,

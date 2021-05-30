@@ -24,10 +24,10 @@ const TopContainer = ({ user }: TopContainerProps) => (
             <FollowButton id={user.id}/>
         </View>
         <View style={styles.followsContainer}>
-            <View>
+            <View style={styles.followsButton}>
             <FollowersButton id={user.id}></FollowersButton>
             </View>
-            <View>
+            <View style={styles.followsButton}>
                 <FollowingButton id={user.id}></FollowingButton>
             </View>
         </View>
@@ -74,11 +74,15 @@ const styles = StyleSheet.create({
     followButton:{
 
     },
+    followsButton:{
+        marginHorizontal:20
+    },
     followsContainer: {
         flexDirection:'row',
         justifyContent:'space-around',
         marginTop: 6,
         marginBottom:6,
+        marginHorizontal:10,
         fontSize: 20,
         fontWeight: 'bold',
     },

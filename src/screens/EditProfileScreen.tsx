@@ -27,6 +27,7 @@ class EditProfileScreen extends Component {
             mainGym: "",
             mainSport: "",
             level: "",
+            name:"",
         }
         var mainGym="";
         var mainSport="";

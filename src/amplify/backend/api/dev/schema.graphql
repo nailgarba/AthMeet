@@ -88,11 +88,11 @@ type Message
 
 type Follow
   @model 
-  @key(name: "byUser", fields: ["userID"]){
+  @key(name: "byUser", fields: ["userID","id"]){
   id: ID!
   userID: ID!
   user: User @connection(fields: ["userID"])
-  followed:[User] @connection(keyName: "byUser", fields: ["id"])
-  followers:[User] @connection(keyName: "byUser", fields: ["id"])
+  followed:[User] 
+  followers:[User]
 
 }

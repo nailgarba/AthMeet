@@ -50,10 +50,28 @@ export const getUser = /* GraphQL */ `
           updatedAt
         }
         followed {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         followers {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -644,34 +662,52 @@ export const getFollow = /* GraphQL */ `
         updatedAt
       }
       followed {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       followers {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -701,10 +737,28 @@ export const listFollows = /* GraphQL */ `
           updatedAt
         }
         followed {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         followers {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt

@@ -8,10 +8,10 @@ import Navigation from './navigation';
 
 
 import { withAuthenticator } from 'aws-amplify-react-native';
-import Amplify, {Auth, API, graphqlOperation} from 'aws-amplify';
+import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import AMPLIFY_CONFIG from './aws-exports';
-import {getUser} from './src/graphql/queries';
-import {createUser} from './src/graphql/mutations';
+import { getUser } from './src/graphql/queries';
+import { createFollow, createUser } from './src/graphql/mutations';
 import { CreateUserInput } from './src/API';
 
 Amplify.configure(AMPLIFY_CONFIG)
@@ -23,9 +23,9 @@ function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  const saveUserToDB = async (user:CreateUserInput) =>{
-   // console.log(user);
-    await API.graphql(graphqlOperation(createUser, {input: user}))
+  const saveUserToDB = async (user: CreateUserInput) => {
+    // console.log(user);
+    await API.graphql(graphqlOperation(createUser, { input: user }))
   }
 
   useEffect(() => {
@@ -33,22 +33,24 @@ function App() {
       // Get current authenticated user
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
 
-      if(userInfo) {
+      if (userInfo) {
         // Check if user already exists in database
         const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }));
         //console.log(userData)
-        if(!userData.getUser) {
+        if (!userData.getUser) {
           const user = {
             id: userInfo.attributes.sub,
             username: userInfo.username,
             name: userInfo.username,
             email: userInfo.attributes.email,
-            image: '',
+            image: 'https://winaero.com/blog/wp-content/uploads/2015/05/user-200.png',
           }
           await saveUserToDB(user);
+          await API.graphql(graphqlOperation(createFollow, { userID: userInfo.attributes.sub }));
         } else {
           console.log('User already exists');
         }
+
       }
 
 

@@ -50,10 +50,28 @@ export const onCreateUser = /* GraphQL */ `
           updatedAt
         }
         followed {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         followers {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -111,10 +129,28 @@ export const onUpdateUser = /* GraphQL */ `
           updatedAt
         }
         followed {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         followers {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -172,10 +208,28 @@ export const onDeleteUser = /* GraphQL */ `
           updatedAt
         }
         followed {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         followers {
-          nextToken
+          id
+          username
+          name
+          email
+          image
+          mainGym
+          mainSport
+          level
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1376,34 +1430,52 @@ export const onCreateFollow = /* GraphQL */ `
         updatedAt
       }
       followed {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       followers {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -1440,34 +1512,52 @@ export const onUpdateFollow = /* GraphQL */ `
         updatedAt
       }
       followed {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       followers {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -1504,34 +1594,52 @@ export const onDeleteFollow = /* GraphQL */ `
         updatedAt
       }
       followed {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       followers {
-        items {
+        id
+        username
+        name
+        email
+        image
+        posts {
+          nextToken
+        }
+        mainGym
+        mainSport
+        level
+        chatRoomUser {
+          nextToken
+        }
+        followInfo {
           id
-          username
-          name
-          email
-          image
-          mainGym
-          mainSport
-          level
+          userID
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
