@@ -1,0 +1,161 @@
+sequence diagrams
+-----------
+title Home Tab Sequences
+
+participant Home Tab
+
+participant Private Messages
+
+participant New Messages
+
+participant ChatRoom
+
+
+
+participant New Post
+participant Share Post
+
+participant Comments
+
+
+
+
+
+Home Tab-> Private Messages:Messages Button
+Home Tab<-Private Messages:
+Private Messages->New Messages:New Message Button
+New Messages->Private Messages:
+New Messages->ChatRoom:Profile's Message Button
+ChatRoom->New Messages:
+Private Messages->ChatRoom:List Item
+ChatRoom->Private Messages:
+Home Tab->New Post: New Post Button
+New Post->Home Tab: Post Button
+
+Home Tab->Share Post:Share Button
+Share Post ->Home Tab:
+Home Tab->Comments:Comment Button
+Comments ->Home Tab:
+----------
+
+title Search Tab Sequences
+
+participant Search Tab
+
+participant Profile Page
+
+participant ChatRoom
+
+
+Search Tab-> Profile Page:Profile Picture
+Profile Page->Search Tab:
+ChatRoom<-Profile Page:Message Button
+ChatRoom->Profile Page:
+Search Tab->ChatRoom:Message Button
+ChatRoom->Search Tab:
+-------------
+
+title Profile Tab Sequences
+
+
+participant Profile Tab
+
+participant Edit Profile Screen
+
+
+participant Comments
+
+participant Profile Page
+
+
+
+
+participant Sign In Screen
+
+Edit Profile Screen<-Profile Tab:Edit Profile Button
+Edit Profile Screen->Profile Tab:Save or Back button
+Profile Tab-> Comments:Comment button
+Comments->Profile Tab:
+Comments->Profile Page: Profile Picture
+Profile Page->Comments:
+
+Profile Tab-> Sign In Screen:Sign Out button
+-------------------------
+title AthleteFinder Tab Sequences
+
+
+participant AthleteFinder Tab
+
+participant AthleteFinder Filter
+
+
+
+
+participant Profile Page
+
+
+
+
+
+participant ChatRoom
+
+AthleteFinder Tab->AthleteFinder Filter:Filter Button
+AthleteFinder Tab<-AthleteFinder Filter:Save Button
+AthleteFinder Tab-> Profile Page:Profile Picture in list
+Profile Page->AthleteFinder Tab:
+ChatRoom<-Profile Page:Message Button
+ChatRoom->Profile Page:
+AthleteFinder Tab->ChatRoom:Message Button
+ChatRoom->AthleteFinder Tab:
+------------------------------
+title Bottom Tab Navigator
+
+
+participant Home Tab
+
+participant Profile Tab
+
+participant AthleteFinder Tab
+
+participant Search Tab
+
+Home Tab->Profile Tab:
+
+Home Tab->AthleteFinder Tab:
+Home Tab->Search Tab:
+Home Tab<-Profile Tab:
+Profile Tab->AthleteFinder Tab:
+Profile Tab->Search Tab:
+AthleteFinder Tab->Search Tab:
+Profile Tab<-AthleteFinder Tab:
+Home Tab<-AthleteFinder Tab:
+AthleteFinder Tab<-Search Tab:
+Profile Tab<-Search Tab:
+Home Tab<-Search Tab:
+------------
+title Authentication
+
+
+participant Application
+participant withAuthenticator
+
+participant Cognito User Pool
+
+participant Cognito Identity Pool
+
+participant AWS Services
+
+// ->
+// :
+
+
+Application->withAuthenticator:Application is launched
+withAuthenticator->Cognito User Pool:Users enter sign in information
+Cognito User Pool->Cognito User Pool:Sign in information is checked and authenticated
+withAuthenticator<-Cognito User Pool:Successful authentication sends tokens
+withAuthenticator->Cognito Identity Pool:Tokens are exchanged for AWS Credentials 
+withAuthenticator<-Cognito Identity Pool:Sends AWS credentials based on Identity pool user's access
+Application<-withAuthenticator:Provides application with AWS Access Credentials
+Application->AWS Services:Access AWS Services through received credentials
+Application<-AWS Services:AWS provides services
+-------------------

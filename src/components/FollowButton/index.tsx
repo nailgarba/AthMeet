@@ -68,21 +68,18 @@ export default class FollowButton extends Component {
                 console.log(e);
             }
             const followed = await API.graphql(graphqlOperation(getUser));
-
-
         }
-
-
     }
-    checkIfFollowed() {
 
+    checkIfFollowed() {
+        
     }
 
     followUser = async () => {
         try {
             const myUser = await API.graphql(graphqlOperation(getUser, { id: this.state.myID }));
             const followed = await API.graphql(graphqlOperation(getUser, { id: this.state.userID }));
-           // await API.graphql(graphqlOperation(createFollow, { id: myID, followed}));
+            // await API.graphql(graphqlOperation(createFollow, { id: myID, followed}));
         } catch (e) {
             console.log(e);
         }
@@ -99,10 +96,6 @@ export default class FollowButton extends Component {
     }
 
 
-
-
-
-
     onClick = async () => {
         if (this.state.isFollowed) {
             this.unfollowUser();
@@ -113,15 +106,15 @@ export default class FollowButton extends Component {
 
     render() {
 
-            return (
+        return (
 
-                (<View >
-                    <TouchableOpacity style={styles.container} onPress={this.onClick}>
-                        <SimpleLineIcons name={this.state.isFollowed ? "user-following" : "user-follow"} size={30} color={!this.state.isFollowed ? 'white' : 'white'} />
-                    </TouchableOpacity>
-                </View>)
-            )
-        
+            (<View >
+                <TouchableOpacity style={styles.container} onPress={this.onClick}>
+                    <SimpleLineIcons name={this.state.isFollowed ? "user-following" : "user-follow"} size={30} color={!this.state.isFollowed ? 'white' : 'white'} />
+                </TouchableOpacity>
+            </View>)
+        )
+
 
     }
 
@@ -129,13 +122,13 @@ export default class FollowButton extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:"tomato",
-        borderRadius:9,
-        paddingVertical:5,
-        paddingHorizontal:15,
+        backgroundColor: "tomato",
+        borderRadius: 9,
+        paddingVertical: 5,
+        paddingHorizontal: 15,
         alignItems: 'center',
-        margin: 'auto',
-        flex: 1,
+        //  margin: 'auto',
+        //   flex: 1,
         marginTop: 5,
     },
 })

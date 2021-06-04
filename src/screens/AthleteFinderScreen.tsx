@@ -21,75 +21,44 @@ export default function AthleteFinderScreen() {
   const [level, setLevel] = React.useState("");
   const [posts, setPosts] = React.useState([]);
   const [users, setUsers] = React.useState([]);
-  const [user,setUser]=React.useState([]);
+  const [user, setUser] = React.useState([]);
 
   React.useEffect(() => {
 
     const fetchMyUser = async () => {
-    
+
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
       if (!userInfo) {
         return;
       }
-      
+
       try {
-        const userData = await API.graphql(graphqlOperation(getUser, { id:  userInfo.attributes.sub }))
+        const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
         if (userData) {
           setUser(userData.data.getUser);
         }
       } catch (e) {
         console.log(e);
       }
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------user in fetchMyUser---------------------------`);
-      console.log(user);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
     }
     fetchMyUser();
-    console.log(`-------------------------------------------`);
-    console.log(`-------------------------------------------`);
-    console.log(`-------------------------------------------`);
-    console.log(`-------------------------------------------`);
-    console.log(`-------------user after fetchMyUser---------------------------`);
-    console.log(user);
-    console.log(`-------------------------------------------`);
-    console.log(`-------------------------------------------`);
-    console.log(`-------------------------------------------`);
     if (!user) {
       return;
     }
     const fetchUsers = async () => {
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------user.mainGym  after fetchMyUser---------------------------`);
-      console.log(user.mainGym );
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
-      console.log(`-------------user.mainSport  after fetchMyUser---------------------------`);
-      console.log(user.mainSport );
-      console.log(`-------------------------------------------`);
-      console.log(`-------------------------------------------`);
       try {
-      const followingData = await API.graphql(
-        graphqlOperation(
-          listUsers, {
+        const followingData = await API.graphql(
+          graphqlOperation(
+            listUsers, {
             filter: {
-                mainGym: { contains: mainGym },
-                mainSport: {contains: mainSport },
-                level: {contains: level }
-                }
+              mainGym: { contains: mainGym },
+              mainSport: { contains: mainSport },
+              level: { contains: level }
+            }
           }
-          
-            )
-            );
-            
+          )
+        );
+
         setUsers(followingData.data.listUsers.items);
       } catch (e) {
         console.log(e);
@@ -98,20 +67,20 @@ export default function AthleteFinderScreen() {
     fetchUsers();
   }, [])
 
-
+  //Fetch new users list to be passed to filter component
   const fetchUsers = async () => {
     try {
       const followingData = await API.graphql(
         graphqlOperation(
           listUsers, {
           filter: {
-              mainGym: { contains: mainGym },
-              mainSport: {contains: mainSport},
-              level: {contains: level},
-              }
+            mainGym: { contains: mainGym },
+            mainSport: { contains: mainSport },
+            level: { contains: level },
           }
-      
-      )
+        }
+
+        )
       );
       setUsers(followingData.data.listUsers.items);
     } catch (e) {
@@ -125,7 +94,6 @@ export default function AthleteFinderScreen() {
 
   return (
     <View style={styles.container}>
-      <AthleteFinderFilterButton props ={fetchUsers} />
       <View>
         <FlatList
           style={{ width: '100%' }}
@@ -134,6 +102,8 @@ export default function AthleteFinderScreen() {
           keyExtractor={(item) => item.id}
         />
       </View>
+
+      <AthleteFinderFilterButton props={fetchUsers} />
     </View>
 
   );
@@ -141,10 +111,10 @@ export default function AthleteFinderScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop:5,
+    paddingTop: 5,
     alignItems: 'stretch',
-        justifyContent: 'flex-start',
-        flexDirection: 'column',
-        flex: 1,
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    flex: 1,
   },
 });

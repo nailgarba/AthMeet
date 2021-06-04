@@ -29,10 +29,6 @@
     "dev": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
-    },
-    "athmeets3": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
     }
   }
 }
