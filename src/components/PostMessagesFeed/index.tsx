@@ -9,12 +9,6 @@ import PostChatListItem from '../PostChatListItem';
 
 
 const PostMessagesFeed = (props) => {
-    console.log(`-----------------------`)
-    console.log(`----------PostMessagesFeed props-------------`)
-    console.log(props)
-    console.log(`-----------------------`)
-    console.log(`----------PostMessagesFeed props.chatRooms-------------`)
-    console.log(props.chatRooms)
     return(
     <View style={{ width: '100%' }}>
         <FlatList
@@ -28,23 +22,3 @@ const PostMessagesFeed = (props) => {
 }
 
 export default PostMessagesFeed;
-/*
-{
-    <FlatList
-      style={{ width: '100%' }}
-      data={testchatRooms}
-      renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
-      keyExtractor={(item) => item.id}
-    />}
-/*
-const PrivateMessagesFeed = () => (
-    <View style ={{width: '100%'}}>
-        <FlatList
-            data = {users}
-            renderItem={({item}) => <PrivateMessagesListContainer user = {item.user} />}
-            keyExtractor={(item) => item.id}
-        />
-
-    </View>
-)
-*/

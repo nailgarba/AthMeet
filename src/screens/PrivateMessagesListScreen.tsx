@@ -19,17 +19,14 @@ export default class PrivateMessagesListScreen extends Component {
 
     this.state = {
       chatRooms: [],
-      testchatRooms:[],
-
-
     }
+  
     const fetchChatRooms = async () => {
       try {
         const userInfo = await Auth.currentAuthenticatedUser();
-
         const userData = await API.graphql(
           graphqlOperation(
-            getUser, {
+            listChatRooms, {
             id: userInfo.attributes.sub,
           }
           )
@@ -44,30 +41,9 @@ export default class PrivateMessagesListScreen extends Component {
       }
     }
     fetchChatRooms();
-
-    const fetchtestChatRooms = async () => {
-      try {
-        const userInfo = await Auth.currentAuthenticatedUser();
-
-        const userData = await API.graphql(
-          graphqlOperation(
-            listChatRooms, {
-            id: userInfo.attributes.sub,
-          }
-          )
-        )
-        if (userData) {
-          this.setState({
-            testchatRooms: userData.data.getUser.chatRoomUser.items
-          });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    fetchtestChatRooms();
   }
-  fetchtestChatRooms = async () => {
+
+  fetchChatRooms = async () => {
     try {
       const userInfo = await Auth.currentAuthenticatedUser();
 
@@ -80,7 +56,7 @@ export default class PrivateMessagesListScreen extends Component {
       )
       if (userData) {
         this.setState({
-          testchatRooms: userData.data.getUser.chatRoomUser.items
+          chatRooms: userData.data.getUser.chatRoomUser.items
         });
       }
     } catch (e) {
@@ -88,11 +64,13 @@ export default class PrivateMessagesListScreen extends Component {
     }
   }
   reloadPrivateMessagesList(){
-    this.fetchtestChatRooms();
+    this.fetchChatRooms();
   }
+  
+  //Refresh list when screen comes into view
   componentDidMount(){
     this.focusListener = this.props.navigation.addListener('focus', () => {
-      this.fetchtestChatRooms();
+      this.fetchChatRooms();
     });
   }
 
@@ -105,8 +83,8 @@ export default class PrivateMessagesListScreen extends Component {
         <NewChatButton ></NewChatButton>
       </View>
       <View style={styles.chatsContainer}>
-        {this.state.testchatRooms && <PrivateMessagesFeed chatRooms={this.state.testchatRooms} reloadPrivateMessagesList={this.fetchtestChatRooms.bind(this)} />}
-        {this.state.testchatRooms.items ?  <Text> Start a chat</Text> :<View /> }
+        {this.state.chatRooms && <PrivateMessagesFeed chatRooms={this.state.chatRooms} reloadPrivateMessagesList={this.fetchChatRooms.bind(this)} />}
+        {this.state.chatRooms.items ?  <Text> Start a chat</Text> :<View /> }
       </View>
     </View>
 

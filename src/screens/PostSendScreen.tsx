@@ -22,17 +22,16 @@ export default class PostSendScreen extends Component {
         this.state = {
             postID: props.route.params.postID,
             chatRooms: [],
-            testchatRooms: [],
-
-
         }
+        
+
         const fetchChatRooms = async () => {
             try {
                 const userInfo = await Auth.currentAuthenticatedUser();
 
                 const userData = await API.graphql(
                     graphqlOperation(
-                        getUser, {
+                        listChatRooms, {
                         id: userInfo.attributes.sub,
                     }
                     )
@@ -47,30 +46,8 @@ export default class PostSendScreen extends Component {
             }
         }
         fetchChatRooms();
-
-        const fetchtestChatRooms = async () => {
-            try {
-                const userInfo = await Auth.currentAuthenticatedUser();
-
-                const userData = await API.graphql(
-                    graphqlOperation(
-                        listChatRooms, {
-                        id: userInfo.attributes.sub,
-                    }
-                    )
-                )
-                if (userData) {
-                    this.setState({
-                        testchatRooms: userData.data.getUser.chatRoomUser.items
-                    });
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        }
-        fetchtestChatRooms();
     }
-    fetchtestChatRooms = async () => {
+    fetchChatRooms = async () => {
         try {
             const userInfo = await Auth.currentAuthenticatedUser();
 
@@ -83,7 +60,7 @@ export default class PostSendScreen extends Component {
             )
             if (userData) {
                 this.setState({
-                    testchatRooms: userData.data.getUser.chatRoomUser.items
+                    chatRooms: userData.data.getUser.chatRoomUser.items
                 });
             }
         } catch (e) {
@@ -91,35 +68,16 @@ export default class PostSendScreen extends Component {
         }
     }
     reloadPrivateMessagesList() {
-        this.fetchtestChatRooms();
+        this.fetchChatRooms();
     }
+    //Reload screen when it comes into view. Update messages
     componentDidMount() {
         this.focusListener = this.props.navigation.addListener('focus', () => {
-            this.fetchtestChatRooms();
+            this.fetchChatRooms();
         });
     }
 
     render() {
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`---------------this.state.post in render ---------------`);
-        console.log(this.state.postID);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`---------------this.props in render ---------------`);
-        console.log(this.props);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`---------------this.state.testchatRooms in render ---------------`);
-        console.log(this.state.testchatRooms);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-
         return (
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
@@ -127,23 +85,12 @@ export default class PostSendScreen extends Component {
                     <NewChatButton ></NewChatButton>
                 </View>
                 <View style={styles.chatsContainer}>
-                {this.state.testchatRooms && <PostMessagesFeed chatRooms={this.state.testchatRooms} postID={this.state.postID}/>}
+                    {this.state.chatRooms && <PostMessagesFeed chatRooms={this.state.chatRooms} postID={this.state.postID} />}
                 </View>
             </View>
-
-);/*
-{ this.state.testchatRooms && this.props.postID && <View style={{ width: '100%' }}>
-    <FlatList
-        data={this.state.testchatRooms}
-        renderItem={({ item }) => <PostChatListItem chatRoom={item.chatRoom} postID ={this.state.postID} /> }
-        keyExtractor={(item) => item.id}
-    />
-
-</View>}*/
+        );
+    }
 }
-}
-//{this.state.testchatRooms && <PrivateMessagesFeed chatRooms={this.state.testchatRooms} reloadPrivateMessagesList={this.fetchtestChatRooms.bind(this)} />}
-//{this.state.testchatRooms.items ? <Text> Start a chat</Text> : <View />}
 
 const styles = StyleSheet.create({
     container: {

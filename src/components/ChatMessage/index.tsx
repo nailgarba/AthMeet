@@ -13,12 +13,10 @@ export type ChatMessageProps = {
 const ChatMessage = (props: ChatMessageProps) => {
   const { message, myId } = props;
 
+  //Check message's sender to determine which style to apply
   const isMyMessage = () => {
     return message.user.id === myId;
   }
-  console.log(`----------------------`)
-  console.log(`------message---------`)
-  console.log(message)
   return (
     <View style={styles.container}>
       <View style={[

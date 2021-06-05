@@ -45,8 +45,7 @@ export default function NewPostScreen() {
                 image: image,
                 userID: currentUser.attributes.sub,
             }
-            console.log(`Created newPost object: ${newPost.content}${newPost.userID}`);
-
+            console.log(`Created newPost object: ${newPost.content}${newPost.userID}${image}`);
             await API.graphql(graphqlOperation(createPost, { input: newPost }));
             navigation.goBack();
         } catch (e) {
@@ -80,55 +79,12 @@ export default function NewPostScreen() {
             });
             if (!result.cancelled) {
                 setImageURL(result.uri);
-              //  binaryImage= convertDataURIToBinary(result.uri)
             }
             console.log(result);
         } catch (e) {
             console.log(e);
         }
     };
-
-    /*
-    const convertImageToBaseSixFour = (url) => {
-
-        ImgToBase64.getBase64String(url)
-            .then((base64String) => {
-                baseStringSample = base64String,
-            })
-            .catch(err => Alert.alert('Error' + err));
-
-    }*/
-
-
-    // ****** CONVERT BASE64 TO BLOB ******* //
-
-    const imageToBlob=(baseStringSample)=>{
-
-        var byteCharacters = atob(baseStringSample);
-        var byteNumbers = new Array(byteCharacters.length);
-        for (var i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-            byteArray = new Uint8Array(byteNumbers);
-            console.log("BYTEARRAY: " + byteArray);
-        }
-
-    }
-    
-
-    
-    var BASE64_MARKER = ';base64,';
-    function convertDataURIToBinary(dataURI) {
-        var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-        var base64 = dataURI.substring(base64Index);
-        var raw = window.atob(base64);
-        var rawLength = raw.length;
-        var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-        for (var i = 0; i < rawLength; i++) {
-            array[i] = raw.charCodeAt(i);
-        }
-        return array;
-    }
 
     //Generate unique key from current date, random numbers, and image URL
     const generateKey=(url)=>{
@@ -139,11 +95,8 @@ export default function NewPostScreen() {
         return newFileName.substring(0,60);
     }
 
-
-
     //Upload image to Amazon S3 and return uploaded image's address
     const uploadImage = async () => {
-        
         try {
             const response = await fetch(imageURL);
             const blob = await response.blob();

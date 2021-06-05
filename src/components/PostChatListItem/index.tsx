@@ -15,20 +15,7 @@ const PostChatListItem = (props) => {
     const navigation = useNavigation();
 
     React.useEffect(() => {
-        console.log(`-------------------------------------------`);
-        console.log(`-------------------------------------------`);
-        console.log(`-------------------------------------------`);
-        console.log(`---------------chatroom in ChatListItem------------------`);
-        console.log(chatRoom);
-        console.log(`-------------------------------------------`);
-        console.log(`-------------------------------------------`);
-        console.log(`---------------props in ChatListItem------------------`);
-        console.log(props);
-        console.log(`-------------------------------------------`);
-        console.log(`-------------------------------------------`);
-        console.log(`-------------------------------------------`);
-
-
+        //Get other user in the chatroom
         const getOtherUser = async () => {
             const userInfo = await Auth.currentAuthenticatedUser();
             if (chatRoom.chatRoomUsers.items[0].user.id === userInfo.attributes.sub) {
@@ -36,12 +23,8 @@ const PostChatListItem = (props) => {
             } else {
                 setOtherUser(chatRoom.chatRoomUsers.items[0].user);
             }
-
         }
-
-        //   if (chatRoom && chatRoom.items) {
         getOtherUser();
-        // }
     }, [])
 
     const onClick = () => {
@@ -52,7 +35,7 @@ const PostChatListItem = (props) => {
     }
 
     if (!otherUser) {
-        return null;
+        return (<View/>);
     }
 
     return (
@@ -60,7 +43,6 @@ const PostChatListItem = (props) => {
             <View style={styles.container}>
                 <View style={styles.lefContainer}>
                     <Image source={{ uri: otherUser.image }} style={styles.profilePicture} />
-
                     <View style={styles.midContainer}>
                         <Text style={styles.username}>{otherUser.name}</Text>
                         <Text
@@ -71,9 +53,7 @@ const PostChatListItem = (props) => {
                                 : <View />}
                         </Text>
                     </View>
-
                 </View>
-
                 <Text style={styles.time}>
                     {chatRoom.lastMessage && moment(chatRoom.lastMessage.createdAt).format("DD/MM/YYYY")}
                 </Text>

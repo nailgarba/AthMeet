@@ -7,8 +7,7 @@ import {UserType} from '../types';
 import Feed from '../components/Feed';
 import ProfileScreenComponents from '../components/ProfileScreenComponents';
 import TopContainer from '../components/ProfileScreenComponents/TopContainer';
-
-import { useRoute } from '@react-navigation/native';
+import { useRoute ,useNavigation} from '@react-navigation/native';
 import users from '../data/users';
 import EditProfileButton from '../components/EditProfileButton';
 import Amplify, {Auth, API, graphqlOperation} from 'aws-amplify';
@@ -26,7 +25,9 @@ export default function ProfileScreen() {
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
   const [refreshing, setRefreshing] = React.useState(false);
-
+  const navigation= useNavigation();
+  
+  const [focusListener, setFocusListener] = React.useState("");
   
   React.useEffect(() => {
     // get the current user
@@ -48,12 +49,12 @@ export default function ProfileScreen() {
     fetchUser();
     //forceUpdate();
   }, [])
+  
   const fetchUser = async () => {
     const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
     if (!userInfo) {
       return;
     }
-
     try {
       const userData = await API.graphql(graphqlOperation(getUser, { id:  userInfo.attributes.sub }))
       if (userData) {
@@ -63,6 +64,7 @@ export default function ProfileScreen() {
       console.log(e);
     }
   }
+
   
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);

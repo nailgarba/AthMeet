@@ -17,6 +17,7 @@ export default function PrivateMessagesScreen() {
     const [myId, setMyId] = React.useState(null);
     const route = useRoute();
     
+    //fetch messages for chatrooms
     const fetchMessages = async () => {
         const messagesData = await API.graphql(
           graphqlOperation(
@@ -43,6 +44,7 @@ export default function PrivateMessagesScreen() {
         getMyId();
       }, [])
 
+      //Subscribe to messages so that new messages are updated automatically
       React.useEffect(() => {
         const subscription = API.graphql(
           graphqlOperation(onCreateMessage)
@@ -54,9 +56,7 @@ export default function PrivateMessagesScreen() {
               console.log("Message is in another room!")
               return;
             }
-    
             fetchMessages();
-            // setMessages([newMessage, ...messages]);
           }
     });
     return () => subscription.unsubscribe();
@@ -71,7 +71,6 @@ export default function PrivateMessagesScreen() {
             />
             <InputBox chatRoomID={route.params.id} />
         </View>
-
     );
 }
 

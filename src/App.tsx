@@ -54,7 +54,7 @@ function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  //Upload user to User table in database
+  //Upload user and follow to tables in database
   const saveUserToDB = async (user: CreateUserInput) => {
 
     await API.graphql(graphqlOperation(createUser, { input: user }))
@@ -73,11 +73,9 @@ function App() {
         // Check if user already exists in database
         const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }));
         var followID = 'follow';
-        followID= followID.concat(userInfo.attributes.sub);
-        console.log(`follow id made: `);
-        console.log(followID);
-        //console.log(userData)
         if (!userData.getUser) {       
+          //Create FollowID with user's userID to store followers and users being followed
+          followID= followID.concat(userInfo.attributes.sub);
           const user = {
             id: userInfo.attributes.sub,
             username: userInfo.username,
@@ -95,9 +93,7 @@ function App() {
         } else {
           console.log('User already exists');
         }
-
       }
-
       // If it doesn't, create the user in the database
     }
     updateUser();

@@ -23,20 +23,10 @@ export default class SendPostButton extends Component {
             }
         }
         fetchUser();
-        console.log(`----------------------------`)
-        console.log(`--------------state----------`)
-        console.log(this.state)
-        console.log(`----------------------------`)
-        console.log(`--------------props----------`)
-        console.log(props)
-
     }
 
+    //Create message with postID and send. Update last message in chatroom
     sendMessage = async () => {
-        console.log(`----------------------------`)
-        console.log(`----------------------------`)
-        console.log(`-----------state in send press-------------`)
-        console.log(this.state)
         try {
             const newMessageData = await API.graphql(
                 graphqlOperation(
@@ -54,6 +44,7 @@ export default class SendPostButton extends Component {
             console.log(e);
         }
     }
+    //Update last message in chatroom
     updateChatRoomLastMessage = async (messageId: string) => {
         try {
             await API.graphql(

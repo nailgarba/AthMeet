@@ -33,7 +33,6 @@ export default function SearchScreen() {
                         name: { contains: searchValue },
                     }
                 }
-
                 )
             )
             setUsers(followingData.data.listUsers.items);
@@ -45,9 +44,7 @@ export default function SearchScreen() {
 
 
     const onSendPress = () => {
-        console.log(`-----------------------------`);
         fetchUsers();
-
     }
 
 
