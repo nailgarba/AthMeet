@@ -1,5 +1,5 @@
 import React, {Component, useEffect } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
 
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -16,12 +16,6 @@ import {getUser} from '../src/graphql/queries';
 
 import myUser from '../data/myUser';
 import SecondFeed from '../components/SecondFeed';
-/*
-export {UserType} from '../types';
-
-export type PostProps = {
-user: UserType,
-}*/
 
 
 export default function ProfileScreen() {
@@ -29,7 +23,11 @@ export default function ProfileScreen() {
   
   const route = useRoute();
   const [user,setUser]=React.useState([]);
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  
   React.useEffect(() => {
     // get the current user
     const fetchUser = async () => {
@@ -48,43 +46,52 @@ export default function ProfileScreen() {
       }
     }
     fetchUser();
+    //forceUpdate();
   }, [])
+  const fetchUser = async () => {
+    const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+    if (!userInfo) {
+      return;
+    }
 
-
+    try {
+      const userData = await API.graphql(graphqlOperation(getUser, { id:  userInfo.attributes.sub }))
+      if (userData) {
+        setUser(userData.data.getUser);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    fetchUser().then(() => setRefreshing(false));
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <ScrollView>
+        <ScrollView  refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }>
         <View style={styles.profileInfo}>
-
-{user.id && <ProfileScreenComponents user={user} />}
-</View>
-<View style={styles.profileFeed}>
-{user.id && <SecondFeed id={user.id} />}
-</View>
-
-          
+        {user.id && <ProfileScreenComponents user={user} />}
+      </View>
+      <View style={styles.profileFeed}>
+       {user.id && <SecondFeed id={user.id} />}
+      </View>
         </ScrollView>
       </View>
       <EditProfileButton/>
-
     </View>
     
   );
 }
-//<Feed />
-/*
-<View style={styles.profileInfo}>
 
-            {user.id && <ProfileScreenComponents user={user} />}
-          </View>
-          <View style={styles.profileFeed}>
-            {user.id && <SecondFeed id={user.id} />}
-          </View>
-
-
-*/
 const styles = StyleSheet.create({
     container: {
       flex: 1,

@@ -15,7 +15,7 @@ export type UserProps = {
     user: UserType,
 }
 
-
+//Generate Profile information
 class ProfileScreenComponents extends Component{
     constructor(props){
         super(props);
@@ -26,63 +26,22 @@ class ProfileScreenComponents extends Component{
             loaded:false,
 
         }
-        console.log(`----------------------------------------------------`);
-        console.log(`------------------ProfileScreenComponents----------------------`);
-        console.log(`-------------------this.state------------------`);
-        console.log(`----------------------------------------------------`);
-        console.log(this.state);
-        console.log(`----------------------------------------------------`);
-        console.log(`----------------------------------------------------`);
-        console.log(this.state.user);
-        console.log(`----------------------------------------------------`);
-        console.log(this.state.testvar);
     }
+
     componentDidMount(){
         if(this.state.user?.id){
             this.setState({
                 loaded: true
               });
-            console.log(`----------------------------------------------------`);
-    console.log(`------------------ProfileScreenComponents----------------------`);
-    console.log(`-------------------this.state------------------`);
-    console.log(`----------------------------------------------------`);
-    console.log(this.state);
-    console.log(`----------------------------------------------------`);
-    console.log(`--------------------user--------------------------------`);
-    console.log(this.state.user);
-    console.log(`----------------------------------------------------`);
-    console.log(`---------------------testvar-------------------------------`);
-    console.log(this.state.testvar);
         }
         if(this.state.loaded=false){
             //this.render();
         }
     }
 
-/*
-const ProfileScreenComponents = ({user}: UserProps) => {
-    console.log(`----------------------------------------------------`);
-            console.log(`------------------ProfileScreenComponents----------------------`);
-            console.log(`-------------------user id-------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(user.id);
-            console.log(`----------------------------------------------------`);
-    
-*/
+
 
 render(){
-    console.log(`----------------------------------------------------`);
-    console.log(`------------------ProfileScreenComponents----------------------`);
-    console.log(`-------------------this.state------------------`);
-    console.log(`----------------------------------------------------`);
-    console.log(this.state);
-    console.log(`----------------------------------------------------`);
-    console.log(`--------------------user--------------------------------`);
-    console.log(this.state.user);
-    console.log(`----------------------------------------------------`);
-    console.log(`---------------------testvar-------------------------------`);
-    console.log(this.state.testvar);
-
     return (
     <View style ={styles.container}>
         <View style={styles.topContainer}>
@@ -94,13 +53,6 @@ render(){
 )}
 }
 
-
-//{this.state.loaded? <TopContainer user={this.state.user}/>: null}        
-
-//        <View style={styles.middleContainer}>
-        //{this.state.loaded? <MiddleContainer  user={this.state.user}/>: null}        
-//        </View>
-//<Feed/>
 export default ProfileScreenComponents;
 
 
@@ -124,21 +76,3 @@ const styles = StyleSheet.create({
     },
    
 });
-
-
-/*
-
-        <BottomContainer user={user}/>
-        */
-
-
-
-/*
-<View style ={{width: '100%'}}>
-        <FlatList
-            data = {posts}
-            renderItem={({item}) => <Post post = {item} />}
-            keyExtractor={(item) => item.id}
-        />
-    </View>
-*/

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View} from 'react-native';
 import Colors from "../../constants/Colors";
 import { Message } from "../../types";
 import moment from "moment"
+import PostInMessage from '../PostInMessage';
 
 export type ChatMessageProps = {
   message: Message;
@@ -15,7 +16,9 @@ const ChatMessage = (props: ChatMessageProps) => {
   const isMyMessage = () => {
     return message.user.id === myId;
   }
-
+  console.log(`----------------------`)
+  console.log(`------message---------`)
+  console.log(message)
   return (
     <View style={styles.container}>
       <View style={[
@@ -27,11 +30,13 @@ const ChatMessage = (props: ChatMessageProps) => {
       ]}>
         {!isMyMessage() && <Text style={styles.name}>{message.user.name}</Text>}
         <Text style={styles.message}>{message.content}</Text>
+        <PostInMessage postID={message.postID}/>
         <Text style={styles.time}>{moment(message.createdAt).calendar()}</Text>
       </View>
     </View>
   )
 }
+//{message.post?.id && <PostInMessage postID={message.postID}/>}
 //<Text style={styles.time}>{moment(message.createdAt).fromNow()}</Text>
 
 export default ChatMessage;

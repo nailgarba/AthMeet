@@ -11,6 +11,8 @@ export {UserType} from '../../types'
 export type UserProps = {
 user: UserType,
 }
+
+//List component for private messages
 const PrivateMessagesListContainer = ({user}: UserProps) => (
     <View style= {styles.container}>
        <LeftContainer user={user}/>

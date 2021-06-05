@@ -116,7 +116,7 @@ export default class ChatRoomScreen extends Component {
       <SafeAreaView style={styles.container}>
         <View style={styles.headerContainer}>
           <BackButton />
-          <Text style={styles.nameContainer}>{this.state.name}</Text>
+          <Text style={styles.nameContainer}>{this.state.routename}</Text>
         </View>
         <View style={styles.mainContainer}>
           <FlatList
@@ -131,7 +131,6 @@ export default class ChatRoomScreen extends Component {
         </View>
 
       </SafeAreaView>
-
     );
   }
 }

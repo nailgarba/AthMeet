@@ -28,60 +28,6 @@ const MainContainer = ({ post }: MainContainerProps) => {
     } 
     geturl();
 
-
-    /* const geturl=  async () =>{
-         try{
-             const accessURL = await Storage.get(post.image,{expires:60});
-             console.log(`ACCESS URL:`,accessURL);
-             setURL(accessURL);
-         }catch(e){
-             console.log(e);
-         }
-     } 
- 
-     useEffect(() => {
-         geturl()
-     }, [])
-     
-     var  creds;
-     var x;
-    const getCredentials = async () =>{
-        creds=await Auth.currentCredentials().then(function (val) {
-            setAK(val.accessKeyId);
-            setSAK(val.secretAccessKey)
-            
-          });
-        return creds;
-        //creds.then(function(result){ x=result});
-    }
-    creds = getCredentials();
-*/
-/*
-    console.log(`----------------creds-------------`);
-    console.log(creds);
-    console.log(`----------------xxxx-------------`);
-    console.log(creds.Icredentials);
-    console.log(`----------------creds.[[PromiseResult]]-------------`);
-    console.log(creds.PromiseResult);
-    
-
-
-
-    if (post?.image) {
-        var res = post?.image.substring(0, 6);
-        if (res == 'images') {
-            var AWS = require('aws-sdk');
-            var s3 = new AWS.S3({ accessKeyId: ak, secretAccessKey: sak , region: 'eu-west-1' });
-
-            var params = { Bucket: 'athmeets3bucket184241-dev', Key: post.image };
-            s3.getSignedUrl('getObject', params, function (err, urll) {
-                console.log('Your generated pre-signed URL is', urll);
-                if (!!urll) { setURL(urll); }
-            });
-        }
-    }
-*/
-
     return (
         <View style={styles.container}>
             <View style={styles.postHeaderContainer}>
@@ -89,14 +35,11 @@ const MainContainer = ({ post }: MainContainerProps) => {
                 <Text style={styles.username}>@{post.user.username}</Text>
                 <Text style={styles.createdAt}>{moment(post.createdAt).fromNow()}</Text>
             </View>
-
             <View >
                 <Text style={styles.content}>{post.content}</Text>
+                {!!post.image && <Image style={styles.image} source={{ uri: post.image }} />}
                 {!!post.image && <S3Image style={styles.image} imgKey={url} />}
             </View>
-            <Footer post={post} />
-
-
             {/*username */}
             {/*content */}
             {/*footer */}

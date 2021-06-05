@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listPosts } from '../../src/graphql/queries';
-/*
-import posts from '../../data/posts';
-*/
 import Post from '../Posts';
+
 const Feed = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -29,7 +27,7 @@ const Feed = () => {
     }, [])
 
 
-
+    //Display posts in flatlist
     return (
         <View style={{ width: '100%' }}>
             <FlatList

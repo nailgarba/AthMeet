@@ -64,7 +64,7 @@ export default function AthleteFinderFilterScreen() {
             </View>
             <View style={styles.mainContainer}>
                 <View style={styles.inputContainer}>
-                    <TextInput style={styles.inputs}
+                    <TextInput 
                         value={mainGym}
                         onChangeText={(value) => setMainGym(value)}
                         multiline={true}

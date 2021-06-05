@@ -40,8 +40,6 @@ const TopContainer = ({ user }: TopContainerProps) => (
 
 
 )
-//<Text>Followers {user.followers}</Text>
-//<Text>Following {user.following}</Text>
 
 export default TopContainer;
 

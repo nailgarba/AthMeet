@@ -8,16 +8,24 @@ import PostChatListItem from '../PostChatListItem';
 
 
 
-const PostMessagesFeed = (props) => (
+const PostMessagesFeed = (props) => {
+    console.log(`-----------------------`)
+    console.log(`----------PostMessagesFeed props-------------`)
+    console.log(props)
+    console.log(`-----------------------`)
+    console.log(`----------PostMessagesFeed props.chatRooms-------------`)
+    console.log(props.chatRooms)
+    return(
     <View style={{ width: '100%' }}>
         <FlatList
             data={props.chatRooms}
-            renderItem={({ item }) => <PostChatListItem chatRoom={item.chatRoom} postID={props.postID} />}
+            renderItem={({ item }) => <PostChatListItem chatRoom={item.chatRoom} postID={props.postID} chatRoomID={item.chatRoomID} />}
             keyExtractor={(item) => item.id}
         />
 
     </View>
 )
+}
 
 export default PostMessagesFeed;
 /*

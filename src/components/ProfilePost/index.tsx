@@ -15,7 +15,8 @@ user: UserType,
 }
 
 
-
+//Container that displays profile in lists
+//Main container contains content. Left container contains profile picture
 const ProfilePost = ({user}: ProfilePostProps) => (
     <View style= {styles.container}>
        <LeftContainer user={user}/>

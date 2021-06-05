@@ -18,6 +18,7 @@ import * as ImagePicker from 'expo-image-picker';
 import ImgToBase64 from 'react-native-image-base64';
 import { decode as atob, encode as btoa } from 'base-64';
 import {uploadImageToS3} from '../customgraphql/uploadImage';
+import moment from 'moment';
 
 
 
@@ -79,7 +80,7 @@ export default function NewPostScreen() {
             });
             if (!result.cancelled) {
                 setImageURL(result.uri);
-                binaryImage= convertDataURIToBinary(result.uri)
+              //  binaryImage= convertDataURIToBinary(result.uri)
             }
             console.log(result);
         } catch (e) {
@@ -129,90 +130,38 @@ export default function NewPostScreen() {
         return array;
     }
 
-
+    //Generate unique key from current date, random numbers, and image URL
+    const generateKey=(url)=>{
+        const date=moment().format("YYYYMMDD");
+        const randomString = Math.random().toString(36).substring(2,7);
+        const fileName= url.toLowerCase().replace(/[^a-z0-9]/g,"-");
+        const newFileName = `${date}-${randomString}-${fileName}`;
+        return newFileName.substring(0,60);
+    }
 
 
 
     //Upload image to Amazon S3 and return uploaded image's address
     const uploadImage = async () => {
-        /*
+        
         try {
             const response = await fetch(imageURL);
             const blob = await response.blob();
             const urlParts = imageURL.split('.');
             const extension = urlParts[urlParts.length - 1];
-            const key = `${uuidv4()}.${extension}`;
-            await Storage.put(key, blob);
+            const key = generateKey(imageURL);
+            await Storage.put(key, blob,{
+                contentType: 'image/jpeg', // contentType is optional
+              });
+            console.log(key);
+              return key;
 
         } catch (e) {
             console.log(`Error caught in upload image`);
             console.log(e);
         }
-        return '';*/
-        var AWS = require('aws-sdk');
-        var s3 = new AWS.S3({ accessKeyId: 'AKIA5PG7RCI6IPV5LK47', secretAccessKey: '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', region: 'eu-west-1' });
-        var signurl = "";
-        var params = { Bucket: 'athmeets3bucket184241-dev', Key: imageURL };
-        s3.getSignedUrl('putObject', params, function (err, url) {
-            console.log('Your generated pre-signed URL is', url);
-            setSignedImageURL(url);
-            signurl = url;
-        });
-        /*
-        uploadImageToS3(
-            imageURL, signurl
-        );
-*?
-
-
-
-
-        /*
-        try {
-
-            console.log(`imageURL`);
-            console.log(imageURL);
-
-
-            const response = await fetch(imageURL);
-            const blob = await response.blob();
-            var blob2 = blob;
-            var blob3 = blob;
-
-            try {
-                console.log(`GOT TO TRY CATCH`);
-                console.log(`BLOB`);
-                console.log(blob);
-                console.log(`signedImageURL`);
-                console.log(signedImageURL);
-                console.log(signurl);
-
-                if (!!blob && !!signurl) {
-                    console.log(`BLOB`);
-                    console.log(blob);
-                    console.log(`signedImageURL`);
-                    console.log(signedImageURL);
-
-
-                    await Storage.put(signurl, blob, {
-                        contentType: 'image/jpg', // contentType is optional
-                    });
-                    return signurl;
-
-                    console.log(`GOT TO AWAIT STORAGE`);
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        } catch (e) {
-            console.log(e);
-        }*/
-
-
-
+        return '';
     }
-
-
 
 
 

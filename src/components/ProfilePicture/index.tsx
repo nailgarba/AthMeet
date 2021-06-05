@@ -9,6 +9,8 @@ export type ProfilePictureProps = {
     image?: string,
 }
 
+
+//Touching profile picture navigates to User's profile page
 const ProfilePicture = ({ user, size = 50 }: ProfilePictureProps) => {
     const navigation = useNavigation();
     const id = user.id;
