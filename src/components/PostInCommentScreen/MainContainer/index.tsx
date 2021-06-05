@@ -1,9 +1,10 @@
-import React from 'react';
+import React ,{useState } from 'react';
 import {View, Text, Image,StyleSheet} from 'react-native';
 import { PostType } from '../../../types';
 import {Ionicons} from '@expo/vector-icons';
 import Footer from './Footer';
 import moment from 'moment';
+import {Storage } from 'aws-amplify';
 
 
 
@@ -11,15 +12,17 @@ export type MainContainerProps = {
     postt: PostType,
 }
 const MainContainer = (post) => {
-    /*
-    console.log(`------------------------------`);
-    console.log(`------------------------------`);
-    console.log(`------------------------------`);
-    console.log(`----------Post in MainContainer-------------`);
-    console.log(post);
-    console.log(`------------------------------`);
-    console.log(`------------------------------`);*/
-    
+    const [url, setURL] = useState("");
+    const geturl = async () => {
+        const signedURL = await Storage.get(post.post.image);
+        setURL(signedURL);
+  }
+  React.useEffect(() => {
+      geturl();
+  }, [])
+
+
+
     return (
     <View style= {styles.container}>
         <View style= {styles.postHeaderContainer}>
@@ -30,7 +33,7 @@ const MainContainer = (post) => {
 
         <View style= {styles.content}>
             <Text >{post.post.content}</Text>
-            {!!post.post.image && <Image style={styles.image} source={{uri:post.post.image}}/>}
+            {!!post.post.image && <Image style={styles.image} source={{uri:url}}/>}
         </View>
         <View style= {styles.footer}>
 

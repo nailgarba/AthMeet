@@ -35,14 +35,15 @@ export default function EditProfileScreen() {
     const onSave = async () => {
         console.log(`----------------Saving Changes to profile-------------`);
         let image;
-        try{
+        try {
 
             if (!!imageURL) {
                 image = await uploadImage();
             }
-        }catch(e){
+        } catch (e) {
             console.log(e);
         }
+        //Construct new user. Only add values that have been changed
         var newUser = {};
         if (myID !== "") {
             newUser = { id: myID };
@@ -62,14 +63,15 @@ export default function EditProfileScreen() {
             if (name !== "") {
                 newUser = { ...newUser, name: name }
             }
-            try{
+            //Update user 
+            try {
 
                 const updateUserToDB = async (newUser: UpdateUserInput) => {
                     await API.graphql(graphqlOperation(updateUser, { input: newUser }))
                 }
                 updateUserToDB(newUser);
             }
-            catch(e){
+            catch (e) {
                 console.log(e);
             }
         }
@@ -146,7 +148,7 @@ export default function EditProfileScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-                <BackButton/>
+                <BackButton />
                 <TouchableOpacity style={styles.button} onPress={onSave}>
                     <Text style={styles.buttonText}>SAVE</Text>
                 </TouchableOpacity>
@@ -189,7 +191,7 @@ export default function EditProfileScreen() {
                         ]}
                     />
                     <View style={styles.imageContainer}>
-                        <Image source={{ uri:imageURL }} style={styles.image} />
+                        <Image source={{ uri: imageURL }} style={styles.image} />
                     </View>
                     <View style={styles.imageInputContainer} >
 
@@ -203,240 +205,6 @@ export default function EditProfileScreen() {
     )
 }
 
-/*
-class EditProfileScreen extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-            placeholder: {
-                label: 'Select level of progression',
-                value: null,
-            },
-            mainGym: "",
-            mainSport: "",
-            level: "",
-            name: "",
-            imageURl: "",
-            newName: "",
-            myID: "",
-            updatedUser: [],
-        }
-        var mainGym = "";
-        var mainSport = "";
-        var level = "";
-
-
-    }
-    getUser = async () => {
-        const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-        if (userInfo) {
-            this.setState({
-                myID: userInfo.attributes.sub
-            })
-        }
-    }
-    setName(value) {
-        if (value) {
-            this.setState({
-                newName: value
-            });
-        }
-    }
-    setMainGym(value) {
-        if (value) {
-            this.setState({
-                mainGym: value
-            });
-        }
-    }
-
-    setMainSport(value) {
-        if (value) {
-            this.setState({
-                mainSport: value
-            });
-        }
-    }
-
-    setLevel(value) {
-        if (value) {
-            this.setState({
-                level: value
-            });
-        }
-    }
-
-    onSave = async () => {
-        console.warn("OnPostPost");
-        console.log(`----------------Saving Changes to profile-------------`);
-        var newUser = {};
-        if (this.state.myID !== "") {
-            newUser = { id: this.state.myID };
-
-            if (this.state.imageURl !== "") {
-                newUser = { ...newUser, image: this.state.imageURl }
-            }
-            if (this.state.level !== "") {
-                newUser = { ...newUser, level: this.state.level }
-            }
-            if (this.state.mainGym !== "") {
-                newUser = { ...newUser, mainGym: this.state.mainGym }
-            }
-            if (this.state.mainSport !== "") {
-                newUser = { ...newUser, mainSport: this.state.mainSport }
-            }
-            if (this.state.name !== "") {
-                newUser = { ...newUser, name: this.state.name }
-            }
-
-            const updateUserToDB = async (newUser: UpdateUserInput) => {
-                await API.graphql(graphqlOperation(updateUser, { input: newUser }))
-            }
-            updateUserToDB(newUser);
-        }
-    }
-
-
-
-
-
-
-    getPermission = async () => {
-        if (Platform.OS !== 'web') {
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== 'granted') {
-                alert('Please accept camera roll permissions');
-            }
-        }
-    }
-    useEffect() {
-        this.getUser();
-        this.getPermission();
-    }
-    pickImage = async () => {
-        try {
-            let result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
-                allowsEditing: true,
-                aspect: [4, 3],
-                quality: 1,
-            });
-            if (!result.cancelled) {
-                this.setState({
-                    imageURl: result.uri
-                });
-            }
-            console.log(result);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-    generateKey = (url) => {
-        const date = moment().format("YYYYMMDD");
-        const randomString = Math.random().toString(36).substring(2, 7);
-        const fileName = url.toLowerCase().replace(/[^a-z0-9]/g, "-");
-        const newFileName = `${date}-${randomString}-${fileName}`;
-        return newFileName.substring(0, 60);
-    }
-
-    uploadImage = async () => {
-
-        try {
-            const response = await fetch(this.state.imageURL);
-            const blob = await response.blob();
-            const urlParts = this.state.imageURL.split('.');
-            const extension = urlParts[urlParts.length - 1];
-            const key = this.generateKey(this.state.imageURL);
-            await Storage.put(key, blob, {
-                contentType: 'image/jpeg', // contentType is optional
-            });
-            console.log(key);
-            return key;
-
-        } catch (e) {
-            console.log(`Error caught in upload image`);
-            console.log(e);
-        }
-        return '';
-    }
-
-
-
-
-    render() {
-
-        return (
-            <SafeAreaView style={styles.container}>
-                <View style={styles.container}>
-
-                    <View style={styles.headerContainer}>
-                        <BackButton />
-                        <TouchableOpacity style={styles.button} onPress={this.onSave}>
-                            <Text style={styles.buttonText}>SAVE CHANGES</Text>
-                        </TouchableOpacity>
-                    </View>
-
-
-                    <View style={styles.mainContainer}>
-                        <View style={styles.inputContainer}>
-                            <TextInput
-                                onChangeText={this.setName}
-                                multiline={false}
-                                numberOfLines={1}
-                                style={styles.postInput}
-                                placeholder={"Change Profile Name"}
-                            />
-                            <TextInput
-                                onChangeText={this.setMainGym}
-                                multiline={false}
-                                numberOfLines={1}
-                                style={styles.postInput}
-                                placeholder={"Change Main Gym"}
-                            />
-                            <TextInput
-                                onChangeText={this.setMainSport}
-                                multiline={false}
-                                numberOfLines={1}
-                                style={styles.postInput}
-                                placeholder={"Change Main Sport"}
-                            />
-                            <RNPickerSelect onValueChange={this.setLevel}
-                                placeholder={this.state.placeholder}
-                                style={{ inputAndroid: { color: 'black' } }}
-                                useNativeAndroidPickerStyle={false}
-                                items={[
-                                    { label: 'Beginner', value: 'Beginner' },
-                                    { label: 'Intermediate', value: 'Intermediate' },
-                                    { label: 'Advanced', value: 'Advanced' },
-                                    { label: 'Expert', value: 'Expert' },
-                                ]}
-                            />
-                        </View>
-
-                    </View>
-                    <View style={styles.imageContainer}>
-                        <Image source={{ uri: this.state.imageURL }} style={styles.image} />
-                    </View>
-                    <View style={styles.imageInputContainer} >
-
-                        <TouchableOpacity onPress={this.pickImage}>
-                            <Text style={styles.pickImage}>Upload New Profile Picture</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                </View>
-            </SafeAreaView>
-
-
-        )
-    }
-
-}
-
-export default EditProfileScreen;
-*/
 
 
 const styles = StyleSheet.create({
@@ -524,67 +292,3 @@ const styles = StyleSheet.create({
     }
 });
 
-
-
-
-
-
-
-
-
-/*
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
-
-    },
-    headerContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignContent: 'center',
-        padding: 15,
-        marginTop: 25,
-        paddingBottom: 5,
-        backgroundColor: '#e3e3e3',
-    },
-    button: {
-        backgroundColor: 'tomato',
-        borderRadius: 30,
-        alignSelf: 'center',
-
-    },
-    buttonText: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 15,
-    },
-    backButton: {
-        marginLeft: 15,
-    },
-    inputContainer: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginBottom: 100,
-        paddingBottom: 10,
-        width: '100%',
-
-    },
-    newPostContainer: {
-        flexDirection: 'row',
-        //padding: 15,
-        //width: '100%',
-    },
-    postInput: {
-        height: 30,
-        maxHeight: 50,
-        fontSize: 18,
-        marginBottom: 30,
-    },
-    imageInput: {
-
-    },
-});*/

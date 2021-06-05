@@ -19,7 +19,7 @@ const MainContainer = ({ post }: MainContainerProps) => {
     
     const geturl=  async () =>{
         try{
-            const accessURL = await Storage.get("public/Screenshot_20210601-185603_Expo Go.jpg",{expires:60});
+            const accessURL = await Storage.get(post.image ,{expires:60});
             console.log(`ACCESS URL:`,accessURL);
             setURL(accessURL);
         }catch(e){
@@ -37,8 +37,7 @@ const MainContainer = ({ post }: MainContainerProps) => {
             </View>
             <View >
                 <Text style={styles.content}>{post.content}</Text>
-                {!!post.image && <Image style={styles.image} source={{ uri: post.image }} />}
-                {!!post.image && <S3Image style={styles.image} imgKey={url} />}
+                {!!post.image && <Image style={styles.image} source={{ uri: url }} />}
             </View>
             {/*username */}
             {/*content */}

@@ -4,6 +4,8 @@ import { ChatRoom } from "../../types";
 import moment from "moment";
 import { useNavigation } from '@react-navigation/native';
 import { Auth, } from 'aws-amplify';
+import {Storage } from 'aws-amplify';
+
 
 export type ChatListItemProps = {
   chatRoom: ChatRoom;
@@ -13,7 +15,7 @@ const ChatListItem = (props: ChatListItemProps) => {
   const { chatRoom } = props;
   const [otherUser, setOtherUser] = useState(null);
   const navigation = useNavigation();
-
+const [url, setURL] = useState("");
   React.useEffect(() => {
     const getOtherUser = async () => {
         const userInfo = await Auth.currentAuthenticatedUser();
@@ -24,7 +26,13 @@ const ChatListItem = (props: ChatListItemProps) => {
         }
     }
       getOtherUser();
+      geturl();
   }, [])
+  const geturl = async () => {
+          const signedURL = await Storage.get(otherUser?.image);
+          setURL(signedURL);
+    }
+      
 
   const onClick = () => {
     navigation.navigate('ChatRoom', {
@@ -36,12 +44,13 @@ const ChatListItem = (props: ChatListItemProps) => {
   if (!otherUser) {
     return null;
   }
-
+  
+      
   return (
     <TouchableWithoutFeedback onPress={onClick}>
       <View style={styles.container}>
         <View style={styles.lefContainer}>
-          <Image source={{ uri: otherUser.image }} style={styles.profilePicture} />
+          <Image source={{ uri: url}} style={styles.profilePicture} />
           <View style={styles.midContainer}>
             <Text style={styles.username}>{otherUser.name}</Text>
             <Text

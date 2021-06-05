@@ -5,6 +5,7 @@ import moment from "moment";
 import { useNavigation } from '@react-navigation/native';
 import { Auth, } from 'aws-amplify';
 import SendPostButton from '../SendPostButton';
+import {Storage } from 'aws-amplify';
 
 
 const PostChatListItem = (props) => {
@@ -13,6 +14,7 @@ const PostChatListItem = (props) => {
     const chatRoomID=props.chatRoomID
     const postID = props.postID;
     const navigation = useNavigation();
+    const [url, setURL] = useState("");
 
     React.useEffect(() => {
         //Get other user in the chatroom
@@ -25,7 +27,12 @@ const PostChatListItem = (props) => {
             }
         }
         getOtherUser();
+        geturl();
     }, [])
+    const geturl = async () => {
+            const signedURL = await Storage.get(otherUser?.image);
+            setURL(signedURL);
+      }
 
     const onClick = () => {
         navigation.navigate('ChatRoom', {
@@ -42,7 +49,7 @@ const PostChatListItem = (props) => {
         <TouchableWithoutFeedback onPress={onClick}>
             <View style={styles.container}>
                 <View style={styles.lefContainer}>
-                    <Image source={{ uri: otherUser.image }} style={styles.profilePicture} />
+                    <Image source={{ uri: url }} style={styles.profilePicture} />
                     <View style={styles.midContainer}>
                         <Text style={styles.username}>{otherUser.name}</Text>
                         <Text
