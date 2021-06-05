@@ -11,7 +11,7 @@ import {Auth, API, graphqlOperation} from 'aws-amplify';
 import { messagesByChatRoom } from '../src/graphql/queries';
 import { onCreateMessage } from '../src/graphql/subscriptions';
 import InputBox from "../components/InputBox";
-
+//CAN DELETE
 export default function PrivateMessagesScreen() {
     const [messages, setMessages] = React.useState([]);
     const [myId, setMyId] = React.useState(null);

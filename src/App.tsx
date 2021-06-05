@@ -81,7 +81,7 @@ function App() {
             username: userInfo.username,
             name: userInfo.username,
             email: userInfo.attributes.email,
-            image: 'https://winaero.com/blog/wp-content/uploads/2015/05/user-200.png',
+            image: 'public/defaultprofilepicture.jpg',
             followInfoID: followID,
           }
           await saveUserToDB(user);

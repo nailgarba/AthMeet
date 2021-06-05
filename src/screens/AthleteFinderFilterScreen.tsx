@@ -30,7 +30,7 @@ export default function AthleteFinderFilterScreen() {
     const [level, setLevel] = React.useState("");
     const [profiles, setProfiles] = React.useState([]);
 
-    const onSave = async () => {
+    const onSave = async () => {/*
         console.warn("OnPostPost");
         console.log(`posting post: ${post} Image: ${imageURL}`);
 
@@ -48,7 +48,15 @@ export default function AthleteFinderFilterScreen() {
         } catch (e) {
             console.log(`caught an error in try catch L37 NewPostScreen`);
             console.log(e);
-        }
+        }*/
+        navigation.navigate('AthleteFinder', {
+            filter:{
+                mainGym:  mainGym ,
+                mainSport:  mainSport},
+                level: level
+              });
+          
+
     }
 
 

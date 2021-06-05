@@ -25,15 +25,12 @@ import moment from 'moment';
 export default function NewPostScreen() {
     const [post, setPost] = React.useState("");
     const [imageURL, setImageURL] = React.useState("");
-    const [signedImageURL, setSignedImageURL] = React.useState("");
-    
-    var binaryImage;
     const navigation = useNavigation();
 
 
 
     //Upload post to database
-    const onPostPost = async () => {
+    const onPost = async () => {
         var image;
         if (!!imageURL) {
             image = await uploadImage();
@@ -62,12 +59,9 @@ export default function NewPostScreen() {
             }
         }
     }
-
     useEffect(() => {
         getPermission()
     }, [])
-
-
     //Select image from phone library
     const pickImage = async () => {
         try {
@@ -100,15 +94,11 @@ export default function NewPostScreen() {
         try {
             const response = await fetch(imageURL);
             const blob = await response.blob();
-            const urlParts = imageURL.split('.');
-            const extension = urlParts[urlParts.length - 1];
             const key = generateKey(imageURL);
             await Storage.put(key, blob,{
                 contentType: 'image/jpeg', // contentType is optional
               });
-            console.log(key);
               return key;
-
         } catch (e) {
             console.log(`Error caught in upload image`);
             console.log(e);
@@ -123,7 +113,7 @@ export default function NewPostScreen() {
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
                 <BackButton />
-                <TouchableOpacity style={styles.button} onPress={onPostPost}>
+                <TouchableOpacity style={styles.button} onPress={onPost}>
                     <Text style={styles.buttonText}>POST</Text>
                 </TouchableOpacity>
             </View>

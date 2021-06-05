@@ -26,12 +26,6 @@ export default class ChatRoomScreen extends Component {
       routename: props.route.params.name,
     }
 
-    /*const route = useRoute();
-    this.setState({
-      routeid: route.params.id,
-      routename: route.params.name,
-    });*/
-
 
     const fetchMessages = async () => {
       try {
@@ -39,11 +33,9 @@ export default class ChatRoomScreen extends Component {
           graphqlOperation(
             messagesByChatRoom, {
             chatRoomID: this.state.routeid,
-            //chatRoomID: "0dd96cbb-f831-4503-90e1-d24f05885195",
             sortDirection: "DESC",
           })
         )
-
         if (messagesData) {
           this.setState({
             messages: messagesData.data.messagesByChatRoom.items
@@ -74,11 +66,9 @@ export default class ChatRoomScreen extends Component {
         graphqlOperation(
           messagesByChatRoom, {
           chatRoomID: this.state.routeid,
-          //chatRoomID: "0dd96cbb-f831-4503-90e1-d24f05885195",
           sortDirection: "DESC",
         })
       )
-
       if (messagesData) {
         this.setState({
           messages: messagesData.data.messagesByChatRoom.items
@@ -96,14 +86,11 @@ export default class ChatRoomScreen extends Component {
     ).subscribe({
       next: (data) => {
         const newMessage = data.value.data.onCreateMessage;
-
         if (newMessage.chatRoomID !== this.state.routeid) {
           console.log("Message is in another room!")
           return;
         }
-
         this.fetchMessages();
-        // setMessages([newMessage, ...messages]);
       }
     });
     return () => subscription.unsubscribe();

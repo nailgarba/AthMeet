@@ -33,10 +33,8 @@ export default function EditProfileScreen() {
     const [imageURL, setImageURL] = React.useState("");
 
     const onSave = async () => {
-        console.log(`----------------Saving Changes to profile-------------`);
         let image;
         try {
-
             if (!!imageURL) {
                 image = await uploadImage();
             }
@@ -47,7 +45,6 @@ export default function EditProfileScreen() {
         var newUser = {};
         if (myID !== "") {
             newUser = { id: myID };
-
             if (imageURL !== "") {
                 newUser = { ...newUser, image: image }
             }
@@ -65,7 +62,6 @@ export default function EditProfileScreen() {
             }
             //Update user 
             try {
-
                 const updateUserToDB = async (newUser: UpdateUserInput) => {
                     await API.graphql(graphqlOperation(updateUser, { input: newUser }))
                 }

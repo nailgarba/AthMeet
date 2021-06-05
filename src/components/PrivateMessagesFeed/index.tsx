@@ -20,23 +20,3 @@ const PrivateMessagesFeed = (props) => (
 )
 
 export default PrivateMessagesFeed;
-/*
-{
-    <FlatList
-      style={{ width: '100%' }}
-      data={testchatRooms}
-      renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
-      keyExtractor={(item) => item.id}
-    />}
-/*
-const PrivateMessagesFeed = () => (
-    <View style ={{width: '100%'}}>
-        <FlatList
-            data = {users}
-            renderItem={({item}) => <PrivateMessagesListContainer user = {item.user} />}
-            keyExtractor={(item) => item.id}
-        />
-        
-    </View>
-)
-*/

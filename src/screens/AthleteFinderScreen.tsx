@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import ProfilePost from '../components/ProfilePost';
 import { listUsers, getUser } from '../src/graphql/queries';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 //import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -22,7 +22,7 @@ export default function AthleteFinderScreen() {
   const [posts, setPosts] = React.useState([]);
   const [users, setUsers] = React.useState([]);
   const [user, setUser] = React.useState([]);
-
+  const route = useRoute();
   React.useEffect(() => {
 
     const fetchMyUser = async () => {
@@ -87,6 +87,35 @@ export default function AthleteFinderScreen() {
       console.log(e);
     }
   }
+  const setFilterSettings = (filter) => {
+    setMainGym(filter.mainGym);
+    setMainSport(filter.mainSport);
+    setLevel(filter.level);
+  }
+
+  React.useEffect(() => {
+    const result = route.params?.filter;
+    console.log(`---------------------------`)
+    console.log(`---------------------------`)
+    console.log(`-----------result-----------`)
+    console.log( result)
+    if(result){
+      setFilterSettings(result);
+      fetchUsers();
+    }
+  },[])
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      const result = route.params;
+    console.log(`---------------------------`)
+    console.log(`---------------------------`)
+    console.log(`-----------result-----------`)
+    console.log( result)
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
 
 
 
@@ -103,7 +132,7 @@ export default function AthleteFinderScreen() {
         />
       </View>
 
-      <AthleteFinderFilterButton props={fetchUsers} />
+      <AthleteFinderFilterButton props={setFilterSettings} />
     </View>
 
   );

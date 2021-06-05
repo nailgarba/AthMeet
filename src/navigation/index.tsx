@@ -9,6 +9,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import NewPostScreen from "../screens/NewPostScreen";
 import HomeScreen from "../screens/HomeScreen";
+import AthleteFinderScreen from "../screens/AthleteFinderScreen";
 import AthleteFinderFilterScreen from "../screens/AthleteFinderFilterScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
 import PrivateMessagesListScreen from '../screens/PrivateMessagesListScreen';
@@ -52,6 +53,7 @@ function RootNavigator() {
       <Stack.Screen name ="PrivateMessages" component={PrivateMessagesScreen} />
       <Stack.Screen name ="PrivateMessagesList" component={PrivateMessagesListScreen} />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+    
       <Stack.Screen name ="AthleteFinderFilter" component={AthleteFinderFilterScreen} />   
       <Stack.Screen name="OtherProfile" component={OtherProfileScreen}/>
       <Stack.Screen name="Profile" component={ProfileScreen} />   

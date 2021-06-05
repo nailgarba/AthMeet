@@ -64,12 +64,18 @@ export default function ProfileScreen() {
       console.log(e);
     }
   }
-
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+    
+    });
+    return unsubscribe;
+  }, [navigation]);
   
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     fetchUser().then(() => setRefreshing(false));
   }, []);
+  
 
   return (
     <View style={styles.container}>
@@ -101,7 +107,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     },
     headerContainer: {
-      //width: '100%',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',

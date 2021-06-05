@@ -5,17 +5,17 @@ import moment from "moment";
 import { useNavigation } from '@react-navigation/native';
 import { Auth, } from 'aws-amplify';
 import SendPostButton from '../SendPostButton';
-import {Storage } from 'aws-amplify';
+import { Storage } from 'aws-amplify';
 
 
 const PostChatListItem = (props) => {
     const { chatRoom } = props;
     const [otherUser, setOtherUser] = useState(null);
-    const chatRoomID=props.chatRoomID
+    const chatRoomID = props.chatRoomID
     const postID = props.postID;
     const navigation = useNavigation();
     const [url, setURL] = useState("");
-
+    
     React.useEffect(() => {
         //Get other user in the chatroom
         const getOtherUser = async () => {
@@ -27,12 +27,20 @@ const PostChatListItem = (props) => {
             }
         }
         getOtherUser();
-        geturl();
+        if(otherUser?.image){
+            geturl(otherUser);
+
+        }
     }, [])
-    const geturl = async () => {
-            const signedURL = await Storage.get(otherUser?.image);
-            setURL(signedURL);
-      }
+
+    React.useEffect(() => {
+    
+    }, [])
+    const geturl = async (otherUser) => {
+        const signedURL = await Storage.get(otherUser.image);
+        setURL(signedURL);
+    }
+    
 
     const onClick = () => {
         navigation.navigate('ChatRoom', {
@@ -42,28 +50,31 @@ const PostChatListItem = (props) => {
     }
 
     if (!otherUser) {
-        return (<View/>);
+        return (<View />);
     }
 
     return (
         <TouchableWithoutFeedback onPress={onClick}>
             <View style={styles.container}>
-                <View style={styles.lefContainer}>
-                    <Image source={{ uri: url }} style={styles.profilePicture} />
-                    <View style={styles.midContainer}>
-                        <Text style={styles.username}>{otherUser.name}</Text>
-                        <Text
-                            numberOfLines={2}
-                            style={styles.lastMessage}>
-                            {chatRoom.lastMessage
-                                ? `${chatRoom.lastMessage.user.name}: ${chatRoom.lastMessage.content}`
-                                : <View />}
-                        </Text>
+                <View style={styles.mainContainer}>
+
+                    <View style={styles.lefContainer}>
+                        <Image source={{ uri: url }} style={styles.profilePicture} />
+                        <View style={styles.midContainer}>
+                            <Text style={styles.username}>{otherUser.name}</Text>
+                            <Text
+                                numberOfLines={2}
+                                style={styles.lastMessage}>
+                                {chatRoom.lastMessage
+                                    ? `${chatRoom.lastMessage.user.name}: ${chatRoom.lastMessage.content}`
+                                    : <View />}
+                            </Text>
+                        </View>
                     </View>
+                    <Text style={styles.time}>
+                        {chatRoom.lastMessage && moment(chatRoom.lastMessage.createdAt).format("DD/MM/YYYY")}
+                    </Text>
                 </View>
-                <Text style={styles.time}>
-                    {chatRoom.lastMessage && moment(chatRoom.lastMessage.createdAt).format("DD/MM/YYYY")}
-                </Text>
                 <View>
                     <SendPostButton chatRoomID={chatRoomID} postID={postID} />
                 </View>
@@ -90,6 +101,9 @@ const styles = StyleSheet.create({
     lefContainer: {
         flexDirection: 'row',
     },
+    mainContainer: {
+        width:"90%",
+    },
     midContainer: {
         justifyContent: 'space-around'
     },
@@ -108,6 +122,7 @@ const styles = StyleSheet.create({
         color: 'grey',
     },
     time: {
+        alignSelf:"flex-end",
         fontSize: 14,
         color: 'grey'
     },

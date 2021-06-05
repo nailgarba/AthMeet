@@ -19,14 +19,10 @@ const Feed = () => {
         } finally {
             setLoading(false);
         }
-
-
     }
     useEffect(() => {
         fetchPosts();
     }, [])
-
-
     //Display posts in flatlist
     return (
         <View style={{ width: '100%' }}>

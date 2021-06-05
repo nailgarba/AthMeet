@@ -1,61 +1,27 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { API, graphqlOperation, Auth, input } from 'aws-amplify';
-//import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import {  View } from '../components/Themed';
 import { useRoute } from '@react-navigation/native';
-import Post from '../components/Posts';
-import posts from '../data/posts';
-import Feed from '../components/Feed';
-import NewPostButton from "../components/NewPostButton";
-import { MaterialIcons } from '@expo/vector-icons';
-import {getPost, commentsByPost} from '../src/graphql/queries';
+import { getPost, commentsByPost } from '../src/graphql/queries';
 import PostInComments from '../components/PostInCommentScreen'
-
-import { PostType } from '../types';
 import CommentInputBox from '../components/CommentInputBox';
-import CommentPost from '../components/CommentPost';
 import CommentsinComments from '../components/CommentsinComments';
 import BackButton from '../components/BackButton';
 
 
 export default function CommentsScreen() {
     const route = useRoute();
-    const navigation = useNavigation();
     const [comments, setComments] = React.useState([]);
     const [user, setUser] = React.useState(null);
     const [post, setPost] = React.useState(null);
     const postID = route.params.postID;
-    const postobj = route.params.postobj;/** 
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`---------------postobj in CommentsScreen ---------------`);
-    console.log(postobj);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);*/
-    
-    
+
     React.useEffect(() => {
-        const fetchPost= async () => {
-            const postData = await API.graphql(graphqlOperation(getPost, { id: postID}));
-            setPost(postData.data.getPost);/** 
-            console.log(`------------------------------------------`);
-            console.log(`------------------------------------------`);
-            console.log(`---------------post in fetchpost ---------------`);
-            console.log(post);
-            console.log(`------------------------------------------`);
-            console.log(`------------------------------------------`);
-            console.log(`------------------------------------------`);*/
-        }/**
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`---------------comments screen post id---------------`);
-        console.log(postID);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`); */
+        const fetchPost = async () => {
+            const postData = await API.graphql(graphqlOperation(getPost, { id: postID }));
+            setPost(postData.data.getPost);
+        }
         fetchPost();
         const fetchUser = async () => {
             const currentUser = await Auth.currentAuthenticatedUser();
@@ -63,55 +29,27 @@ export default function CommentsScreen() {
         }
         fetchUser();
         const fetchComments = async () => {
-            const commentData = await API.graphql(graphqlOperation(commentsByPost, { postID: postID}));
+            const commentData = await API.graphql(graphqlOperation(commentsByPost, { postID: postID }));
             setComments(commentData.data.commentsByPost.items);
         }
         fetchComments();
-        console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`---------------comments in comments screen   fetchComments ---------------`);
-    console.log(comments);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
     }, [])
-
-   /** 
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`---------------post in comments screen ---------------`);
-    console.log(post);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-*/
-console.log(`------------------------------------------`);
-    console.log(`------------------2222------------------------`);
-    console.log(`---------------comments in comments screen   fetchComments ---------------`);
-    console.log(comments);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
 
 
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <BackButton/>
+                <BackButton />
             </View>
             <View style={styles.postContainer}>
-            {post && <PostInComments post= {post}></PostInComments>}
-                
+                {post && <PostInComments post={post}></PostInComments>}
             </View>
             <View style={styles.commentsContainer}>
-                {comments && <CommentsinComments comments ={comments}/>}
+                {comments && <CommentsinComments comments={comments} />}
             </View>
-            <View  style={styles.inputContainer}>
-
-            {post && <CommentInputBox props ={post}/>}
+            <View style={styles.inputContainer}>
+                {post && <CommentInputBox props={post} />}
             </View>
-
-                
         </View>
 
     );
@@ -134,9 +72,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#e3e3e3',
     },
     postContainer: {
-        justifyContent:'space-between',
-        marginBottom:5,
-        
+        justifyContent: 'space-between',
+        marginBottom: 5,
+
     },
     commentsContainer: {
         marginBottom: 'auto',
