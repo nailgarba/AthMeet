@@ -27,25 +27,6 @@ const GoToChatButton = ( props:NewChatProps) => {
     const { user } = props;
     const userID = user.id;
     const navigation = useNavigation();
-  
-    const checkForExistingChat = async (id) =>{
-      try {
-        
-        const userInfo = await Auth.currentAuthenticatedUser();
-        const newChatRoomData = await API.graphql(
-          graphqlOperation(
-            createChatRoom, {
-              input: {
-                lastMessageID: "zz753fca-e8c3-473b-8e85-b14196e84e16"
-              }
-            }
-          )
-        )
-          }catch (e) {
-            console.log(e);
-          }
-    } 
-
 
     const onClick = async () => {
       try {
@@ -79,15 +60,9 @@ const GoToChatButton = ( props:NewChatProps) => {
         }
         )
         )
-        console.log(`-------------------------------------------`);
-        console.log(`----------------user id--------------------`);
-        console.log(userID);
-  
+ 
         //  3. Add authenticated user to the Chat Room
         const userInfo = await Auth.currentAuthenticatedUser();
-        console.log(`-------------------------------------------`);
-        console.log(`----------------sub--------------------`);
-        console.log(userInfo.attributes.sub);
         await API.graphql(
           graphqlOperation(
             createChatRoomUser, {

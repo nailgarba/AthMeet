@@ -52,7 +52,9 @@ export default function AthleteFinderScreen() {
             listUsers, {
             filter: {
               mainGym: { contains: mainGym },
-              mainSport: { contains: mainSport },
+              mainSport: { contains:"Bodybuilding" },
+             // mainSport: { contains: mainSport },
+
               level: { contains: level }
             }
           }

@@ -79,15 +79,6 @@ const InputBox = (props) => {
 export default InputBox;
 
 
-/*
-<KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={100}
-            style={{ width: '100%' }}
-        >
-{!message && <Fontisto name="camera" size={24} color="grey" style={styles.icon} />}
-*/
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'gray',
@@ -123,61 +114,3 @@ const styles = StyleSheet.create({
 
 
 
-
-/*
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        margin: 10,
-    },
-    mainContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        backgroundColor: 'white',
-        marginRight: 10,
-        padding: 10,
-        borderRadius: 25,
-    },
-    textInput: {
-        marginHorizontal: 10,
-        flex: 1,
-    },
-    icon: {
-        marginHorizontal: 5,
-    },
-    buttonContainer: {
-        width: 50,
-        height: 50,
-        backgroundColor: 'tomato',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 25,
-    }
-})
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  inner: {
-    padding: 24,
-    flex: 1,
-    justifyContent: "space-around"
-  },
-  header: {
-    fontSize: 36,
-    marginBottom: 48
-  },
-  textInput: {
-    height: 40,
-    borderColor: "#000000",
-    borderBottomWidth: 1,
-    marginBottom: 36
-  },
-  btnContainer: {
-    backgroundColor: "white",
-    marginTop: 12
-  }
-});*/

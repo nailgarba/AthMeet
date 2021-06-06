@@ -16,17 +16,10 @@ export type ProfilePostProps = {
 
 const PrivateFeed = ({user}: ProfilePostProps) => {
     const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);/*
-    console.log(`----------------------------------------------------`);
-    console.log(`----------------------------------------------------`);
-    console.log(`-------------------user id----first---------------`);
-    console.log(`----------------------------------------------------`);
-    console.log(user.id);
-    console.log(`----------------------------------------------------`);
-    */
+    const [loading, setLoading] = useState(false);
     const fetchPosts = async () => {
         setLoading(true);
-        //get posts from DB
+        //get posts from Database
         try {
             const postsData = await API.graphql(graphqlOperation(listPosts,{
                 filter: {
@@ -37,21 +30,7 @@ const PrivateFeed = ({user}: ProfilePostProps) => {
 
             }
                 ));
-            setPosts(postsData.data.listPosts.items);/*
-            console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(`-------------------user id-------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(user.id);
-            console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(`-------------------posts--------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);
-            console.log(`----------------------------------------------------`);*/
+            setPosts(postsData.data.listPosts.items);
         }
         catch (e) {
             console.log(e);

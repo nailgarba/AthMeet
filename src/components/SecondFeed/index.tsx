@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listPosts } from '../../src/graphql/queries';
-/*
-import posts from '../../data/posts';
-*/
 import Post from '../Posts';
 const SecondFeed = (props) => {
    
@@ -12,29 +9,11 @@ const SecondFeed = (props) => {
     
     const [userID, setUserID] = useState("");
     const [loading, setLoading] = useState(false);
-    //setUserID(props.id);
-    /*
-    const fetchPosts = async () => {
-        setLoading(true);
-        //get posts from DB
-        try {
-            const postsData = await API.graphql(graphqlOperation(listPosts));
-            setPosts(postsData.data.listPosts.items);
-        }
-        catch (e) {
-            console.log(e);
-        } finally {
-            setLoading(false);
-        }
-
-
-    }
-*/
 
     const fetchPosts = async () => {
       
         setLoading(true);
-        //get posts from DB
+        //get posts from Database
         try {
             const postsData = await API.graphql(graphqlOperation(listPosts,
                { filter: {userID: {contains: props.id}}}));

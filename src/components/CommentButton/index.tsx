@@ -13,25 +13,9 @@ export type CommentProps = {
 
 const CommentButton = ({ post }: CommentProps) => {
     const postID =post.id;
-    const postobj =post;/*
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`---------------CommentButton post id const---------------`);
-    console.log(postID);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`); 
-    console.log(`---------------CommentButton post prop---------------`);
-    console.log(post);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);
-    console.log(`---------------CommentButton postobj---------------`);
-    console.log(postobj);
-    console.log(`------------------------------------------`);
-    console.log(`------------------------------------------`);*/
+    const postobj =post;
     const navigation = useNavigation();
     const [user, setUser] = React.useState(null);
-    //const [numberOfComments, setNumberOfComments] = React.useState(post.comments.items.length);
 
     React.useEffect(() => {
         const fetchUser = async () => {
@@ -45,17 +29,8 @@ const CommentButton = ({ post }: CommentProps) => {
             postID: postID, postobj:postobj,
         }
         );
-        /*
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`---------------comments button press post id---------------`);
-        console.log(postID);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);
-        console.log(`------------------------------------------`);*/
     }
 
-//<Text style={styles.number}>{numberOfComments}</Text>
     return (
 
         <View style={styles.commentContainer}>

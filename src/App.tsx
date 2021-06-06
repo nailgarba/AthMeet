@@ -53,28 +53,21 @@ API.configure(AMPLIFY_CONFIG)
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-
   //Upload user and follow to tables in database
   const saveUserToDB = async (user: CreateUserInput) => {
-
     await API.graphql(graphqlOperation(createUser, { input: user }))
   }
   const saveFollowToDB = async (follow: CreateFollowInput) => {
-
     await API.graphql(graphqlOperation(createFollow, { input: follow }))
   }
-
   useEffect(() => {
     const updateUser = async () => {
       // Get current authenticated user
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-
-      if (!!userInfo) {
-        // Check if user already exists in database
+      if (!!userInfo) {// Check if user already exists in database
         const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }));
         var followID = 'follow';
-        if (!userData.getUser) {       
-          //Create FollowID with user's userID to store followers and users being followed
+        if (!userData.getUser) {//Create FollowID with user's userID to store followers and users being followed
           followID= followID.concat(userInfo.attributes.sub);
           const user = {
             id: userInfo.attributes.sub,
@@ -94,8 +87,7 @@ function App() {
           console.log('User already exists');
         }
       }
-      // If it doesn't, create the user in the database
-    }
+    } // If it doesn't, create the user in the database
     updateUser();
   }, [])
 

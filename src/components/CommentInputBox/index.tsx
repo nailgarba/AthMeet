@@ -12,18 +12,6 @@ import { MaterialIcons, Ionicons, Entypo, Fontisto, } from '@expo/vector-icons';
 const CommentInputBox = (props) => {
 
     const post  = props;
-    /*
-    console.log(`------------------------------`);
-    console.log(`------------------------------`);
-    console.log(`------------------------------`);
-    console.log(`----------Post in CommentInputBox-------------`);
-    console.log(post);
-    console.log(`------------------------------`);
-    console.log(`------------------------------`);
-    console.log(`----------props in CommentInputBox-------------`);
-    console.log(props);
-    console.log(`------------------------------`);
-    console.log(`------------------------------`);*/
     const [message, setMessage] = useState('');
     const [myUserId, setMyUserId] = useState(null);
     
@@ -49,25 +37,7 @@ const CommentInputBox = (props) => {
             )
         } catch (e) {
             console.log(e);
-        }/*
-        console.log(`-------OnSendPress---------`);
-        console.log(`------------------------------`);
-        console.log(`----------message in CommentInputBox-------------`);
-        console.log(message);
-        console.log(`------------------------------`);
-        console.log(`------------------------------`);
-        console.log(`------------------------------`);
-        console.log(`----------myUserId in CommentInputBox-------------`);
-        console.log(myUserId);
-        console.log(`------------------------------`);
-        console.log(`------------------------------`);
-        console.log(`------------------------------`);
-        console.log(`----------post.post.id in CommentInputBox-------------`);
-        console.log(post.post.id);
-        console.log(`------------------------------`);
-        console.log(`------------------------------`);*/
-
-        
+        }
         setMessage('');
     }
     

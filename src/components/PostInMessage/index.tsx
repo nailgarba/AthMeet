@@ -21,9 +21,6 @@ export default class PostInMessage extends Component {
             post: {},
             //post:props.post,
         }
-        console.log(`----------------------`)
-        console.log(`------postID---------`)
-        console.log(props.postID)
         const fetchPost = async () => {
             try {
                 const postData = await API.graphql(graphqlOperation(getPost,
@@ -32,9 +29,6 @@ export default class PostInMessage extends Component {
                     this.setState({
                         post: postData.data.getPost
                     })
-                    console.log(`----------------------`)
-                    console.log(`------postdata---------`)
-                    console.log(postData.data)
                 }
             }
             catch (e) {
@@ -52,9 +46,6 @@ export default class PostInMessage extends Component {
                 this.setState({
                     post: postData.data.getPost
                 })
-                console.log(`----------------------`)
-                console.log(`------postdata---------`)
-                console.log(postData.data)
             }
         }
         catch (e) {

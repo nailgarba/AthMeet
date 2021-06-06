@@ -17,7 +17,6 @@ const Footer = ({post}: FooterContainerProps) => (
     </View>
 )
 
-//<LikeButton post= {post}></LikeButton>
 export default Footer;
 
 

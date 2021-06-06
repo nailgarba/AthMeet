@@ -33,7 +33,6 @@ const MainContainer = ({ post }: MainContainerProps) => {
             <View style={styles.postHeaderContainer}>
                 <Text style={styles.name}>{post.user.name}</Text>
                 <Text style={styles.username}>@{post.user.username}</Text>
-                <Text style={styles.createdAt}>{moment(post.createdAt).fromNow()}</Text>
             </View>
             <View >
                 <Text style={styles.content}>{post.content}</Text>
@@ -45,6 +44,7 @@ const MainContainer = ({ post }: MainContainerProps) => {
         </View>
     )
 }
+//<Text style={styles.createdAt}>{moment(post.createdAt).fromNow()}</Text>
 //{!!post.image && <Image style={styles.image} source={{ uri: url }} />}
 //{!!post.image && <Image style={styles.image} source={{uri:post.image}}/>}
 

@@ -15,7 +15,7 @@ const ChatListItem = (props: ChatListItemProps) => {
   const { chatRoom } = props;
   const [otherUser, setOtherUser] = useState(null);
   const navigation = useNavigation();
-const [url, setURL] = useState("");
+  const [url, setURL] = useState("");
   React.useEffect(() => {
     const getOtherUser = async () => {
         const userInfo = await Auth.currentAuthenticatedUser();
@@ -29,7 +29,7 @@ const [url, setURL] = useState("");
       geturl();
   }, [])
   const geturl = async () => {
-          const signedURL = await Storage.get(otherUser?.image);
+          const signedURL = await Storage.get(props.user1url);
           setURL(signedURL);
     }
       

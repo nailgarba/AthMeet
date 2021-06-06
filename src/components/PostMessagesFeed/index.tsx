@@ -13,7 +13,7 @@ const PostMessagesFeed = (props) => {
     <View style={{ width: '100%' }}>
         <FlatList
             data={props.chatRooms}
-            renderItem={({ item }) => <PostChatListItem chatRoom={item.chatRoom} postID={props.postID} chatRoomID={item.chatRoomID} />}
+            renderItem={({ item }) => <PostChatListItem chatRoom={item.chatRoom} postID={props.postID} chatRoomID={item.chatRoomID} user1url={item.chatRoom.chatRoomUsers.items[0].user.image} user2url={item.chatRoom.chatRoomUsers.items[1].user.image} />}
             keyExtractor={(item) => item.id}
         />
 

@@ -14,6 +14,7 @@ export type RootStackParamList = {
   Following:undefined;
   Followers:undefined;
   Comments:undefined;
+  PostSend:undefined;
 };
 
 

@@ -34,8 +34,6 @@ const ChatMessage = (props: ChatMessageProps) => {
     </View>
   )
 }
-//{message.post?.id && <PostInMessage postID={message.postID}/>}
-//<Text style={styles.time}>{moment(message.createdAt).fromNow()}</Text>
 
 export default ChatMessage;
 

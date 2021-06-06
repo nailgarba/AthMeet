@@ -22,7 +22,7 @@ export default function EditProfileScreen() {
 
     const navigation = useNavigation();
     const placeholder = {
-        label: 'Select level of progression',
+        label: 'Select level of experience',
         value: null,
     };
     const [mainGym, setMainGym] = React.useState("");

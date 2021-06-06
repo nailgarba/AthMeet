@@ -21,7 +21,7 @@ import BackButton from '../components/BackButton';
 export default function AthleteFinderFilterScreen() {
     const navigation = useNavigation();
     const placeholder = {
-        label: 'Select level of progression',
+        label: 'Select level of experience',
         value: null,
     };
     // main gym (custom option?), main sport

@@ -33,13 +33,13 @@ const PostChatListItem = (props) => {
         }
     }, [])
 
-    React.useEffect(() => {
-    
-    }, [])
-    const geturl = async (otherUser) => {
-        const signedURL = await Storage.get(otherUser.image);
+    const geturl = async () => {
+        const signedURL = await Storage.get(props.user1url);
         setURL(signedURL);
     }
+    React.useEffect(() => {
+        geturl();
+    }, [])
     
 
     const onClick = () => {

@@ -36,7 +36,7 @@ const OtherProfileScreen = () => {
   var testfalse = false;
   var testtrue = true;
   const route = useRoute();
-  // var isSelf = false;
+
 
   React.useEffect(() => {
     //get the current user
@@ -54,69 +54,10 @@ const OtherProfileScreen = () => {
       } catch (e) {
         console.log(e);
 
-      }/*
-      testtrue = ( user.id == userInfo.attributes.sub);
-      setisSelf( user.id == userInfo.attributes.sub);
-      console.log(`--------------------------------------------------`);
-      console.log(`------------------------testtrue-------------------`);
-      console.log(testtrue);
-      console.log(`--------------------------------------------------`);
-      console.log(`--------------------------------------------------`);
-      console.log(`-----------------------testfalse---------------------------`);
-      console.log(testfalse);
-      console.log(`--------------------------------------------------`);
-      console.log(`------------------------isself--------------------------`);
-            console.log(isSelf);
-
-      console.log(`--------------------------------------------------`);
-      console.log(`-------------------bool test---------------------`);
-      console.log(user.id == userInfo.attributes.sub);
-      
-      console.log(`--------------------------------------------------`);
-      console.log(`----------------------user id----------------------------`);
-      console.log(user );
-      console.log(`--------------------------------------------------`);
-      
-      console.log(`-----------------sub---------------------------------`);
-      console.log( userInfo.attributes.sub );
-
-      setisSelf( !user.id == userInfo.attributes.sub);*/
-
-
+      }
     }
     fetchUser();
-    //console.log(user);
-    /*
-    console.log(`-----------------end if---------------------`);
-    console.log(`-------------------bool test---------------------`);
-    console.log(user.id == userInfo.attributes.sub);/*/
-
-
-  }, [])/**/
-
-  const navigation = useNavigation();
-
-
-
-  const checkDMS = () => {
-    console.log(user);
-    console.warn(" route:");
-    console.log(route);
-    console.log(`route params: `);
-    console.log(route.params);
-    console.log(`route id: `);
-    console.log(route.params.id);
-    console.log(`route params userID: `);
-    console.log(route.params.userID);
-    console.log(`route params userID id: `);
-    console.log(route.params.userID.id);
-    console.log(`user: ${user}  tuser: ${tuser}`);
-    //check if chatroom exists if not create one user: ${userID}
-  }
-
-
-
-
+  }, [])
 
   return (
     <View style={styles.container}>

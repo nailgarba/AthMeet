@@ -12,7 +12,7 @@ const PrivateMessagesFeed = (props) => (
     <View style ={{width: '100%'}}>
         <FlatList
             data = {props.chatRooms}
-            renderItem={({item}) => <ChatListItem chatRoom = {item.chatRoom} />}
+            renderItem={({item}) => <ChatListItem chatRoom = {item.chatRoom} user1url={item.chatRoom.chatRoomUsers.items[0].user.image} user2url={item.chatRoom.chatRoomUsers.items[1].user.image} />}
             keyExtractor={(item) => item.id}
         />
         
