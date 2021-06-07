@@ -12,7 +12,7 @@ export {UserType} from '../../types';
 
 
 export type UserProps = {
-    user: UserType,
+    user,
 }
 
 //Generate Profile information
@@ -21,11 +21,13 @@ class ProfileScreenComponents extends Component{
         super(props);
 
         this.state={
-            user:{...this.props.user},
+            user:{...this.props.user, showFollowButton:this.props.showFollowButton},
             testvar:'testvar',
             loaded:false,
 
         }
+        console.log(`--------------user in component------------`);
+    console.log(this.state.user);
     }
 
     componentDidMount(){

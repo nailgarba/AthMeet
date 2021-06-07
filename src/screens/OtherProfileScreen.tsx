@@ -70,7 +70,7 @@ const OtherProfileScreen = () => {
       <View style={styles.mainContainer}>
         <ScrollView>
           <View style={styles.profileInfo}>
-            {user.id && <ProfileScreenComponents user={user} />}
+            {user.id && <ProfileScreenComponents user={user} showFollowButton={true} />}
           </View>
           <View style={styles.profileFeed}>
             {user.id && <SecondFeed id={user.id} />}

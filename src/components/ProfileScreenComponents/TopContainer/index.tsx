@@ -9,9 +9,15 @@ import FollowButton from '../../FollowButton';
 
 
 export type TopContainerProps = {
-    user: UserType,
+    user,
 }
-const TopContainer = ({ user }: TopContainerProps) => (
+const TopContainer = ({ user }: TopContainerProps) => {
+    console.log(`--------------user in top container------------`);
+    console.log(user);
+
+
+
+    return(
     <View style={styles.container}>
         <View style={styles.profilePictureContainer}>
             <ProfilePicture user={user} size={170} />
@@ -21,7 +27,7 @@ const TopContainer = ({ user }: TopContainerProps) => (
             <Text style={styles.usernameContainer}>@{user.username}</Text>
         </View>
         <View style={styles.followButton}>
-            <FollowButton id={user.id}/>
+            {user.showFollowButton && <FollowButton id={user.id}/>}
         </View>
         <View style={styles.followsContainer}>
             <View style={styles.followsButton}>
@@ -39,7 +45,7 @@ const TopContainer = ({ user }: TopContainerProps) => (
     </View>
 
 
-)
+)}
 
 export default TopContainer;
 
